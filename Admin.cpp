@@ -11,3 +11,9 @@ void Admin::show_Menu() {
 	cout << "===================================================================" << endl;
 
 }
+
+void Admin::exitAD() {
+	cout << "欢迎下次使用！！" << endl;
+	system("pause");
+	return;
+}
