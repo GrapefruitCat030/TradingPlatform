@@ -1,12 +1,16 @@
 #pragma once
 #include<iostream>
 using namespace std;
-
+#include"User.h"
+#include"Goods.h"
+#include"Order.h"
 
 class Admin {
 public:
 	Admin();
 	~Admin();
+
+	//****************以下为管理员的功能函数成员*******************//
 
 	//管理员菜单显示
 	void show_Menu();
@@ -24,4 +28,15 @@ public:
 	void banUser();
 	//退出（注销）
 	void exitAD();
+
+	//****************以下为管理员的数据成员*******************//
+
+	//用户数组指针
+	User** userArray;
+
+	//商品数组指针
+	Goods** goodsArray;
+
+	//订单数组指针
+	Order** orderArray;
 };

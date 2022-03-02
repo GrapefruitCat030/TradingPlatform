@@ -28,8 +28,10 @@ int main() {
 			PL.AdminLogin(AD);
 			break;
 		case 2:	//用户注册
+			PL.User_register(AD);
 			break;
 		case 3:	//用户登录
+			PL.UserLogin(AD);
 			break;
 		case 4:	//退出平台
 			PL.exitPlatform();

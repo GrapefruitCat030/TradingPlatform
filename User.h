@@ -1,6 +1,7 @@
 #pragma once
 
 class User {
+public:
 	//用户ID
 	char userID;
 	//用户名
@@ -15,4 +16,17 @@ class User {
 	double balance;
 	//用户状态：1为正常，0为封禁
 	int userState;
+
+
+	//功能函数
 };
+
+
+class Seller : public User {
+
+};
+
+class Buyer : public User {
+
+};
+
