@@ -6,6 +6,17 @@ using namespace std;
 #include"Order.h"
 
 class Admin {
+
+	//用户数组指针
+	User** userArray;
+
+	//商品数组指针
+	Goods** goodsArray;
+
+	//订单数组指针
+	Order** orderArray;
+
+
 public:
 	Admin();
 	~Admin();
@@ -33,12 +44,5 @@ public:
 
 	//****************以下为管理员的数据成员*******************//
 
-	//用户数组指针
-	User** userArray;
 
-	//商品数组指针
-	Goods** goodsArray;
-
-	//订单数组指针
-	Order** orderArray;
 };

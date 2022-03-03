@@ -21,7 +21,6 @@ void Platform::exitPlatform() {
 }
 
 void Platform::AdminLogin(Admin& m_Admin) {
-	
 
 	string A_Name, A_key;
 	cout << "请输入管理员姓名：";

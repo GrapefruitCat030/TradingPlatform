@@ -27,9 +27,7 @@ public:
 
 	//用户登录
 	void UserLogin(Admin& m_Admin);
-
 };
 
-//-------类外函数---------
 
 

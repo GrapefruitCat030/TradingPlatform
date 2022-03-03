@@ -5,22 +5,17 @@ using namespace std;
 
 
 int main() {
-
 	//实例化平台对象
 	Platform PL;
 	//实例化管理者对象
 	Admin AD;
-
 	//用来储存用户选项
 	int choice = 0;
-
-//TheLoop://goto语句使得管理员以及用户模式可以注销回到主菜单
 	while (true) {
 
 		PL.show_Menu();
 		cout << "输入选项：";
 		cin >> choice;
-
 		switch (choice)
 		{
 		case 1:	//管理员登录

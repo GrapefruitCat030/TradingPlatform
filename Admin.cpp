@@ -33,7 +33,6 @@ void Admin::banUser() {};
 void Admin::Module_Admin() {
 	//先进行清屏，然后管理员菜单展示
 	system("cls");
-
 	//用来储存用户选项
 	int choice = 0;
 	bool judge = true;
@@ -74,7 +73,5 @@ void Admin::Module_Admin() {
 			break;
 		}
 	}
-
 	return;
-
 }
