@@ -16,6 +16,7 @@ int main() {
 	//用来储存用户选项
 	int choice = 0;
 
+//TheLoop://goto语句使得管理员以及用户模式可以注销回到主菜单
 	while (true) {
 
 		PL.show_Menu();
@@ -31,7 +32,7 @@ int main() {
 			PL.User_register(AD);
 			break;
 		case 3:	//用户登录
-			PL.UserLogin(AD);
+			PL.UserLogin();
 			break;
 		case 4:	//退出平台
 			PL.exitPlatform();
@@ -40,6 +41,7 @@ int main() {
 			system("cls"); //清屏
 			break;
 		}
+
 	}
 	
 

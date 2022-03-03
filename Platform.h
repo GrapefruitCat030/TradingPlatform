@@ -17,17 +17,17 @@ public:
 	//退出交易平台；
 	void exitPlatform();
 
-	//管理员登录；
+	//管理员登录；利用引用传参，避免在局部函数中创建管理员对象容易消亡
 	void AdminLogin(Admin& m_Admin);
 
 	//用户注册
 	void User_register(Admin& m_Admin);
 
 	//用户登录
-	void UserLogin(Admin& m_Admin);
+	void UserLogin();
+
 };
 
 //-------类外函数---------
 
-//管理员模式，用来接入管理员登录后的模式
-void ModAdmin(Admin& m_Admin);
+
