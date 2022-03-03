@@ -1,5 +1,4 @@
-#include<iostream>
-using namespace std;
+
 #include<string.h>
 #include"Platform.h"
 
@@ -47,9 +46,25 @@ void Platform::AdminLogin(Admin& m_Admin) {
 	}
 };
 
-void Platform::User_register(Admin& m_Admin) {};
+void Platform::User_register(Admin& m_Admin) {
 
-void Platform::UserLogin() {};
+};
+
+void Platform::UserLogin(Admin& m_Admin) {
+	
+	//test
+	int kksk = 0;
+	//如果成功了,switch!!
+	if (kksk) {
+		User* the_User = new User;
+
+	}
+	else {
+		cout << "fail to login" << endl;
+		system("pause");
+		system("cls");
+	}
+};
 
 
 

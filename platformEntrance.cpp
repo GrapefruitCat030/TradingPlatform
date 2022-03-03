@@ -11,8 +11,6 @@ int main() {
 	//实例化管理者对象
 	Admin AD;
 
-
-
 	//用来储存用户选项
 	int choice = 0;
 
@@ -32,7 +30,7 @@ int main() {
 			PL.User_register(AD);
 			break;
 		case 3:	//用户登录
-			PL.UserLogin();
+			PL.UserLogin(AD);
 			break;
 		case 4:	//退出平台
 			PL.exitPlatform();
@@ -41,13 +39,7 @@ int main() {
 			system("cls"); //清屏
 			break;
 		}
-
 	}
-	
-
-
-
-
 }
 
 
