@@ -35,14 +35,17 @@ void Admin::removeGoods() {};
 void Admin::Order_show() {};
 
 void Admin::User_show() {
+	cout << "用户ID" << "\t" << "姓名" << "\t" << "密码" << endl;
 	if (!this->numbUser) {
-		cout << "无用户！！" << endl;
+		cout << "----------无用户！！-----------" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 	for (int i = 0; i < this->numbUser; i++) {
-		cout << this->userArray[i]->username;
+		cout << this->userArray[i]->userID << "\t";
+		cout << this->userArray[i]->username<<"\t";
+		cout << this->userArray[i]->password;
 		cout << endl;
 	}
 	system("pause");

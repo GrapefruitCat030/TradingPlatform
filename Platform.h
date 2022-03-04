@@ -29,5 +29,5 @@ public:
 	void UserLogin(Admin& m_Admin);
 };
 
-
-
+//做出用户ID的字符数组；(注意数据放在堆区，记得用后delete！）
+char* UIDback(int i);

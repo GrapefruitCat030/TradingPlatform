@@ -1,4 +1,4 @@
-
+#include<string>
 #include<string.h>
 #include"Platform.h"
 
@@ -67,6 +67,9 @@ void Platform::User_register(Admin& m_Admin) {
 	User* n_User = new User;
 	strcpy_s(n_User->username, Uname);
 	strcpy_s(n_User->password, Password);
+	//用户的ID：
+	strcpy(n_User->userID,UIDback(m_Admin.numbUser+1));
+
 	//放进去
 	newUArray[m_Admin.numbUser] = n_User;
 
@@ -98,5 +101,22 @@ void Platform::UserLogin(Admin& m_Admin) {
 	}
 };
 
+char* UIDback(int i) {
 
+	string kksk;
+	if (i < 10) {
+		kksk = "U00" + to_string(i);
+	}
+	else if (i < 100) {
+		kksk = "U0" + to_string(i);
+	}
+	else if (i < 1000) {
+		kksk = "U" + to_string(i);
+	}
+
+	char* suki = new char[4];
+	strcpy(suki, kksk.c_str());
+	
+	return suki;
+}
 
