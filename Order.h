@@ -2,9 +2,9 @@
 
 class Order {
 	//订单ID
-	char orderID[4];
+	char orderID[5];
 	//商品ID
-	char commodityID[4];
+	char commodityID[5];
 	//交易单价
 	double unitPrice;
 	//数量
@@ -12,7 +12,7 @@ class Order {
 	//交易时间
 	char date[13];
 	//卖家ID
-	char sellerID[4];
+	char sellerID[5];
 	//买家ID
-	char buyerID[4];
+	char buyerID[5];
 };

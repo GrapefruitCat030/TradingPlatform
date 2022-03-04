@@ -3,7 +3,7 @@
 class User {
 public:
 	//用户ID
-	char userID;
+	char userID[5];
 	//用户名
 	char username[11];
 	//密码

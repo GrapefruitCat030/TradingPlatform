@@ -1,6 +1,13 @@
 #include"Admin.h"
 
-Admin::Admin() {};
+Admin::Admin() {
+
+	numbUser = 0;
+
+	userArray = NULL;
+	orderArray = NULL;
+	goodsArray = NULL;
+};
 
 Admin::~Admin() {};
 
@@ -15,6 +22,7 @@ void Admin::show_Menu() {
 void Admin::exitAD() {
 	cout << "欢迎下次使用！！" << endl;
 	system("pause");
+	system("cls");
 	return;
 }
 
@@ -26,7 +34,21 @@ void Admin::removeGoods() {};
 
 void Admin::Order_show() {};
 
-void Admin::User_show() {};
+void Admin::User_show() {
+	if (!this->numbUser) {
+		cout << "无用户！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	for (int i = 0; i < this->numbUser; i++) {
+		cout << this->userArray[i]->username;
+		cout << endl;
+	}
+	system("pause");
+	system("cls");
+
+};
 
 void Admin::banUser() {};
 
@@ -66,7 +88,6 @@ void Admin::Module_Admin() {
 		case 7:	//注销
 			this->exitAD();
 			judge = false;
-			system("cls");
 			break;
 		default:
 			system("cls"); //清屏

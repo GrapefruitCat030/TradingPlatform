@@ -6,6 +6,9 @@ using namespace std;
 #include"Order.h"
 
 class Admin {
+public:
+	//用户人数
+	int numbUser;
 
 	//用户数组指针
 	User** userArray;
@@ -17,7 +20,7 @@ class Admin {
 	Order** orderArray;
 
 
-public:
+
 	Admin();
 	~Admin();
 

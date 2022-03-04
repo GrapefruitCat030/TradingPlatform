@@ -156,6 +156,8 @@
     <Text Include="commodity.txt" />
     <Text Include="order.txt" />
     <Text Include="user.txt" />
+    <Text Include="小思路.txt" />
+    <Text Include="目前遇到的bug.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

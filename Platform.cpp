@@ -46,7 +46,40 @@ void Platform::AdminLogin(Admin& m_Admin) {
 };
 
 void Platform::User_register(Admin& m_Admin) {
+	char Uname[11] = { 0 };
+	char Password[21] = { 0 };
+	cout << "请输入用户名：";
+	cin >> Uname;
+	cout << "请输入设置密码：";
+	cin >> Password;
 
+	//开辟新空间，利用动态数组，元素类型为User类的指针 (usernumb暂时还没+1）
+	User** newUArray = new User * [m_Admin.numbUser+1];
+
+	//将原来空间下的数据拷贝到新空间下
+	//先做判断，有数据就往里面放
+	if (m_Admin.userArray != NULL) {
+		for (int i = 0; i < m_Admin.numbUser; ++i) {
+			newUArray[i] = m_Admin.userArray[i];
+		}
+	}
+	//创建新的用户对象
+	User* n_User = new User;
+	strcpy_s(n_User->username, Uname);
+	strcpy_s(n_User->password, Password);
+	//放进去
+	newUArray[m_Admin.numbUser] = n_User;
+
+	//释放原有空间
+	delete[] m_Admin.userArray;
+	//更改新空间的指向
+	m_Admin.userArray = newUArray;
+	//更新新职工人数
+	m_Admin.numbUser++;
+
+	cout << "注册成功！！" << endl;
+	system("pause");
+	system("cls");
 };
 
 void Platform::UserLogin(Admin& m_Admin) {
