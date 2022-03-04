@@ -35,7 +35,8 @@ void Admin::removeGoods() {};
 void Admin::Order_show() {};
 
 void Admin::User_show() {
-	cout << "用户ID" << "\t" << "姓名" << "\t" << "密码" << endl;
+	cout << "用户ID" << "\t" << "姓名" << "\t" << "密码" <<"\t" 
+		<<"手机号" << "\t" <<"地址" << endl;
 	if (!this->numbUser) {
 		cout << "----------无用户！！-----------" << endl;
 		system("pause");
@@ -44,8 +45,10 @@ void Admin::User_show() {
 	}
 	for (int i = 0; i < this->numbUser; i++) {
 		cout << this->userArray[i]->userID << "\t";
-		cout << this->userArray[i]->username<<"\t";
-		cout << this->userArray[i]->password;
+		cout << this->userArray[i]->username << "\t";
+		cout << this->userArray[i]->password << "\t";
+		cout << this->userArray[i]->phoneNumber << "\t";
+		cout << this->userArray[i]->address;
 		cout << endl;
 	}
 	system("pause");

@@ -48,10 +48,17 @@ void Platform::AdminLogin(Admin& m_Admin) {
 void Platform::User_register(Admin& m_Admin) {
 	char Uname[11] = { 0 };
 	char Password[21] = { 0 };
+	char phnNumber[21] = { 0 };
+	char address[41] = { 0 };
 	cout << "请输入用户名：";
 	cin >> Uname;
 	cout << "请输入设置密码：";
 	cin >> Password;
+	cout << "请输入手机号：";
+	cin >> phnNumber;
+	cout << "请输入地址：";
+	cin >> address;
+
 
 	//开辟新空间，利用动态数组，元素类型为User类的指针 (usernumb暂时还没+1）
 	User** newUArray = new User * [m_Admin.numbUser+1];
@@ -63,12 +70,19 @@ void Platform::User_register(Admin& m_Admin) {
 			newUArray[i] = m_Admin.userArray[i];
 		}
 	}
+
 	//创建新的用户对象
 	User* n_User = new User;
+	//char* the_cpy = UIDback(m_Admin.numbUser + 1);
+	strcpy(n_User->userID, UIDback(m_Admin.numbUser + 1));
+	//delete[] the_cpy;
 	strcpy_s(n_User->username, Uname);
 	strcpy_s(n_User->password, Password);
-	//用户的ID：
-	strcpy(n_User->userID,UIDback(m_Admin.numbUser+1));
+	strcpy_s(n_User->phoneNumber, phnNumber);
+	strcpy_s(n_User->address, address);
+	n_User->balance = 0.0;
+	n_User->userState = 1;
+
 
 	//放进去
 	newUArray[m_Admin.numbUser] = n_User;
