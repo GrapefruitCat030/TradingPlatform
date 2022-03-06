@@ -62,43 +62,56 @@ void Admin::Module_Admin() {
 	//先进行清屏，然后管理员菜单展示
 	system("cls");
 	//用来储存用户选项
-	int choice = 0;
+	char choicecc[100] = { 0 };
 	bool judge = true;
 
 	while (judge) {
 
 		this->show_Menu();
 		cout << "输入选项：";
-		cin >> choice;
+		cin >> choicecc;
+		//if (cin >> choicecc) {
 
-		switch (choice)
+		//}
+		//else {
+		//	cin.clear();
+		//}
+		if (strlen(choicecc) > 1) {
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls");
+			continue;
+		}
+		//char kksk = choicecc[0];
+		switch (choicecc[0])
 		{
-		case 1:	//查看所有商品
+		case '1':	//查看所有商品
 			this->Goods_show();
 			break;
-		case 2:	//搜索商品
+		case '2':	//搜索商品
 			this->searchGoods();
 			break;
-		case 3:	//下架商品
+		case '3':	//下架商品
 			this->removeGoods();
 			break;
-		case 4:	//查看所有订单
+		case '4':	//查看所有订单
 			this->Order_show();
 			break;
-		case 5:	//查看所有用户
+		case '5':	//查看所有用户
 			this->User_show();
 			break;
-		case 6:	//封禁用户
+		case '6':	//封禁用户
 			this->banUser();
 			break;
-		case 7:	//注销
+		case '7':	//注销
 			this->exitAD();
 			judge = false;
 			break;
 		default:
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
 			system("cls"); //清屏
 			break;
 		}
 	}
-	return;
 }
