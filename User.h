@@ -18,6 +18,7 @@ public:
 	int userState;
 
 
+
 	//-------------功能函数-----------------
 	// 用户菜单显示
 	void showUSERMenu();

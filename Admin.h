@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 using namespace std;
 #include"User.h"
 #include"Goods.h"
@@ -45,7 +46,18 @@ public:
 	//管理员模式，用来接入管理员登录后的模式
 	void Module_Admin();
 
+
+	/**************************/
+
+	//用户整体整体整体初始化
+	void USERINIT();
+	//用户数组文件读取
+	void userInitArray();
+
 	//****************以下为管理员的数据成员*******************//
 
 
 };
+
+//根据文件内容获取用户数量
+int getnumb_USER();

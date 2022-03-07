@@ -1,12 +1,17 @@
 #include"Admin.h"
 
 Admin::Admin() {
-
-	numbUser = 0;
-
-	userArray = NULL;
 	orderArray = NULL;
 	goodsArray = NULL;
+	//用户初始化
+	this->USERINIT();
+
+
+	//numbUser = 0;
+
+	//userArray = NULL;
+	//orderArray = NULL;
+	//goodsArray = NULL;
 };
 
 Admin::~Admin() {};
@@ -36,7 +41,7 @@ void Admin::Order_show() {};
 
 void Admin::User_show() {
 	cout << "用户ID" << "\t" << "姓名" << "\t" << "密码" <<"\t" 
-		<<"手机号" << "\t" <<"地址" << endl;
+		<<"手机号" << "\t" <<"地址" << "\t" << "用户余额" << "\t" << "用户状态" << endl;
 	if (!this->numbUser) {
 		cout << "----------无用户！！-----------" << endl;
 		system("pause");
@@ -48,7 +53,13 @@ void Admin::User_show() {
 		cout << this->userArray[i]->username << "\t";
 		cout << this->userArray[i]->password << "\t";
 		cout << this->userArray[i]->phoneNumber << "\t";
-		cout << this->userArray[i]->address;
+		cout << this->userArray[i]->address << "\t";
+		cout << this->userArray[i]->balance << "\t";
+		if (this->userArray[i]->userState == 1)
+			cout << "正常";
+		else
+			cout << "封禁";
+
 		cout << endl;
 	}
 	system("pause");
@@ -56,7 +67,9 @@ void Admin::User_show() {
 
 };
 
-void Admin::banUser() {};
+void Admin::banUser() {
+
+};
 
 void Admin::Module_Admin() {
 	//先进行清屏，然后管理员菜单展示
@@ -114,4 +127,122 @@ void Admin::Module_Admin() {
 			break;
 		}
 	}
+}
+
+void Admin::USERINIT() {
+	//分三种情况初始化
+	ifstream ifs;
+	ifs.open("user.txt", ios::in);
+
+	//1.用户文件不存在时
+	if (!ifs.is_open()) {
+		cout << "文件为空！！" << endl;
+		numbUser = 0;
+		userArray = NULL;
+		ifs.close();
+		return;
+	}
+
+	//2.用户文件存在但为空
+	char ch;
+	ifs >> ch;
+	if (ifs.eof()) {
+		cout << "内容为空！！" << endl;
+		numbUser = 0;
+		userArray = NULL;
+		ifs.close();
+		return;
+	}
+
+	//3.用户文件存在且不为空
+	numbUser = getnumb_USER();
+	cout << "用户人数为：" << numbUser << endl;
+	userArray = new User * [numbUser];
+	this->userInitArray();
+}
+
+void Admin::userInitArray() {
+	ifstream ifs;
+	ifs.open("user.txt", ios::in);
+	if (!ifs.is_open()) {
+		cout << "FILE OPEN WRONG (AD::userInitArray)";
+		return;
+	}
+
+	//用户ID
+	char userID[5];
+	//用户名
+	char username[11];
+	//密码
+	char password[21];
+	//联系方式
+	char phoneNumber[21];
+	//地址
+	char address[41];
+	//钱包余额
+	double balance;
+	//用户状态：1为正常，0为封禁
+	string userState;
+
+	int index = 0;
+	while (ifs >> userID && ifs >> username && ifs >> password
+		&& ifs >> phoneNumber && ifs >> address && ifs >> balance && ifs >> userState)
+	{
+		User* n_user = new User;
+		strcpy(n_user->userID, userID);
+		strcpy(n_user->username, username);
+		strcpy(n_user->password, password);
+		strcpy(n_user->phoneNumber, phoneNumber);
+		strcpy(n_user->address, address);
+		n_user->balance = balance;
+		if (userState == "正常") {
+			n_user->userState = 1;
+		}
+		else {
+			n_user->userState = 0;
+		}
+
+		this->userArray[index] = n_user;
+
+		index++;
+	}
+
+	ifs.close();
+}
+
+
+/***************类外函数***********************/
+int getnumb_USER() {
+	ifstream ifs;
+	ifs.open("user.txt", ios::in);
+	if (!ifs.is_open()) {
+		cout << "FILE OPEN WRONG (AD::getnumbUser)";
+		exit(-1);
+	}
+
+	//用户ID
+	char userID[5];
+	//用户名
+	char username[11];
+	//密码
+	char password[21];
+	//联系方式
+	char phoneNumber[21];
+	//地址
+	char address[41];
+	//钱包余额
+	double balance;
+	//用户状态：1为正常，0为封禁
+	//int userState;
+	string userState;
+
+	int num = 0;
+	while (ifs >> userID && ifs >> username && ifs >> password
+		&& ifs >> phoneNumber && ifs >> address && ifs >> balance && ifs >> userState)
+	{
+		num++;
+	}
+
+	ifs.close();
+	return num;
 }

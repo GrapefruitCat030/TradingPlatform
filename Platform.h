@@ -1,12 +1,17 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 using namespace std;
 #include"Admin.h"
 #include"User.h"
+#include<string>
+#include<string.h>
 
 
 #define ADNAME "admin"
 #define ADKEY "123456"
+
+#define FILEUSER "user.txt"
 
 class Platform {
 public:
@@ -27,7 +32,13 @@ public:
 
 	//用户登录
 	void UserLogin(Admin& m_Admin);
+
+
+	//注册用户后用来保存到文件中的函数
+	void saveFILE(Admin& m_Admin);
 };
 
 //做出用户ID的字符数组；(注意数据放在堆区，记得用后delete！）
 char* UIDback(int i);
+
+

@@ -1,5 +1,4 @@
-#include<string>
-#include<string.h>
+
 #include"Platform.h"
 
 
@@ -59,6 +58,15 @@ void Platform::User_register(Admin& m_Admin) {
 	cout << "请输入地址：";
 	cin >> address;
 
+	cout << "确定注册？(Y/其它)	";
+	string judge;
+	cin >> judge;
+	if (judge != "Y") {
+		cout << "放弃注册！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 
 	//开辟新空间，利用动态数组，元素类型为User类的指针 (usernumb暂时还没+1）
 	User** newUArray = new User * [m_Admin.numbUser+1];
@@ -91,8 +99,13 @@ void Platform::User_register(Admin& m_Admin) {
 	delete[] m_Admin.userArray;
 	//更改新空间的指向
 	m_Admin.userArray = newUArray;
-	//更新新职工人数
+	//更新用户人数
 	m_Admin.numbUser++;
+
+	//成功添加后，保存到文件中
+	saveFILE(m_Admin);
+
+
 
 	cout << "注册成功！！" << endl;
 	system("pause");
@@ -133,4 +146,31 @@ char* UIDback(int i) {
 	
 	return suki;
 }
+
+void Platform::saveFILE(Admin& m_Admin) {
+	ofstream ofs;
+	ofs.open(FILEUSER, ios::out);
+	if (!ofs.is_open()) {
+		cout << "FILE OPEN WRONG (PL::saveFILE)";
+		return;
+	}
+
+	for (int i = 0; i < m_Admin.numbUser; i++) {
+		ofs << m_Admin.userArray[i]->userID << " "
+			<< m_Admin.userArray[i]->username << " "
+			<< m_Admin.userArray[i]->password << " "
+			<< m_Admin.userArray[i]->phoneNumber << " "
+			<< m_Admin.userArray[i]->address << " "
+			<< m_Admin.userArray[i]->balance << " ";
+		if (m_Admin.userArray[i]->userState == 1) {
+			ofs << "正常" << endl;
+		}
+		else {
+			ofs << "封禁" << endl;
+		}
+			
+	}
+	ofs.close();
+};
+
 
