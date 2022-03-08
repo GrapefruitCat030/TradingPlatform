@@ -6,6 +6,9 @@ using namespace std;
 #include"Goods.h"
 #include"Order.h"
 
+#define FILEUSER "user.txt"
+
+
 class Admin {
 public:
 	//用户人数
@@ -54,6 +57,9 @@ public:
 	//用户数组文件读取
 	void userInitArray();
 
+	//文件保存
+	void saveFILE();
+	
 	//****************以下为管理员的数据成员*******************//
 
 

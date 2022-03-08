@@ -72,10 +72,13 @@ void Admin::User_show() {
 void Admin::banUser() {
 	string UID;
 	cout << "请输入要封禁的用户ID：";
-	cin >> UID;
+	cin.sync();
+	getline(cin, UID);
 	cout << "确定封禁？(Y/其他) ";
 	string judge;
-	cin >> judge;
+	cin.sync();
+	getline(cin, judge);
+
 	if (judge != "Y") {
 		cout << "放弃封禁！！" << endl;
 		system("pause");
@@ -89,6 +92,9 @@ void Admin::banUser() {
 			if (UID == theID) {
 				this->userArray[i]->userState = 0;
 				cout << "封禁成功！！" << endl;
+
+				this->saveFILE();
+
 				system("pause");
 				system("cls");
 				return;
@@ -96,27 +102,30 @@ void Admin::banUser() {
 		}
 		cout << "未找到此用户！！" << endl;
 	}
+
+
 };
 
 void Admin::Module_Admin() {
 	//先进行清屏，然后管理员菜单展示
 	system("cls");
 	//用来储存用户选项
-	char choicecc[100] = { 0 };
+	string choicecc;
 	bool judge = true;
 
 	while (judge) {
 
 		this->show_Menu();
 		cout << "输入选项：";
-		cin >> choicecc;
+		cin.sync();
+		getline(cin, choicecc);
 		//if (cin >> choicecc) {
 
 		//}
 		//else {
 		//	cin.clear();
 		//}
-		if (strlen(choicecc) > 1) {
+		if (size(choicecc) > 1) {
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls");
@@ -199,13 +208,13 @@ void Admin::userInitArray() {
 	//用户ID
 	string userID;
 	//用户名
-	char username[11];
+	string username;
 	//密码
-	char password[21];
+	string password;
 	//联系方式
-	char phoneNumber[21];
+	string phoneNumber;
 	//地址
-	char address[41];
+	string address;
 	//钱包余额
 	double balance;
 	//用户状态：1为正常，0为封禁
@@ -217,10 +226,10 @@ void Admin::userInitArray() {
 	{
 		User* n_user = new User;
 		n_user->userID = userID;
-		strcpy(n_user->username, username);
-		strcpy(n_user->password, password);
-		strcpy(n_user->phoneNumber, phoneNumber);
-		strcpy(n_user->address, address);
+		n_user->username = username;
+		n_user->password = password;
+		n_user->phoneNumber = phoneNumber;
+		n_user->address = address;
 		n_user->balance = balance;
 		if (userState == "正常") {
 			n_user->userState = 1;
@@ -250,13 +259,13 @@ int getnumb_USER() {
 	//用户ID
 	string userID;
 	//用户名
-	char username[11];
+	string username;
 	//密码
-	char password[21];
+	string password;
 	//联系方式
-	char phoneNumber[21];
+	string phoneNumber;
 	//地址
-	char address[41];
+	string address;
 	//钱包余额
 	double balance;
 	//用户状态：1为正常，0为封禁
@@ -273,3 +282,29 @@ int getnumb_USER() {
 	ifs.close();
 	return num;
 }
+
+void Admin::saveFILE() {
+	ofstream ofs;
+	ofs.open(FILEUSER, ios::out);
+	if (!ofs.is_open()) {
+		cout << "FILE OPEN WRONG (PL::saveFILE)";
+		return;
+	}
+
+	for (int i = 0; i < this->numbUser; i++) {
+		ofs << this->userArray[i]->userID << " "
+			<< this->userArray[i]->username << " "
+			<< this->userArray[i]->password << " "
+			<< this->userArray[i]->phoneNumber << " "
+			<< this->userArray[i]->address << " "
+			<< this->userArray[i]->balance << " ";
+		if (this->userArray[i]->userState == 1) {
+			ofs << "正常" << endl;
+		}
+		else {
+			ofs << "封禁" << endl;
+		}
+
+	}
+	ofs.close();
+};

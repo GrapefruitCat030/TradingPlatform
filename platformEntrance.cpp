@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#include<string.h>
+#include<string>
 #include"Platform.h"
 
 
@@ -11,13 +11,14 @@ int main() {
 	//实例化管理者对象
 	Admin AD;
 	//用来储存用户选项
-	char choice[] = { 0 };
+	string choice;
 	while (true) {
 
 		PL.show_Menu();
 		cout << "输入选项：";
-		cin >> choice;
-		if (strlen(choice) > 1) {
+		cin.sync();
+		getline(cin, choice);
+		if (size(choice) > 1) {
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls");

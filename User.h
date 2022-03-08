@@ -5,16 +5,19 @@ using namespace std;
 
 class User {
 public:
+	User();
+	User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState);
+
 	//用户ID
 	string userID;
 	//用户名
-	char username[11];
-	//密码
-	char password[21];
+	string username;
+	//密码phoneNumber
+	string password;
 	//联系方式
-	char phoneNumber[21];
+	string phoneNumber;
 	//地址
-	char address[41];
+	string address;
 	//钱包余额
 	double balance;
 	//用户状态：1为正常，0为封禁

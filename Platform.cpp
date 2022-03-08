@@ -23,9 +23,11 @@ void Platform::AdminLogin(Admin& m_Admin) {
 
 	string A_Name, A_key;
 	cout << "请输入管理员姓名：";
-	cin >> A_Name;
+	cin.sync();
+	getline(cin, A_Name);
 	cout << "请输入密码：";
-	cin >> A_key;
+	cin.sync();
+	getline(cin, A_key);
 
 	
 	//登录失败则清屏返回主菜单
@@ -45,22 +47,27 @@ void Platform::AdminLogin(Admin& m_Admin) {
 };
 
 void Platform::User_register(Admin& m_Admin) {
-	char Uname[11] = { 0 };
-	char Password[21] = { 0 };
-	char phnNumber[21] = { 0 };
-	char address[41] = { 0 };
+	string Uname;
+	string Password;
+	string phnNumber;
+	string address;
 	cout << "请输入用户名：";
-	cin >> Uname;
+	cin.sync();
+	getline(cin, Uname);
 	cout << "请输入设置密码：";
-	cin >> Password;
+	cin.sync();
+	getline(cin, Password);
 	cout << "请输入手机号：";
-	cin >> phnNumber;
+	cin.sync();
+	getline(cin, phnNumber);
 	cout << "请输入地址：";
-	cin >> address;
+	cin.sync();
+	getline(cin, address);
 
 	cout << "确定注册？(Y/其它) ";
 	string judge;
-	cin >> judge;
+	cin.sync();
+	getline(cin, judge);
 	if (judge != "Y") {
 		cout << "放弃注册！！" << endl;
 		system("pause");
@@ -80,17 +87,7 @@ void Platform::User_register(Admin& m_Admin) {
 	}
 
 	//创建新的用户对象
-	User* n_User = new User;
-	//char* the_cpy = UIDback(m_Admin.numbUser + 1);
-	n_User->userID = UIDback(m_Admin.numbUser + 1);
-	//delete[] the_cpy;
-	strcpy_s(n_User->username, Uname);
-	strcpy_s(n_User->password, Password);
-	strcpy_s(n_User->phoneNumber, phnNumber);
-	strcpy_s(n_User->address, address);
-	n_User->balance = 0.0;
-	n_User->userState = 1;
-
+	User* n_User = new User(UIDback(m_Admin.numbUser + 1), Uname, Password, phnNumber, address, 0.0, 1);
 
 	//放进去
 	newUArray[m_Admin.numbUser] = n_User;
@@ -103,7 +100,7 @@ void Platform::User_register(Admin& m_Admin) {
 	m_Admin.numbUser++;
 
 	//成功添加后，保存到文件中
-	saveFILE(m_Admin);
+	this->saveFILE(m_Admin);
 
 
 
