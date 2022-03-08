@@ -1,8 +1,7 @@
 #include"Admin.h"
 
 Admin::Admin() {
-	orderArray = NULL;
-	goodsArray = NULL;
+
 	//用户初始化
 	this->USERINIT();
 

@@ -16,13 +16,13 @@ public:
 	int numbUser;
 
 	//用户列表向量
-	vector<User*> userVec;
+	vector <User*> userVec;
 
-	//商品数组指针
-	Goods** goodsArray;
+	//商品列表向量
+	vector <Goods*> goodsVec;
 
-	//订单数组指针
-	Order** orderArray;
+	//订单列表向量
+	vector <Order*> orderVec;
 
 
 

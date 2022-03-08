@@ -91,7 +91,17 @@ void User::showINFOMenu() {
 
 };
 
-void User::GetUserinfo() {};
+void User::GetUserinfo() {
+	cout << "==============================" << endl;
+	cout << "用户名："<<this->username << endl;
+	cout << "联系方式："<<this->phoneNumber << endl;
+	cout << "地址："<<this->address << endl;
+	cout << "钱包余额："<<this->balance << endl;
+	cout << "==============================" << endl;
+	system("pause");
+	system("cls");
+	return;
+};
 void User::ModifyUserinfo() {};
 void User::Topup_Userbalance() {};
 void User::exitINFO() {

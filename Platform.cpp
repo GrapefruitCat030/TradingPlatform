@@ -61,6 +61,19 @@ void Platform::User_register(Admin& m_Admin) {
 		system("cls");
 		return;
 	}
+	//用户名不能重复
+	//遍历搜索用户
+	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
+		if (Uname == (*it)->username) {
+			//失败，已存在用户名
+			cout << "注册失败！！已存在用户名！！" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+
+
 
 	cout << "请输入设置密码(最大20位)：";
 	cin.sync();
