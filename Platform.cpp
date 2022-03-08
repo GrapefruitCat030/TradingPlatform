@@ -58,7 +58,7 @@ void Platform::User_register(Admin& m_Admin) {
 	cout << "请输入地址：";
 	cin >> address;
 
-	cout << "确定注册？(Y/其它)	";
+	cout << "确定注册？(Y/其它) ";
 	string judge;
 	cin >> judge;
 	if (judge != "Y") {
@@ -82,7 +82,7 @@ void Platform::User_register(Admin& m_Admin) {
 	//创建新的用户对象
 	User* n_User = new User;
 	//char* the_cpy = UIDback(m_Admin.numbUser + 1);
-	strcpy(n_User->userID, UIDback(m_Admin.numbUser + 1));
+	n_User->userID = UIDback(m_Admin.numbUser + 1);
 	//delete[] the_cpy;
 	strcpy_s(n_User->username, Uname);
 	strcpy_s(n_User->password, Password);
@@ -128,7 +128,9 @@ void Platform::UserLogin(Admin& m_Admin) {
 	}
 };
 
-char* UIDback(int i) {
+
+/*************协助性函数****************************************/
+string UIDback(int i) {
 
 	string kksk;
 	if (i < 10) {
@@ -141,10 +143,10 @@ char* UIDback(int i) {
 		kksk = "U" + to_string(i);
 	}
 
-	char* suki = new char[4];
-	strcpy(suki, kksk.c_str());
+	//char* suki = new char[4];
+	//strcpy(suki, kksk.c_str());
 	
-	return suki;
+	return kksk;
 }
 
 void Platform::saveFILE(Admin& m_Admin) {

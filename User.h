@@ -1,9 +1,12 @@
+#include<string>
+using namespace std;
 #pragma once
+
 
 class User {
 public:
 	//用户ID
-	char userID[5];
+	string userID;
 	//用户名
 	char username[11];
 	//密码

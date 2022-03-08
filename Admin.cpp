@@ -55,10 +55,12 @@ void Admin::User_show() {
 		cout << this->userArray[i]->phoneNumber << "\t";
 		cout << this->userArray[i]->address << "\t";
 		cout << this->userArray[i]->balance << "\t";
-		if (this->userArray[i]->userState == 1)
+		if (this->userArray[i]->userState == 1) {
 			cout << "正常";
-		else
+		}
+		else {
 			cout << "封禁";
+		}
 
 		cout << endl;
 	}
@@ -68,7 +70,32 @@ void Admin::User_show() {
 };
 
 void Admin::banUser() {
-
+	string UID;
+	cout << "请输入要封禁的用户ID：";
+	cin >> UID;
+	cout << "确定封禁？(Y/其他) ";
+	string judge;
+	cin >> judge;
+	if (judge != "Y") {
+		cout << "放弃封禁！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	else {
+		for (int i = 0; i < this->numbUser; i++) {
+			string theID;
+			theID = this->userArray[i]->userID;
+			if (UID == theID) {
+				this->userArray[i]->userState = 0;
+				cout << "封禁成功！！" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+		}
+		cout << "未找到此用户！！" << endl;
+	}
 };
 
 void Admin::Module_Admin() {
@@ -170,7 +197,7 @@ void Admin::userInitArray() {
 	}
 
 	//用户ID
-	char userID[5];
+	string userID;
 	//用户名
 	char username[11];
 	//密码
@@ -189,7 +216,7 @@ void Admin::userInitArray() {
 		&& ifs >> phoneNumber && ifs >> address && ifs >> balance && ifs >> userState)
 	{
 		User* n_user = new User;
-		strcpy(n_user->userID, userID);
+		n_user->userID = userID;
 		strcpy(n_user->username, username);
 		strcpy(n_user->password, password);
 		strcpy(n_user->phoneNumber, phoneNumber);
@@ -221,7 +248,7 @@ int getnumb_USER() {
 	}
 
 	//用户ID
-	char userID[5];
+	string userID;
 	//用户名
 	char username[11];
 	//密码
