@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<fstream>
+#include<vector>
 using namespace std;
 #include"User.h"
 #include"Goods.h"
@@ -14,8 +15,8 @@ public:
 	//用户人数
 	int numbUser;
 
-	//用户数组指针
-	User** userArray;
+	//用户列表向量
+	vector<User*> userVec;
 
 	//商品数组指针
 	Goods** goodsArray;

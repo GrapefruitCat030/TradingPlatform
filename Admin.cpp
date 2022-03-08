@@ -48,14 +48,14 @@ void Admin::User_show() {
 		system("cls");
 		return;
 	}
-	for (int i = 0; i < this->numbUser; i++) {
-		cout << this->userArray[i]->userID << "\t";
-		cout << this->userArray[i]->username << "\t";
-		cout << this->userArray[i]->password << "\t";
-		cout << this->userArray[i]->phoneNumber << "\t";
-		cout << this->userArray[i]->address << "\t";
-		cout << this->userArray[i]->balance << "\t";
-		if (this->userArray[i]->userState == 1) {
+	for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
+		cout << (*it)->userID << "\t";
+		cout << (*it)->username << "\t";
+		cout << (*it)->password << "\t";
+		cout << (*it)->phoneNumber << "\t";
+		cout << (*it)->address << "\t";
+		cout << (*it)->balance << "\t";
+		if ((*it)->userState == 1) {
 			cout << "正常";
 		}
 		else {
@@ -86,11 +86,11 @@ void Admin::banUser() {
 		return;
 	}
 	else {
-		for (int i = 0; i < this->numbUser; i++) {
+		for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
 			string theID;
-			theID = this->userArray[i]->userID;
+			theID = (*it)->userID;
 			if (UID == theID) {
-				this->userArray[i]->userState = 0;
+				(*it)->userState = 0;
 				cout << "封禁成功！！" << endl;
 
 				this->saveFILE();
@@ -174,7 +174,7 @@ void Admin::USERINIT() {
 	if (!ifs.is_open()) {
 		cout << "文件为空！！" << endl;
 		numbUser = 0;
-		userArray = NULL;
+		//userVec = NULL;
 		ifs.close();
 		return;
 	}
@@ -185,7 +185,7 @@ void Admin::USERINIT() {
 	if (ifs.eof()) {
 		cout << "内容为空！！" << endl;
 		numbUser = 0;
-		userArray = NULL;
+		//userVec = NULL;
 		ifs.close();
 		return;
 	}
@@ -193,7 +193,7 @@ void Admin::USERINIT() {
 	//3.用户文件存在且不为空
 	numbUser = getnumb_USER();
 	cout << "用户人数为：" << numbUser << endl;
-	userArray = new User * [numbUser];
+	//userVec = new User * [numbUser];
 	this->userInitArray();
 }
 
@@ -220,17 +220,17 @@ void Admin::userInitArray() {
 	//用户状态：1为正常，0为封禁
 	string userState;
 
-	int index = 0;
+	//int index = 0;
 	while (ifs >> userID && ifs >> username && ifs >> password
 		&& ifs >> phoneNumber && ifs >> address && ifs >> balance && ifs >> userState)
 	{
-		User* n_user = new User;
-		n_user->userID = userID;
-		n_user->username = username;
-		n_user->password = password;
-		n_user->phoneNumber = phoneNumber;
-		n_user->address = address;
-		n_user->balance = balance;
+		User* n_user = new User(userID,username,password,phoneNumber,address,balance,1);
+		//n_user->userID = userID;
+		//n_user->username = username;
+		//n_user->password = password;
+		//n_user->phoneNumber = phoneNumber;
+		//n_user->address = address;
+		//n_user->balance = balance;
 		if (userState == "正常") {
 			n_user->userState = 1;
 		}
@@ -238,9 +238,10 @@ void Admin::userInitArray() {
 			n_user->userState = 0;
 		}
 
-		this->userArray[index] = n_user;
+		//this->userArray[index] = n_user;
+		userVec.push_back(n_user);
 
-		index++;
+		//index++;
 	}
 
 	ifs.close();
@@ -291,14 +292,14 @@ void Admin::saveFILE() {
 		return;
 	}
 
-	for (int i = 0; i < this->numbUser; i++) {
-		ofs << this->userArray[i]->userID << " "
-			<< this->userArray[i]->username << " "
-			<< this->userArray[i]->password << " "
-			<< this->userArray[i]->phoneNumber << " "
-			<< this->userArray[i]->address << " "
-			<< this->userArray[i]->balance << " ";
-		if (this->userArray[i]->userState == 1) {
+	for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
+		ofs << (*it)->userID << " "
+			<< (*it)->username << " "
+			<< (*it)->password << " "
+			<< (*it)->phoneNumber << " "
+			<< (*it)->address << " "
+			<< (*it)->balance << " ";
+		if ((*it)->userState == 1) {
 			ofs << "正常" << endl;
 		}
 		else {

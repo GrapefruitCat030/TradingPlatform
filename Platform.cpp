@@ -103,29 +103,40 @@ void Platform::User_register(Admin& m_Admin) {
 		return;
 	}
 
-	//开辟新空间，利用动态数组，元素类型为User类的指针 (usernumb暂时还没+1）
-	User** newUArray = new User * [m_Admin.numbUser+1];
+	////开辟新空间，利用动态数组，元素类型为User类的指针 (usernumb暂时还没+1）
+	//User** newUArray = new User * [m_Admin.numbUser+1];
 
-	//将原来空间下的数据拷贝到新空间下
-	//先做判断，有数据就往里面放
-	if (m_Admin.userArray != NULL) {
-		for (int i = 0; i < m_Admin.numbUser; ++i) {
-			newUArray[i] = m_Admin.userArray[i];
-		}
-	}
+	////将原来空间下的数据拷贝到新空间下
+	////先做判断，有数据就往里面放
+	//if (m_Admin.userArray != NULL) {
+	//	for (int i = 0; i < m_Admin.numbUser; ++i) {
+	//		newUArray[i] = m_Admin.userArray[i];
+	//	}
+	//}
+
+	////创建新的用户对象
+	//User* n_User = new User(UIDback(m_Admin.numbUser + 1), Uname, Password, phnNumber, address, 0.0, 1);
+
+	////放进去
+	//newUArray[m_Admin.numbUser] = n_User;
+
+	////释放原有空间
+	//delete[] m_Admin.userArray;
+	////更改新空间的指向
+	//m_Admin.userArray = newUArray;
+	////更新用户人数
+	//m_Admin.numbUser++;
 
 	//创建新的用户对象
 	User* n_User = new User(UIDback(m_Admin.numbUser + 1), Uname, Password, phnNumber, address, 0.0, 1);
 
-	//放进去
-	newUArray[m_Admin.numbUser] = n_User;
+	//确定注册，直接往userVec里面push新用户类指针
+	m_Admin.userVec.push_back(n_User);
 
-	//释放原有空间
-	delete[] m_Admin.userArray;
-	//更改新空间的指向
-	m_Admin.userArray = newUArray;
 	//更新用户人数
 	m_Admin.numbUser++;
+
+
 
 	//成功添加后，保存到文件中
 	this->saveFILE(m_Admin);
@@ -152,12 +163,12 @@ void Platform::UserLogin(Admin& m_Admin) {
 	int flag = 0;
 	string judgeUN, judgeUK;
 	//遍历搜索用户
-	for (int i = 0; i < m_Admin.numbUser; i++) {
-		judgeUN = m_Admin.userArray[i]->username;
-		judgeUK = m_Admin.userArray[i]->password;
+	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
+		judgeUN = (*it)->username;
+		judgeUK = (*it)->password;
 		if (U_Name == judgeUN && U_key == judgeUK) {
 			//拷贝新用户
-			n_user = *(m_Admin.userArray[i]);
+			n_user = *((*it));
 			flag = 1;
 			cout << "成功登录！" << endl;
 			system("pause");
@@ -247,14 +258,14 @@ void Platform::saveFILE(Admin& m_Admin) {
 		return;
 	}
 
-	for (int i = 0; i < m_Admin.numbUser; i++) {
-		ofs << m_Admin.userArray[i]->userID << " "
-			<< m_Admin.userArray[i]->username << " "
-			<< m_Admin.userArray[i]->password << " "
-			<< m_Admin.userArray[i]->phoneNumber << " "
-			<< m_Admin.userArray[i]->address << " "
-			<< m_Admin.userArray[i]->balance << " ";
-		if (m_Admin.userArray[i]->userState == 1) {
+	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
+		ofs << (*it)->userID << " "
+			<< (*it)->username << " "
+			<< (*it)->password << " "
+			<< (*it)->phoneNumber << " "
+			<< (*it)->address << " "
+			<< (*it)->balance << " ";
+		if ((*it)->userState == 1) {
 			ofs << "正常" << endl;
 		}
 		else {
