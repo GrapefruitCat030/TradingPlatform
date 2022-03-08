@@ -1,4 +1,5 @@
 #include<string>
+#include<iostream>
 using namespace std;
 #pragma once
 
@@ -7,7 +8,7 @@ class User {
 public:
 	User();
 	User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState);
-
+	//User(const User& cpyuser);
 	//用户ID
 	string userID;
 	//用户名

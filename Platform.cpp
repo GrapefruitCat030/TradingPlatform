@@ -138,12 +138,77 @@ void Platform::User_register(Admin& m_Admin) {
 };
 
 void Platform::UserLogin(Admin& m_Admin) {
-	
-	//test
-	int kksk = 0;
+	//创建新用户，后读入数据
+	User n_user;
+
+	string U_Name, U_key;
+	cout << "请输入用户名：";
+	cin.sync();
+	getline(cin, U_Name);
+	cout << "请输入密码：";
+	cin.sync();
+	getline(cin, U_key);
+
+	int flag = 0;
+	string judgeUN, judgeUK;
+	//遍历搜索用户
+	for (int i = 0; i < m_Admin.numbUser; i++) {
+		judgeUN = m_Admin.userArray[i]->username;
+		judgeUK = m_Admin.userArray[i]->password;
+		if (U_Name == judgeUN && U_key == judgeUK) {
+			//拷贝新用户
+			n_user = *(m_Admin.userArray[i]);
+			flag = 1;
+			cout << "成功登录！" << endl;
+			system("pause");
+			break;
+		}
+	}
+
 	//如果成功了,switch!!
-	if (kksk) {
-		User* the_User = new User;
+	if (flag) {
+		//先进行清屏，然后用户菜单展示
+		system("cls");
+		//用来储存用户选项
+		string choiceuu;
+		bool judge = true;
+
+		while (judge) {
+
+			n_user.showUSERMenu();
+			cout << "输入选项：";
+			cin.sync();
+			getline(cin, choiceuu);
+
+			if (size(choiceuu) > 1) {
+				cout << "输入有误！请重新输入!!" << endl;
+				system("pause");
+				system("cls");
+				continue;
+			}
+
+			switch (choiceuu[0])
+			{
+			case '1':	//我是买家
+				n_user.Module_BUYER();
+				break;
+			case '2':	//我是卖家
+				n_user.Module_SELLER();
+				break;
+			case '3':	//个人信息管理
+				n_user.infoManageUSER();
+				break;
+			case '4':	//退出登录
+				n_user.exitUSER();
+				judge = false;
+				break;
+			default:
+				cout << "输入有误！请重新输入!!" << endl;
+				system("pause");
+				system("cls"); //清屏
+				break;
+			}
+		}
 
 	}
 	else {
