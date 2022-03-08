@@ -51,18 +51,46 @@ void Platform::User_register(Admin& m_Admin) {
 	string Password;
 	string phnNumber;
 	string address;
-	cout << "请输入用户名：";
+
+	cout << "请输入用户名(最大10位)：";
 	cin.sync();
 	getline(cin, Uname);
-	cout << "请输入设置密码：";
+	if (size(Uname) > 10) {
+		cout << "用户名超过长度！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	cout << "请输入设置密码(最大20位)：";
 	cin.sync();
 	getline(cin, Password);
-	cout << "请输入手机号：";
+	if (size(Password) > 20) {
+		cout << "密码超过长度！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	cout << "请输入手机号(最多20个数字)：";
 	cin.sync();
 	getline(cin, phnNumber);
-	cout << "请输入地址：";
+	if (size(phnNumber) > 20) {
+		cout << "手机号超过长度！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	cout << "请输入地址(最多40个字)：";
 	cin.sync();
 	getline(cin, address);
+	if (size(address) > 40) {
+		cout << "地址超过长度！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 
 	cout << "确定注册？(Y/其它) ";
 	string judge;
