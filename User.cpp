@@ -1,6 +1,6 @@
 #include"User.h"
 
-User::User() {};
+User::User() { userState = 1; balance = 0.0; };
 User::User(string userID,string username,string password,string phoneNumber,string address,double balance,int userState) {
 	this->userID = userID;
 	this->username = username;
@@ -102,8 +102,30 @@ void User::GetUserinfo() {
 	system("cls");
 	return;
 };
-void User::ModifyUserinfo() {};
-void User::Topup_Userbalance() {};
+
+void User::ModifyUserinfo() {
+
+
+};
+
+void User::Topup_Userbalance() {
+
+	double money;
+	cout << "请输入要充值的金额：";
+	cin.sync();
+	(cin >> money).get();	//cin>>的结束符，回车，或者空格都可以，但是当cin读取结束后，cin的结束符还会再缓冲区中存在，并让下次需要读取时进行读取
+							//添加了.get(),用cin.get()来消除缓冲区中残留的‘\n’
+
+	//cin.ignore(numeric_limits<std::streamsize>::max());				//清空缓冲区(清除输入缓冲区的所有内容) //放屁
+	this->balance += money;
+
+
+	cout << "充值成功！！" << endl;
+	system("pause");
+	system("cls");
+};
+
+
 void User::exitINFO() {
 	cout << "欢迎下次使用！！" << endl;
 	system("pause");

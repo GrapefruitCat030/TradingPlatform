@@ -162,8 +162,8 @@ void Platform::User_register(Admin& m_Admin) {
 };
 
 void Platform::UserLogin(Admin& m_Admin) {
-	//创建新用户，后读入数据
-	User n_user;
+	//创建新用户指针，后指向用户数据
+	User* n_user;
 
 	string U_Name, U_key;
 	cout << "请输入用户名：";
@@ -181,7 +181,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 		judgeUK = (*it)->password;
 		if (U_Name == judgeUN && U_key == judgeUK) {
 			//拷贝新用户
-			n_user = *((*it));
+			n_user = (*it);
 			flag = 1;
 			cout << "成功登录！" << endl;
 			system("pause");
@@ -199,7 +199,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 
 		while (judge) {
 
-			n_user.showUSERMenu();
+			n_user->showUSERMenu();
 			cout << "输入选项：";
 			cin.sync();
 			getline(cin, choiceuu);
@@ -214,16 +214,18 @@ void Platform::UserLogin(Admin& m_Admin) {
 			switch (choiceuu[0])
 			{
 			case '1':	//我是买家
-				n_user.Module_BUYER();
+				n_user->Module_BUYER();
 				break;
 			case '2':	//我是卖家
-				n_user.Module_SELLER();
+				n_user->Module_SELLER();
 				break;
 			case '3':	//个人信息管理
-				n_user.infoManageUSER();
+				n_user->infoManageUSER();
+				//保存数据
+				this->saveFILE(m_Admin);
 				break;
 			case '4':	//退出登录
-				n_user.exitUSER();
+				n_user->exitUSER();
 				judge = false;
 				break;
 			default:
