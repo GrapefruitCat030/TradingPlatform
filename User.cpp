@@ -28,6 +28,7 @@ void User::Module_BUYER() {};
 
 void User::Module_SELLER() {};
 
+
 //外面PL的switch语句中已经有保存函数
 void User::infoManageUSER(vector<User*> vec) {
 	//先进行清屏，然后用户菜单展示
@@ -81,7 +82,6 @@ void User::exitUSER() {
 	system("cls");
 	return;
 };
-
 
 
 //信息管理菜单
@@ -223,8 +223,59 @@ void User::Topup_Userbalance() {
 	//cin.ignore(numeric_limits<std::streamsize>::max());				//清空缓冲区(清除输入缓冲区的所有内容) //放屁
 	this->balance += money;
 
-
 	cout << "充值成功！！" << endl;
+
+
+	//分两种情况：没有文件和有文件时
+	//以写入和追加方式打开文件
+	ofstream ofs("balance.txt", ios::out | ios::app);
+	ifstream ifs("balance.txt", ios::in);
+
+	//拿到当前充值的系统时间
+	time_t blcTime;
+	time(&blcTime);
+
+	//无文件，进行创建
+	if (!ofs.is_open()) {
+		cout << "the balance txt open failed." << endl;
+		//ofs << setw(10) << setiosflags(ios::left) << "充值用户ID" 
+		//	<< setw(10) << setiosflags(ios::left) <<"充值金额"
+		//	<< setw(30) << setiosflags(ios::left) <<"充值时间" << endl;
+
+		//ofs << setw(10) << setiosflags(ios::left) << this->userID 
+		//	<< setw(10) << setiosflags(ios::left) << money 
+		//	<< setw(30) << setiosflags(ios::left) << ctime(&blcTime) << endl;
+
+		ofs.close();
+		system("pause");
+		system("cls");
+		return;
+	}
+	if (!ifs.is_open()) {
+		cout << "blcfile ifs open failed." << endl;
+		ifs.close();
+		system("pause");
+		system("cls");
+		return;
+	}
+
+
+	//判断文件为空(eof)
+	char ch;
+	if (!ifs.get(ch)) {
+		ofs << setw(20) << setiosflags(ios::left) << "充值用户ID"
+			<< setw(20) << setiosflags(ios::left) << "充值金额"
+			<< setw(30) << setiosflags(ios::left) << "充值时间" << endl;
+	}
+	//先前已经有文件存在
+	ofs << setw(20) << setiosflags(ios::left) << this->userID
+		<< setw(20) << setiosflags(ios::left) << money
+		<< setw(30) << setiosflags(ios::left) << ctime(&blcTime);
+
+	//关闭文件
+	ofs.close();
+	ifs.close();
+
 	system("pause");
 	system("cls");
 };

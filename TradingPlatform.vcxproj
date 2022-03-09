@@ -152,6 +152,7 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="balance.txt" />
     <Text Include="commands.txt" />
     <Text Include="commodity.txt" />
     <Text Include="order.txt" />

@@ -1,6 +1,9 @@
 #include<string>
 #include<vector>
 #include<iostream>
+#include<fstream>
+#include<iomanip>
+#include<time.h>
 
 using namespace std;
 #pragma once
