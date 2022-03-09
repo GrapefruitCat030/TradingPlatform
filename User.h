@@ -1,5 +1,7 @@
 #include<string>
+#include<vector>
 #include<iostream>
+
 using namespace std;
 #pragma once
 
@@ -29,12 +31,16 @@ public:
 	//-------------功能函数-----------------
 	// 用户菜单显示
 	void showUSERMenu();
+
 	//买家模式
 	void Module_BUYER();
+
 	//卖家模式
 	void Module_SELLER();
-	//个人信息管理
-	void infoManageUSER();
+
+	//个人信息管理,传入vector以方便用户信息修改时进行用户名的遍历
+	void infoManageUSER(vector<User*> vec);
+
 	//注销登录
 	void exitUSER();
 
@@ -44,7 +50,7 @@ public:
 	//查看信息
 	void GetUserinfo();
 	//修改信息
-	void ModifyUserinfo();
+	void ModifyUserinfo(vector<User*> vec);
 	//充值
 	void Topup_Userbalance();
 	//返回用户主界面

@@ -175,12 +175,13 @@ void Platform::UserLogin(Admin& m_Admin) {
 
 	int flag = 0;
 	string judgeUN, judgeUK;
+
 	//遍历搜索用户
 	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
 		judgeUN = (*it)->username;
 		judgeUK = (*it)->password;
+		//找到用户
 		if (U_Name == judgeUN && U_key == judgeUK) {
-			//拷贝新用户
 			n_user = (*it);
 			flag = 1;
 			cout << "成功登录！" << endl;
@@ -220,7 +221,8 @@ void Platform::UserLogin(Admin& m_Admin) {
 				n_user->Module_SELLER();
 				break;
 			case '3':	//个人信息管理
-				n_user->infoManageUSER();
+				//传值传参，不怕原vector修改
+				n_user->infoManageUSER(m_Admin.userVec);
 				//保存数据
 				this->saveFILE(m_Admin);
 				break;

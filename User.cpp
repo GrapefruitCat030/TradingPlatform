@@ -1,5 +1,6 @@
 #include"User.h"
 
+
 User::User() { userState = 1; balance = 0.0; };
 User::User(string userID,string username,string password,string phoneNumber,string address,double balance,int userState) {
 	this->userID = userID;
@@ -27,7 +28,8 @@ void User::Module_BUYER() {};
 
 void User::Module_SELLER() {};
 
-void User::infoManageUSER() {
+//外面PL的switch语句中已经有保存函数
+void User::infoManageUSER(vector<User*> vec) {
 	//先进行清屏，然后用户菜单展示
 	system("cls");
 	//用来储存用户选项
@@ -54,7 +56,7 @@ void User::infoManageUSER() {
 			this->GetUserinfo();
 			break;
 		case '2':	//修改信息
-			this->ModifyUserinfo();
+			this->ModifyUserinfo(vec);
 			break;
 		case '3':	//充值
 			this->Topup_Userbalance();
@@ -103,7 +105,109 @@ void User::GetUserinfo() {
 	return;
 };
 
-void User::ModifyUserinfo() {
+void User::ModifyUserinfo(vector<User*> vec) {
+	
+	string choice;
+	bool judge = true;
+
+	//进入循环
+	while (judge) {
+		//菜单展示
+		cout << "=====================================" << endl;
+		cout << "=========请输入要修改的信息===========" << endl;
+		cout << "====== 1.用户名  2.联系方式  3.地址  4.取消修改======" << endl;
+		cout << "==========================================" << endl;
+
+		//输入选择
+		cout << "输入选项：";
+		cin.sync();
+		getline(cin, choice);
+
+		if (size(choice) > 1) {
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls");
+			continue;
+		}
+
+		switch (choice[0])
+		{
+		case '1':	//修改用户名,注意用户名不能相同
+		{
+			cout << "请输入修改后的用户名：";
+			string Uname;
+			cin.sync();
+			getline(cin, Uname);
+
+			//进行用户名的遍历
+			for (vector<User*>::iterator it =vec.begin(); it != vec.end(); it++) {
+				if (Uname == (*it)->username) {
+					//失败，已存在用户名
+					cout << "注册失败！！已存在用户名！！" << endl;
+					system("pause");
+					system("cls");
+					return;
+				}
+			}
+			
+			
+			//成功则修改
+			this->username = Uname;
+			cout << "修改成功！！" << endl;
+			judge = false;
+			system("pause");
+			system("cls");
+		}
+			break;
+		case '2':	//修改联系方式
+		{
+			cout << "请输入修改后的联系方式：";
+			string number;
+			cin.sync();
+			getline(cin, number);
+
+			this->phoneNumber = number;
+			cout << "修改成功！！" << endl;
+			judge = false;
+
+			system("pause");
+			system("cls");
+		}
+			break;
+		case '3':	//修改地址
+		{
+			cout << "请输入修改后的地址：";
+			string addr;
+			cin.sync();
+			getline(cin, addr);
+
+			this->address = addr;
+
+
+			cout << "修改成功！！" << endl;
+			judge = false;
+
+			system("pause");
+			system("cls");
+
+		}
+			break;
+		case '4':
+		{
+			judge = false;
+
+			system("pause");
+			system("cls");
+		}
+			break;
+		default:
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls"); //清屏
+			break;
+		}
+	}
+
 
 
 };
@@ -124,7 +228,6 @@ void User::Topup_Userbalance() {
 	system("pause");
 	system("cls");
 };
-
 
 void User::exitINFO() {
 	cout << "欢迎下次使用！！" << endl;
