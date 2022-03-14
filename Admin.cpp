@@ -306,89 +306,47 @@ void Admin::banUser() {
 
 
 void Admin::USERINIT() {
-	//分三种情况初始化
-	ifstream ifs;
-	ifs.open("user.txt", ios::in);
+	ifstream ifs(FILEUSER, ios::in);
 
-	//1.用户文件不存在时
+	//打开失败
 	if (!ifs.is_open()) {
-		cout << "文件为空！！" << endl;
-		numbUser = 0;
-		//userVec = NULL;
-		ifs.close();
+		cout << "user txt open failed!" << endl;
 		return;
 	}
 
-	//2.用户文件存在但为空
-	char ch;
-	ifs >> ch;
-	if (ifs.eof()) {
-		cout << "内容为空！！" << endl;
-		numbUser = 0;
-		//userVec = NULL;
-		ifs.close();
-		return;
-	}
+	//每行读入
+	string str;
+	//去掉没用的第一行
+	getline(ifs, str);
+	//继续读入
+	while (getline(ifs, str)) {
 
-	//3.用户文件存在且不为空
-	numbUser = getnumb_USER();
-	cout << "用户人数为：" << numbUser << endl;
-	//userVec = new User * [numbUser];
-	this->userInitVec();
-}
+		stringstream kksk(str);
 
-void Admin::userInitVec() {
-	ifstream ifs;
-	ifs.open("user.txt", ios::in);
-	if (!ifs.is_open()) {
-		cout << "FILE OPEN WRONG (AD::userInitVec)";
-		return;
-	}
+		vector<string> record;
 
-	//用户ID
-	string userID;
-	//用户名
-	string username;
-	//密码
-	string password;
-	//联系方式
-	string phoneNumber;
-	//地址
-	string address;
-	//钱包余额
-	double balance;
-	//用户状态：1为正常，0为封禁
-	string userState;
-
-	//int index = 0;
-	while (ifs >> userID && ifs >> username && ifs >> password
-		&& ifs >> phoneNumber && ifs >> address && ifs >> balance && ifs >> userState)
-	{
-		User* n_user = new User(userID,username,password,phoneNumber,address,balance,1);
-		//n_user->userID = userID;
-		//n_user->username = username;
-		//n_user->password = password;
-		//n_user->phoneNumber = phoneNumber;
-		//n_user->address = address;
-		//n_user->balance = balance;
-		if (userState == "正常") {
-			n_user->userState = 1;
-		}
-		else {
-			n_user->userState = 0;
+		//将一行中以逗号为分隔符的字符串记录进record向量中
+		while (kksk) {
+			string tmp;
+			getline(kksk, tmp, ',');
+			record.push_back(tmp);
 		}
 
-		//this->userArray[index] = n_user;
-		userVec.push_back(n_user);
-
-		//index++;
+		//初始化新的商品对象
+		User* gd = new User(record);
+		//装进向量里面
+		this->userVec.push_back(gd);
 	}
+
 
 	ifs.close();
+
+
+
 }
 
 void Admin::GOODSINIT() {
-	ifstream ifs("commodity.txt", ios::in);
+	ifstream ifs(FILEGOOD, ios::in);
 
 	//打开失败
 	if (!ifs.is_open()) {
@@ -467,40 +425,6 @@ void Admin::ORDERINIT() {
 
 
 /***************类外函数***********************/
-int getnumb_USER() {
-	ifstream ifs;
-	ifs.open("user.txt", ios::in);
-	if (!ifs.is_open()) {
-		cout << "FILE OPEN WRONG (AD::getnumbUser)";
-		exit(-1);
-	}
-
-	//用户ID
-	string userID;
-	//用户名
-	string username;
-	//密码
-	string password;
-	//联系方式
-	string phoneNumber;
-	//地址
-	string address;
-	//钱包余额
-	double balance;
-	//用户状态：1为正常，0为封禁
-	//int userState;
-	string userState;
-
-	int num = 0;
-	while (ifs >> userID && ifs >> username && ifs >> password
-		&& ifs >> phoneNumber && ifs >> address && ifs >> balance && ifs >> userState)
-	{
-		num++;
-	}
-
-	ifs.close();
-	return num;
-}
 
 void Admin::saveUSERFILE() {
 	ofstream ofs;
@@ -510,14 +434,16 @@ void Admin::saveUSERFILE() {
 		return;
 	}
 
+	ofs << "用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态" << endl;
+
 	//用户vec写入
 	for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
-		ofs << (*it)->userID << " "
-			<< (*it)->username << " "
-			<< (*it)->password << " "
-			<< (*it)->phoneNumber << " "
-			<< (*it)->address << " "
-			<< (*it)->balance << " ";
+		ofs << (*it)->userID << ","
+			<< (*it)->username << ","
+			<< (*it)->password << ","
+			<< (*it)->phoneNumber << ","
+			<< (*it)->address << ","
+			<< to_string((*it)->balance) << ",";	//double转string
 		if ((*it)->userState == 1) {
 			ofs << "正常" << endl;
 		}

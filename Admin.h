@@ -58,8 +58,6 @@ public:
 
 	//用户整体整体整体初始化
 	void USERINIT();
-	//用户向量文件读取
-	void userInitVec();
 
 	//商品文件整体整体初始化
 	void GOODSINIT();
@@ -78,5 +76,3 @@ public:
 
 };
 
-//根据文件内容获取用户数量
-int getnumb_USER();

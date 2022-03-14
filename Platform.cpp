@@ -275,20 +275,23 @@ void Platform::saveFILE(Admin& m_Admin) {
 		return;
 	}
 
+	ofs << "用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态" << endl;
+
+	//用户vec写入
 	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
-		ofs << (*it)->userID << " "
-			<< (*it)->username << " "
-			<< (*it)->password << " "
-			<< (*it)->phoneNumber << " "
-			<< (*it)->address << " "
-			<< (*it)->balance << " ";
+		ofs << (*it)->userID << ","
+			<< (*it)->username << ","
+			<< (*it)->password << ","
+			<< (*it)->phoneNumber << ","
+			<< (*it)->address << ","
+			<< (*it)->balance << ",";	//double转string
 		if ((*it)->userState == 1) {
 			ofs << "正常" << endl;
 		}
 		else {
 			ofs << "封禁" << endl;
 		}
-			
+
 	}
 	ofs.close();
 };

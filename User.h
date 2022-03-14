@@ -1,11 +1,12 @@
+using namespace std;
 #include<string>
 #include<vector>
 #include<iostream>
 #include<fstream>
 #include<iomanip>
 #include<time.h>
+#include<iomanip>
 
-using namespace std;
 #pragma once
 
 
@@ -13,6 +14,7 @@ class User {
 public:
 	User();
 	User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState);
+	User(vector<string> vcstr);
 	//User(const User& cpyuser);
 	//ÓÃ»§ID
 	string userID;

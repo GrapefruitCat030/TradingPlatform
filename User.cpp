@@ -2,7 +2,7 @@
 
 
 User::User() { userState = 1; balance = 0.0; };
-User::User(string userID,string username,string password,string phoneNumber,string address,double balance,int userState) {
+User::User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState) {
 	this->userID = userID;
 	this->username = username;
 	this->password = password;
@@ -10,6 +10,58 @@ User::User(string userID,string username,string password,string phoneNumber,stri
 	this->address = address;
 	this->balance = balance;
 	this->userState = userState;
+};
+User::User(vector<string> vcstr) {
+	//用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态
+	//U001, 南大, 123456, 12345678, 仙林大道163号, 1024.0, 正常
+	//											double	int
+	int i = 0;
+	for (i; i < 7; ++i) {
+		switch (i)
+		{
+		case 0:
+			userID = vcstr.at(i);
+			break;
+		case 1:
+			username = vcstr.at(i);
+			break;
+		case 2:
+			password = vcstr.at(i);
+			break;
+		case 3:
+			phoneNumber = vcstr.at(i);
+			break;
+		case 4:
+			address = vcstr.at(i);
+			break;
+		case 5:
+		{
+			balance = 0;
+			//balance
+			string blcstr = vcstr.at(i);
+			balance = stod(blcstr);
+			//balance = vcstr.at(i);
+		}
+			break;
+		case 6:
+		{
+			userState = 1;
+			//state
+			string usstr = vcstr.at(i);	//	传入的是 正常/封禁
+			if (usstr == "正常") {
+				userState = 1;
+			}
+			if (usstr == "封禁") {
+				userState = 0;
+			}
+			//userState = vcstr.at(i);
+		}
+			break;
+		default:
+			break;
+		}
+
+	}
 };
 //User::User(const User& cpyuser) {};
 
