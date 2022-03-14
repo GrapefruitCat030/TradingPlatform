@@ -15,8 +15,12 @@ using namespace std;
 
 class Admin {
 public:
-	//用户人数
+	//用户数量
 	int numbUser;
+	//商品数量
+	int numbGoods;
+	//订单数量
+	int numbOrder;
 
 	//用户列表向量
 	vector <User*> userVec;

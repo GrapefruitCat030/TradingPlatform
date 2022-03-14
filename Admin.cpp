@@ -2,6 +2,8 @@
 
 Admin::Admin() {
 	numbUser = 0;
+	numbGoods = 0;
+	numbOrder = 0;
 	//用户初始化
 	this->USERINIT();
 	//商品初始化
@@ -360,6 +362,7 @@ void Admin::GOODSINIT() {
 	getline(ifs, str);
 	//继续读入
 	while (getline(ifs, str)) {
+		numbGoods++;
 
 		stringstream kksk(str);
 
@@ -398,6 +401,7 @@ void Admin::ORDERINIT() {
 	getline(ifs, str);
 	//继续读入
 	while (getline(ifs, str)) {
+		numbOrder++;
 
 		stringstream kksk(str);
 

@@ -67,7 +67,7 @@ User::User(vector<string> vcstr) {
 
 
 
-//-------------功能函数-----------------
+//----------------------功能函数------------------------
 void User::showUSERMenu() {
 	cout << "——————现在处于用户模式——————" << endl;
 	cout << "==================================================" << endl;
@@ -78,10 +78,64 @@ void User::showUSERMenu() {
 
 void User::Module_BUYER() {};
 
-void User::Module_SELLER() {};
+void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec) {
+	Seller n_seller;
+	n_seller.userID = this->userID;
+
+	//先进行清屏，然后用户菜单展示
+	system("cls");
+	//用来储存用户选项
+	string choicess;
+	bool judge = true;
+
+	while (judge) {
+
+		n_seller.showSELLERMenu();
+		cout << "输入选项：";
+		cin.sync();
+		getline(cin, choicess);
+
+		if (size(choicess) > 1) {
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls");
+			continue;
+		}
+
+		switch (choicess[0])
+		{
+		case '1':	//发布商品
+			n_seller.publishGOODS(numbgoods,gdvec);
+			break;
+		case '2':	//查看发布商品
+			n_seller.viewSGOODS(gdvec);
+			break;
+		case '3':	//修改商品信息
+			n_seller.modifyGOODS(gdvec);
+			break;
+		case '4':	//下架商品
+			n_seller.removeGOODS(gdvec);
+			break;
+		case '5':	//查看历史订单
+			n_seller.viewSORDER(orvec);
+			break;
+		case '6':	//返回用户主界面
+			n_seller.exitSELLER();
+			judge = false;
+			break;
+
+		default:
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls"); //清屏
+			break;
+		}
+	}
 
 
-//外面PL的switch语句中已经有保存函数
+
+};
+														//外面PL的switch语句中已经有保存函数
 void User::infoManageUSER(vector<User*> vec) {
 	//先进行清屏，然后用户菜单展示
 	system("cls");
@@ -136,7 +190,101 @@ void User::exitUSER() {
 };
 
 
-//信息管理菜单
+
+
+
+
+//---------------------卖家菜单
+
+//卖家菜单展示
+void Seller::showSELLERMenu() {
+	cout << "————————————现在处于用户卖家模式————————————" << endl;
+	cout << "==============================================================================" << endl;
+	cout << "1.发布商品  2.查看发布商品  3.修改商品信息  4.下架商品 5.查看历史订单  6.返回用户主界面" << endl;
+	cout << "==============================================================================" << endl;
+
+};
+
+//发布商品
+void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
+
+	cout << endl << endl;
+
+	string gname;
+	string gprice;
+	string gnumb;
+	string gdescrib;
+
+	cout << "请输入商品名称：";
+	cin.sync();
+	getline(cin, gname);
+	cout << "请输入商品价值：";
+	cin.sync();
+	getline(cin, gprice);
+	cout << "请输入商品数量：";
+	cin.sync();
+	getline(cin, gnumb);
+	cout << "请输入商品描述：";
+	cin.sync();
+	getline(cin, gdescrib);
+
+
+	cout << endl << endl;
+
+	cout << "请再次确定商品信息:" << endl;
+	cout << "商品名称：" << gname << endl;
+	cout << "商品价格：" << gprice << endl;
+	cout << "商品数量：" << gnumb << endl;
+	cout << "商品描述：" << gdescrib << endl;
+
+	cout << "确定发布？(y/n)";
+	string judge;
+	cin.sync();
+	getline(cin, judge);
+
+	//---发布并进行文件写入
+	if (judge != "y") {
+		cout << "已取消发布。" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	else {
+		string st = "销售中";
+		string theTime = "2022-02-21";
+		Goods* good = new Goods(GOODSIDback(numbgoods + 1), gname, gprice, gnumb, gdescrib, this->userID, theTime, st);
+		gdvec.push_back(good);
+		numbgoods++;
+		//-------保存该vec，进行文件写入
+
+		saveGOOD(gdvec);
+
+		cout << "发布成功！！" << endl;
+	}
+	system("pause");
+	system("cls");
+};
+
+//查看发布商品
+void Seller::viewSGOODS(vector<Goods*>& gdvec) {};
+//修改商品信息
+void Seller::modifyGOODS(vector<Goods*>& gdvec) {};
+//下架商品
+void Seller::removeGOODS(vector<Goods*>& gdvec) {};
+//查看历史订单
+void Seller::viewSORDER(vector<Order*>& orvec) {};
+//返回用户主界面
+void Seller::exitSELLER() {
+	system("pause");
+	system("cls");
+};
+
+
+
+
+
+
+//---------------------信息管理菜单
 void User::showINFOMenu() {
 	cout << "——————现在处于用户个人信息管理模式——————" << endl;
 	cout << "==================================================" << endl;
@@ -339,3 +487,47 @@ void User::exitINFO() {
 	return;
 };
 
+
+
+//-----------------------协助性函数
+string GOODSIDback(int i) {
+
+	string kksk;
+	if (i < 10) {
+		kksk = "M00" + to_string(i);
+	}
+	else if (i < 100) {
+		kksk = "M0" + to_string(i);
+	}
+	else if (i < 1000) {
+		kksk = "M" + to_string(i);
+	}
+	return kksk;
+}
+
+
+void saveGOOD(vector<Goods*> gdvec) {
+	ofstream ofs;
+	ofs.open(FILEGOODS, ios::out);
+	if (!ofs.is_open()) {
+		cout << "FILE OPEN WRONG (Us::saveGoods)";
+		return;
+	}
+
+	ofs << "商品ID,名称,价格,数量,描述,卖家ID,上架时间,商品状态" << endl;
+
+	//用户vec写入
+	for (vector<Goods*>::iterator it = gdvec.begin(); it != gdvec.end(); it++) {
+		ofs << (*it)->commodityID << ","
+			<< (*it)->commodityName << ","
+			<< (*it)->price << ","
+			<< (*it)->number << ","
+			<< (*it)->description << ","
+			<< (*it)->sellerID << ","
+			<< (*it)->addedDate << ","
+			<< (*it)->state << endl;
+
+	}
+	ofs.close();
+
+}

@@ -225,7 +225,8 @@ void Platform::UserLogin(Admin& m_Admin) {
 				n_user->Module_BUYER();
 				break;
 			case '2':	//我是卖家
-				n_user->Module_SELLER();
+				//引用传参
+				n_user->Module_SELLER(m_Admin.numbGoods, m_Admin.goodsVec, m_Admin.orderVec);
 				break;
 			case '3':	//个人信息管理
 				//传值传参，不怕原vector修改

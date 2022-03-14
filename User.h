@@ -6,8 +6,11 @@ using namespace std;
 #include<iomanip>
 #include<time.h>
 #include<iomanip>
-
+#include"Goods.h"
+#include"Order.h"
 #pragma once
+
+#define FILEGOODS "commodity.txt"
 
 
 class User {
@@ -41,7 +44,7 @@ public:
 	void Module_BUYER();
 
 	//卖家模式
-	void Module_SELLER();
+	void Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec); // i为商品数量, gdvec传值传参
 
 	//个人信息管理,传入vector以方便用户信息修改时进行用户名的遍历
 	void infoManageUSER(vector<User*> vec);
@@ -65,24 +68,34 @@ public:
 
 
 class Seller : public User {
+public:
+
+	using User::User;
+
+	//发布增加的商品种类数量（行数）
+	int plbgoodnumb;
+
 	//卖家菜单展示
 	void showSELLERMenu();
 	//发布商品
-	void publishGOODS();
+	void publishGOODS(int& numbgoods, vector<Goods*>& gdvec); // i是从卖家模式函数传进来的商品数量, gdvec传值传参
 	//查看发布商品
-	void viewSGOODS();
+	void viewSGOODS(vector<Goods*>& gdvec);
 	//修改商品信息
-	void modifyGOODS();
+	void modifyGOODS(vector<Goods*>& gdvec);
 	//下架商品
-	void removeGOODS();
+	void removeGOODS(vector<Goods*>& gdvec);
 	//查看历史订单
-	void viewSORDER();
+	void viewSORDER(vector<Order*>& orvec);
 	//返回用户主界面
 	void exitSELLER();
 
 };
 
 class Buyer : public User {
+public:
+	using User::User;
+
 	//买家菜单展示
 	void showBUYERMenu();
 	//查看商品列表（只能看到在售）
@@ -100,3 +113,9 @@ class Buyer : public User {
 
 };
 
+//-----------------------协助性函数
+
+//返回商品ID的string
+string GOODSIDback(int i);
+//保存商品列表
+void saveGOOD(vector<Goods*> gdvec);
