@@ -64,6 +64,8 @@ public:
 	//商品文件整体整体初始化
 	void GOODSINIT();
 
+	//订单文件整体初始化
+	void ORDERINIT();
 
 	//用户文件保存
 	void saveUSERFILE();

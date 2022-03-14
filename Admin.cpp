@@ -6,6 +6,8 @@ Admin::Admin() {
 	this->USERINIT();
 	//商品初始化
 	this->GOODSINIT();
+	//订单初始化
+	this->ORDERINIT();
 
 	//numbUser = 0;
 
@@ -212,7 +214,23 @@ void Admin::removeGoods() {
 	system("cls");
 };
 
-void Admin::Order_show() {};
+void Admin::Order_show() {
+	cout << "订单ID" << "\t" << "商品ID" << "\t" << "交易单价" << "\t"
+		<< "数量" << "\t" << "交易时间" << "\t" << "卖家ID" << "\t"
+		<< "买家ID" << endl;
+
+	for (vector<Order*>::iterator it = this->orderVec.begin(); it != this->orderVec.end(); it++) {
+		cout << (*it)->orderID << "\t";
+		cout << (*it)->commodityID << "\t";
+		cout << (*it)->unitPrice << "\t";
+		cout << (*it)->number << "\t";
+		cout << (*it)->date << "\t";
+		cout << (*it)->sellerID << "\t";
+		cout << (*it)->buyerID << endl;
+	}
+	system("pause");
+	system("cls");
+};
 
 void Admin::User_show() {
 	cout << "用户ID" << "\t" << "姓名" << "\t" << "密码" <<"\t" 
@@ -407,7 +425,44 @@ void Admin::GOODSINIT() {
 
 };
 
+void Admin::ORDERINIT() {
+	ifstream ifs("order.txt", ios::in);
 
+	//打开失败
+	if (!ifs.is_open()) {
+		cout << "order txt open failed!" << endl;
+		return;
+	}
+
+	//每行读入
+	string str;
+	//去掉没用的第一行
+	getline(ifs, str);
+	//继续读入
+	while (getline(ifs, str)) {
+
+		stringstream kksk(str);
+
+		vector<string> record;
+
+		//将一行中以逗号为分隔符的字符串记录进record向量中
+		while (kksk) {
+			string tmp;
+			getline(kksk, tmp, ',');
+			record.push_back(tmp);
+		}
+
+		//初始化新的商品对象
+		Order* gd = new Order(record);
+		//装进向量里面
+		this->orderVec.push_back(gd);
+	}
+
+
+	ifs.close();
+
+
+}
 
 
 

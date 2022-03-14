@@ -1,18 +1,26 @@
 #pragma once
+using namespace std;
+#include<string>
+#include<vector>
 
 class Order {
+public:
 	//订单ID
-	char orderID[5];
+	string orderID;
 	//商品ID
-	char commodityID[5];
+	string commodityID;
 	//交易单价
-	double unitPrice;
+	string unitPrice;
 	//数量
-	int number;
+	string number;
 	//交易时间
-	char date[13];
+	string date;
 	//卖家ID
-	char sellerID[5];
+	string sellerID;
 	//买家ID
-	char buyerID[5];
+	string buyerID;
+
+
+	//初始化
+	Order(vector<string> strvc);
 };
