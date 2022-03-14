@@ -4,7 +4,8 @@ Admin::Admin() {
 
 	//用户初始化
 	this->USERINIT();
-
+	//商品初始化
+	this->GOODSINIT();
 
 	//numbUser = 0;
 
@@ -14,6 +15,65 @@ Admin::Admin() {
 };
 
 Admin::~Admin() {};
+
+void Admin::Module_Admin() {
+	//先进行清屏，然后管理员菜单展示
+	system("cls");
+	//用来储存用户选项
+	string choicecc;
+	bool judge = true;
+
+	while (judge) {
+
+		this->show_Menu();
+		cout << "输入选项：";
+		cin.sync();
+		getline(cin, choicecc);
+		//if (cin >> choicecc) {
+
+		//}
+		//else {
+		//	cin.clear();
+		//}
+		if (size(choicecc) > 1) {
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls");
+			continue;
+		}
+		//char kksk = choicecc[0];
+		switch (choicecc[0])
+		{
+		case '1':	//查看所有商品
+			this->Goods_show();
+			break;
+		case '2':	//搜索商品
+			this->searchGoods();
+			break;
+		case '3':	//下架商品
+			this->removeGoods();
+			break;
+		case '4':	//查看所有订单
+			this->Order_show();
+			break;
+		case '5':	//查看所有用户
+			this->User_show();
+			break;
+		case '6':	//封禁用户
+			this->banUser();
+			break;
+		case '7':	//注销
+			this->exitAD();
+			judge = false;
+			break;
+		default:
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls"); //清屏
+			break;
+		}
+	}
+}
 
 void Admin::show_Menu() {
 	cout << "-----您现在处于管理员模式-----" << endl;
@@ -30,7 +90,14 @@ void Admin::exitAD() {
 	return;
 }
 
-void Admin::Goods_show() {};
+void Admin::Goods_show() {
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t" 
+		<< "上架时间" << "\t"<<"商品状态"<<endl;
+
+
+
+};
 
 void Admin::searchGoods() {};
 
@@ -105,64 +172,11 @@ void Admin::banUser() {
 
 };
 
-void Admin::Module_Admin() {
-	//先进行清屏，然后管理员菜单展示
-	system("cls");
-	//用来储存用户选项
-	string choicecc;
-	bool judge = true;
 
-	while (judge) {
 
-		this->show_Menu();
-		cout << "输入选项：";
-		cin.sync();
-		getline(cin, choicecc);
-		//if (cin >> choicecc) {
 
-		//}
-		//else {
-		//	cin.clear();
-		//}
-		if (size(choicecc) > 1) {
-			cout << "输入有误！请重新输入!!" << endl;
-			system("pause");
-			system("cls");
-			continue;
-		}
-		//char kksk = choicecc[0];
-		switch (choicecc[0])
-		{
-		case '1':	//查看所有商品
-			this->Goods_show();
-			break;
-		case '2':	//搜索商品
-			this->searchGoods();
-			break;
-		case '3':	//下架商品
-			this->removeGoods();
-			break;
-		case '4':	//查看所有订单
-			this->Order_show();
-			break;
-		case '5':	//查看所有用户
-			this->User_show();
-			break;
-		case '6':	//封禁用户
-			this->banUser();
-			break;
-		case '7':	//注销
-			this->exitAD();
-			judge = false;
-			break;
-		default:
-			cout << "输入有误！请重新输入!!" << endl;
-			system("pause");
-			system("cls"); //清屏
-			break;
-		}
-	}
-}
+
+
 
 void Admin::USERINIT() {
 	//分三种情况初始化
@@ -193,14 +207,14 @@ void Admin::USERINIT() {
 	numbUser = getnumb_USER();
 	cout << "用户人数为：" << numbUser << endl;
 	//userVec = new User * [numbUser];
-	this->userInitArray();
+	this->userInitVec();
 }
 
-void Admin::userInitArray() {
+void Admin::userInitVec() {
 	ifstream ifs;
 	ifs.open("user.txt", ios::in);
 	if (!ifs.is_open()) {
-		cout << "FILE OPEN WRONG (AD::userInitArray)";
+		cout << "FILE OPEN WRONG (AD::userInitVec)";
 		return;
 	}
 
@@ -245,6 +259,47 @@ void Admin::userInitArray() {
 
 	ifs.close();
 }
+
+void Admin::GOODSINIT() {
+	ifstream ifs("commodity.txt", ios::in);
+
+	//打开失败
+	if (!ifs.is_open()) {
+		cout << "goods txt open failed!" << endl;
+		return;
+	}
+
+	//每行读入
+	string str;
+	//去掉没用的第一行
+	getline(ifs, str);
+	//继续读入
+	while (getline(ifs, str)) {
+
+		stringstream kksk(str);
+
+		vector<string> record;
+
+		//将一行中以逗号为分隔符的字符串记录进record向量中
+		while (kksk) {
+			string tmp;
+			getline(kksk, tmp, ',');
+			record.push_back(tmp);
+		}
+
+		//初始化新的商品对象
+		Goods* gd = new Goods(record);
+		//装进向量里面
+		this->goodsVec.push_back(gd);
+	}
+
+
+	ifs.close();
+
+};
+
+
+
 
 
 /***************类外函数***********************/

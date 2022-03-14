@@ -1,20 +1,27 @@
 #pragma once
+#include<string>
+#include<vector>
+using namespace std;
 
 class Goods {
+
 	//商品ID
-	char commodityID[5];
+	string commodityID;
 	//名称
-	char commodityName[21];
-	//价格
-	double price;
-	//数量
-	int number;
+	string commodityName;
+	//价格(需要时再进行转换)
+	string price;
+	//数量(需要时再进行转换)
+	string number;
 	//描述
-	char description[201];
+	string description;
 	//卖家ID
-	char sellerID[5];
+	string sellerID;
 	//上架时间
-	char addedDate[13];
-	//商品状态：0为已下架(removed)，1为销售中(onSale)
-	int state;
+	string addedDate;
+	//商品状态：销售中 || 已下架
+	string state;
+public:
+	Goods();
+	Goods(vector<string> strvc);
 };

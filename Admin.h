@@ -2,6 +2,9 @@
 #include<iostream>
 #include<fstream>
 #include<vector>
+#include<sstream>
+
+
 using namespace std;
 #include"User.h"
 #include"Goods.h"
@@ -55,8 +58,12 @@ public:
 
 	//用户整体整体整体初始化
 	void USERINIT();
-	//用户数组文件读取
-	void userInitArray();
+	//用户向量文件读取
+	void userInitVec();
+
+	//商品文件整体整体初始化
+	void GOODSINIT();
+
 
 	//文件保存
 	void saveFILE();
