@@ -1,10 +1,11 @@
 #pragma once
+using namespace std;
 #include<string>
 #include<vector>
-using namespace std;
+
 
 class Goods {
-
+public:
 	//商品ID
 	string commodityID;
 	//名称
@@ -21,7 +22,7 @@ class Goods {
 	string addedDate;
 	//商品状态：销售中 || 已下架
 	string state;
-public:
+
 	Goods();
 	Goods(vector<string> strvc);
 };

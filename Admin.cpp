@@ -95,7 +95,19 @@ void Admin::Goods_show() {
 		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t" 
 		<< "上架时间" << "\t"<<"商品状态"<<endl;
 
+	for (vector<Goods*>::iterator it = this->goodsVec.begin(); it != this->goodsVec.end(); it++) {
+		cout << (*it)->commodityID << "\t";
+		cout << (*it)->commodityName << "\t";
+		cout << (*it)->price << "\t";
+		cout << (*it)->number << "\t";
+		cout << (*it)->description << "\t";
+		cout << (*it)->sellerID << "\t";
+		cout << (*it)->addedDate << "\t";
+		cout << (*it)->state << endl;
+	}
 
+	system("pause");
+	system("cls");
 
 };
 
