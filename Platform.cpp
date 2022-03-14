@@ -183,6 +183,13 @@ void Platform::UserLogin(Admin& m_Admin) {
 		//找到用户
 		if (U_Name == judgeUN && U_key == judgeUK) {
 			n_user = (*it);
+			//如果用户为封禁状态，则登录失败
+			if (n_user->userState == 0) {
+				cout << "登录失败！！用户已被封禁！！" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
 			flag = 1;
 			cout << "成功登录！" << endl;
 			system("pause");

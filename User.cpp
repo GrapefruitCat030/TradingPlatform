@@ -36,7 +36,7 @@ User::User(vector<string> vcstr) {
 			break;
 		case 5:
 		{
-			balance = 0;
+			balance = 0.0;
 			//balance
 			string blcstr = vcstr.at(i);
 			balance = stod(blcstr);
