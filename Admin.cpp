@@ -168,7 +168,7 @@ void Admin::removeGoods() {
 	//遍历
 	vector<Goods*>::iterator it = this->goodsVec.begin();
 	for (it; it != this->goodsVec.end(); it++) {
-		if ((*it)->commodityName == gstr) break;
+		if ((*it)->commodityID == gstr) break;
 	}
 	//无商品
 	if (it == this->goodsVec.end()) {
@@ -177,11 +177,37 @@ void Admin::removeGoods() {
 		system("cls");
 		return;
 	}
+
+	cout << "确定下架该商品吗?" << endl;
+	cout << "****************************************" << endl;
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t"
+		<< "上架时间" << "\t" << "商品状态" << endl;
+	cout << (*it)->commodityID << "\t";
+	cout << (*it)->commodityName << "\t";
+	cout << (*it)->price << "\t";
+	cout << (*it)->number << "\t";
+	cout << (*it)->description << "\t";
+	cout << (*it)->sellerID << "\t";
+	cout << (*it)->addedDate << "\t";
+	cout << (*it)->state << endl;
+	cout << "****************************************" << endl;
+	cout << "请选择：(y/n)  ";
+
+	string flag;
+	cin.sync();
+	getline(cin, flag);
 	//进行修改
-	(*it)->state = "已下架";
+	if (flag == "y") {
+		(*it)->state = "已下架";
+		cout << "下架成功！！" << endl;
+	}
+	else
+		cout << "取消下架" << endl;
+
+
 	this->saveGOODFILE();
 
-	cout << "修改成功！！" << endl;
 	system("pause");
 	system("cls");
 };
