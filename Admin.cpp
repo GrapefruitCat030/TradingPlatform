@@ -111,9 +111,64 @@ void Admin::Goods_show() {
 
 };
 
-void Admin::searchGoods() {};
+void Admin::searchGoods() {
+	string gname;
+	cout << "请输入您要查找的商品名：";
+	cin >> gname;
+	//寻找商品再vec中的位置
+	vector<Goods*>::iterator it = this->goodsVec.begin();
+	for (it; it != this->goodsVec.end(); it++) {
+		if ((*it)->commodityName == gname) break;
+	}
+	//没有商品存在
+	if (it == this->goodsVec.end()) {
+		cout << "没有该商品！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//输出
+	cout << "***************" << endl;
+	cout << "商品名：" << (*it)->commodityName << endl;
+	cout << "商品价格：";
+	cout << "数量：";
+	cout << "单价：";
+	cout << "卖家ID：";
+	cout << "上架时间：";
+	cout << "商品描述：";
+	cout << "***************" << endl;
 
-void Admin::removeGoods() {};
+};
+
+void Admin::removeGoods() {
+	//先查看一下商品列表
+	cout << "****************************************" << endl;
+	this->Goods_show();
+	cout << "****************************************" << endl;
+
+	string gstr;
+	cout << "输入想要下架的商品：";
+	cin >> gstr;
+	//遍历
+	vector<Goods*>::iterator it = this->goodsVec.begin();
+	for (it; it != this->goodsVec.end(); it++) {
+		if ((*it)->commodityName == gstr) break;
+	}
+	//无商品
+	if (it == this->goodsVec.end()) {
+		cout << "没有该商品！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//进行修改
+	(*it)->state == "已下架";
+	this->saveGOODFILE();
+
+	cout << "修改成功！！" << endl;
+	system("pause");
+	system("cls");
+};
 
 void Admin::Order_show() {};
 
@@ -171,7 +226,7 @@ void Admin::banUser() {
 				(*it)->userState = 0;
 				cout << "封禁成功！！" << endl;
 
-				this->saveFILE();
+				this->saveUSERFILE();
 
 				system("pause");
 				system("cls");
@@ -350,14 +405,15 @@ int getnumb_USER() {
 	return num;
 }
 
-void Admin::saveFILE() {
+void Admin::saveUSERFILE() {
 	ofstream ofs;
 	ofs.open(FILEUSER, ios::out);
 	if (!ofs.is_open()) {
-		cout << "FILE OPEN WRONG (PL::saveFILE)";
+		cout << "FILE OPEN WRONG (AD::saveUSERFILE)";
 		return;
 	}
 
+	//用户vec写入
 	for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
 		ofs << (*it)->userID << " "
 			<< (*it)->username << " "
@@ -373,5 +429,33 @@ void Admin::saveFILE() {
 		}
 
 	}
+		
+	
 	ofs.close();
 };
+
+void Admin::saveGOODFILE() {
+	ofstream ofs(FILEGOOD, ios::out);
+
+	//判断打开是否成功
+	if (!ofs.is_open()) {
+		cout << "file open failed (AD:saveGOODFILE)" << endl;
+		return;
+	}
+
+	ofs << "商品ID,名称,价格,数量,描述,卖家ID,上架时间,商品状态" << endl;
+
+	//商品vec写入
+	for (vector<Goods*>::iterator it = this->goodsVec.begin(); it != this->goodsVec.end(); it++) {
+		ofs << (*it)->commodityID << ","
+			<< (*it)->commodityName << ","
+			<< (*it)->price << ","
+			<< (*it)->number << ","
+			<< (*it)->description << ","
+			<< (*it)->sellerID << ","
+			<< (*it)->addedDate << ","
+			<< (*it)->state << endl;
+	}
+
+	ofs.close();
+}

@@ -11,7 +11,7 @@ using namespace std;
 #include"Order.h"
 
 #define FILEUSER "user.txt"
-
+#define FILEGOOD "commodity.txt"
 
 class Admin {
 public:
@@ -65,8 +65,11 @@ public:
 	void GOODSINIT();
 
 
-	//文件保存
-	void saveFILE();
+	//用户文件保存
+	void saveUSERFILE();
+
+	//商品文件保存
+	void saveGOODFILE();
 	
 	//****************以下为管理员的数据成员*******************//
 
