@@ -108,7 +108,7 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 			n_seller.publishGOODS(numbgoods,gdvec);
 			break;
 		case '2':	//查看发布商品
-			n_seller.viewSGOODS(gdvec);
+			n_seller.viewSGOODS(userID,gdvec);
 			break;
 		case '3':	//修改商品信息
 			n_seller.modifyGOODS(gdvec);
@@ -117,7 +117,7 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 			n_seller.removeGOODS(gdvec);
 			break;
 		case '5':	//查看历史订单
-			n_seller.viewSORDER(orvec);
+			n_seller.viewSORDER(userID, orvec);
 			break;
 		case '6':	//返回用户主界面
 			n_seller.exitSELLER();
@@ -266,13 +266,57 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 };
 
 //查看发布商品
-void Seller::viewSGOODS(vector<Goods*>& gdvec) {};
+void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
+	cout << endl;
+	cout << "*****************************************" << endl;
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "数量" << "\t" << "上架时间" << "\t" << "商品状态" << endl;
+
+	for (vector<Goods*>::iterator it = gdvec.begin(); it != gdvec.end(); it++) {
+		if ((*it)->sellerID == ID) {
+			cout << (*it)->commodityID << "\t";
+			cout << (*it)->commodityName << "\t";
+			cout << (*it)->price << "\t";
+			cout << (*it)->number << "\t";
+			cout << (*it)->addedDate << "\t";
+			cout << (*it)->state << endl;
+		}
+	
+	}
+	cout << "*****************************************" << endl;
+
+	system("pause");
+	system("cls");
+};
+
+
 //修改商品信息
 void Seller::modifyGOODS(vector<Goods*>& gdvec) {};
 //下架商品
 void Seller::removeGOODS(vector<Goods*>& gdvec) {};
 //查看历史订单
-void Seller::viewSORDER(vector<Order*>& orvec) {};
+void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
+	cout << endl;
+	cout << "*****************************************" << endl;
+	cout << "订单ID" << "\t" << "商品ID" << "\t" << "交易单价" << "\t"
+		<< "数量" << "\t" << "交易时间" << "\t" << "买家ID" << endl;
+
+	for (vector<Order*>::iterator it = orvec.begin(); it != orvec.end(); it++) {
+		if ((*it)->sellerID == ID) {
+			cout << (*it)->orderID << "\t";
+			cout << (*it)->commodityID << "\t";
+			cout << (*it)->unitPrice << "\t";
+			cout << (*it)->number << "\t";
+			cout << (*it)->date << "\t";
+			cout << (*it)->buyerID << endl;
+		}
+
+	}
+	cout << "*****************************************" << endl;
+
+	system("pause");
+	system("cls");
+};
 //返回用户主界面
 void Seller::exitSELLER() {
 	system("pause");

@@ -80,13 +80,13 @@ public:
 	//发布商品
 	void publishGOODS(int& numbgoods, vector<Goods*>& gdvec); // i是从卖家模式函数传进来的商品数量, gdvec传值传参
 	//查看发布商品
-	void viewSGOODS(vector<Goods*>& gdvec);
+	void viewSGOODS(string ID, vector<Goods*>& gdvec);
 	//修改商品信息
 	void modifyGOODS(vector<Goods*>& gdvec);
 	//下架商品
 	void removeGOODS(vector<Goods*>& gdvec);
 	//查看历史订单
-	void viewSORDER(vector<Order*>& orvec);
+	void viewSORDER(string ID, vector<Order*>& orvec);
 	//返回用户主界面
 	void exitSELLER();
 
