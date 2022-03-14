@@ -1,7 +1,7 @@
 #include"Admin.h"
 
 Admin::Admin() {
-
+	numbUser = 0;
 	//用户初始化
 	this->USERINIT();
 	//商品初始化
@@ -320,7 +320,7 @@ void Admin::USERINIT() {
 	getline(ifs, str);
 	//继续读入
 	while (getline(ifs, str)) {
-
+		numbUser++;
 		stringstream kksk(str);
 
 		vector<string> record;
