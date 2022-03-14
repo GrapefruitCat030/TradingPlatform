@@ -46,6 +46,8 @@ void Admin::Module_Admin() {
 		{
 		case '1':	//查看所有商品
 			this->Goods_show();
+			system("pause");
+			system("cls");
 			break;
 		case '2':	//搜索商品
 			this->searchGoods();
@@ -106,38 +108,52 @@ void Admin::Goods_show() {
 		cout << (*it)->state << endl;
 	}
 
-	system("pause");
-	system("cls");
-
 };
 
 void Admin::searchGoods() {
 	string gname;
 	cout << "请输入您要查找的商品名：";
-	cin >> gname;
+	cin.sync();
+	getline(cin, gname);
+
+	cout << "****************************************" << endl;
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t"
+		<< "上架时间" << "\t" << "商品状态" << endl;
+
 	//寻找商品再vec中的位置
+	bool flag = false;
+	int i = 0;
 	vector<Goods*>::iterator it = this->goodsVec.begin();
 	for (it; it != this->goodsVec.end(); it++) {
-		if ((*it)->commodityName == gname) break;
+		//寻找字符
+		int fdstr = (*it)->commodityName.find(gname, 0);
+		//若找到，则记录当前vec下标位置，进行输出
+		if (fdstr < (*it)->commodityName.length()) {
+			cout << (*it)->commodityID << "\t";
+			cout << (*it)->commodityName << "\t";
+			cout << (*it)->price << "\t";
+			cout << (*it)->number << "\t";
+			cout << (*it)->description << "\t";
+			cout << (*it)->sellerID << "\t";
+			cout << (*it)->addedDate << "\t";
+			cout << (*it)->state << endl;
+			flag = true;
+		}
+		i++;
 	}
 	//没有商品存在
-	if (it == this->goodsVec.end()) {
-		cout << "没有该商品！！" << endl;
+	if (!flag) {
+		cout << "------没有该商品！！-------" << endl;
+		cout << "**************************************" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//输出
-	cout << "***************" << endl;
-	cout << "商品名：" << (*it)->commodityName << endl;
-	cout << "商品价格：";
-	cout << "数量：";
-	cout << "单价：";
-	cout << "卖家ID：";
-	cout << "上架时间：";
-	cout << "商品描述：";
-	cout << "***************" << endl;
 
+	cout << "**************************************" << endl;
+	system("pause");
+	system("cls");
 };
 
 void Admin::removeGoods() {
@@ -148,7 +164,7 @@ void Admin::removeGoods() {
 
 	string gstr;
 	cout << "输入想要下架的商品：";
-	cin >> gstr;
+	getline(cin, gstr);
 	//遍历
 	vector<Goods*>::iterator it = this->goodsVec.begin();
 	for (it; it != this->goodsVec.end(); it++) {
@@ -162,7 +178,7 @@ void Admin::removeGoods() {
 		return;
 	}
 	//进行修改
-	(*it)->state == "已下架";
+	(*it)->state = "已下架";
 	this->saveGOODFILE();
 
 	cout << "修改成功！！" << endl;
