@@ -67,7 +67,7 @@ User::User(vector<string> vcstr) {
 
 
 
-//----------------------功能函数------------------------
+//----------------------用户函数
 void User::showUSERMenu() {
 	cout << "——————现在处于用户模式——————" << endl;
 	cout << "==================================================" << endl;
@@ -188,7 +188,6 @@ void User::exitUSER() {
 	system("cls");
 	return;
 };
-
 
 
 
@@ -482,7 +481,61 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 }
 
 //下架商品
-void Seller::removeGOODS(vector<Goods*>& gdvec) {};
+void Seller::removeGOODS(vector<Goods*>& gdvec) {
+	cout << endl;
+
+	string gID;
+
+	cout << "请输入需要修改的商品ID：";
+	cin.sync();
+	getline(cin, gID);
+
+	//利用iterator找到商品所在位置
+	vector<Goods*>::iterator it = gdvec.begin();
+	for (it; it != gdvec.end(); it++) {
+		if ((*it)->commodityID == gID && (*it)->sellerID == this->userID) break;
+	}
+	if (it == gdvec.end()) {
+		cout << "无此商品！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	cout << "确定下架该商品？" << endl;
+	cout << "*****************************************" << endl;
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "上架时间" << "\t" << "商品状态" << endl;
+	cout << (*it)->commodityID << "\t";
+	cout << (*it)->commodityName << "\t";
+	cout << (*it)->price << "\t";
+	cout << (*it)->addedDate << "\t";
+	cout << (*it)->state << endl;
+	cout << "*****************************************" << endl;
+
+	cout << "请选择：(y/n) ";
+	string judge;
+	cin.sync();
+	getline(cin, judge);
+
+	//---修改并进行文件写入
+	if (judge != "y") {
+		cout << "已取消修改。" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	else {
+		//进行修改
+		(*it)->state = "已下架";
+		saveGOOD(gdvec);
+		cout << "下架成功！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+};
+
 //查看历史订单
 void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
 	cout << endl;
@@ -511,10 +564,6 @@ void Seller::exitSELLER() {
 	system("pause");
 	system("cls");
 };
-
-
-
-
 
 
 //---------------------信息管理菜单
