@@ -23,4 +23,6 @@ public:
 
 	//≥ı ºªØ
 	Order(vector<string> strvc);
+	Order(string ordID, string gID, string price, string numb,string theTime, string seID, string buyID);
+
 };

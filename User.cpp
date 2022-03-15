@@ -15,6 +15,9 @@ User::User(vector<string> vcstr) {
 	//用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态
 	//U001, 南大, 123456, 12345678, 仙林大道163号, 1024.0, 正常
 	//											double	int
+	balance = 0.0;
+	userState = 1;
+
 	int i = 0;
 	for (i; i < 7; ++i) {
 		switch (i)
@@ -76,7 +79,60 @@ void User::showUSERMenu() {
 
 };
 
-void User::Module_BUYER() {};
+void User::Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec, vector<Goods*>& gdvec, vector<Order*>& orvec) {
+	Buyer n_buyer;
+	n_buyer.userID = this->userID;
+
+	//先进行清屏，然后用户菜单展示
+	system("cls");
+	//用来储存用户选项
+	string choicebb;
+	bool judge = true;
+
+	while (judge) {
+
+		n_buyer.showBUYERMenu();
+		cout << "输入选项：";
+		cin.sync();
+		getline(cin, choicebb);
+
+		if (size(choicebb) > 1) {
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls");
+			continue;
+		}
+
+		switch (choicebb[0])
+		{
+		case '1':	//查看商品列表（只能看到在售）
+			n_buyer.viewBGOODS(gdvec);
+			break;
+		case '2':	//购买商品
+			n_buyer.buyGOODS(numbgoods,numborder,userVec,gdvec,orvec);
+			break;
+		case '3':	//搜索商品
+			n_buyer.searchGOODS(gdvec);
+			break;
+		case '4':	//查看历史订单
+			n_buyer.viewBORDER(orvec);
+			break;
+		case '5':	//查看商品详细信息
+			n_buyer.detailGOODS(gdvec);
+			break;
+		case '6':	//返回用户主界面
+			n_buyer.exitBUYER();
+			judge = false;
+			break;
+
+		default:
+			cout << "输入有误！请重新输入!!" << endl;
+			system("pause");
+			system("cls"); //清屏
+			break;
+		}
+	}
+};
 
 void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec) {
 	Seller n_seller;
@@ -192,6 +248,277 @@ void User::exitUSER() {
 
 
 
+//---------------------买家菜单
+
+//买家菜单展示
+void Buyer::showBUYERMenu() {
+	cout << "————————————现在处于用户买家模式————————————" << endl;
+	cout << "====================================================================================" << endl;
+	cout << "1.查看商品列表  2.购买商品  3.搜索商品 4.查看历史订单  5.查看商品详细信息  6.返回用户主界面" << endl;
+	cout << "====================================================================================" << endl;
+};
+
+//查看商品列表（只能看到在售）
+void Buyer::viewBGOODS(vector<Goods*>& gdvec) {
+	cout << endl;
+	cout << "*****************************************" << endl;
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "上架时间" << "\t" << "卖家ID" << endl;
+
+	for (vector<Goods*>::iterator it = gdvec.begin(); it != gdvec.end(); it++) {
+		if ((*it)->state == "销售中") {
+			cout << (*it)->commodityID << "\t";
+			cout << (*it)->commodityName << "\t";
+			cout << (*it)->price << "\t";
+			cout << (*it)->addedDate << "\t";
+			cout << (*it)->sellerID << endl;
+		}
+
+	}
+	cout << "*****************************************" << endl;
+
+	system("pause");
+	system("cls");
+
+};
+
+//购买商品
+void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vector<Goods*>& gdvec, vector<Order*>& orvec) {
+	
+	//利用iterator找到商品对应的买家
+	vector<User*>::iterator bt = usvec.begin();
+	for (bt; bt != usvec.end(); bt++) {
+		if (this->userID == (*bt)->userID) break;
+	}
+
+	
+	
+	cout << "请输入商品ID： ";
+	string gID;
+	cin.sync();
+	getline(cin, gID);
+
+	//利用iterator找到商品所在位置
+	vector<Goods*>::iterator it = gdvec.begin();
+	for (it; it != gdvec.end(); it++) {
+		if ((*it)->commodityID == gID && (*it)->state == "销售中") break;
+	}
+	if (it == gdvec.end()) {
+		cout << "无此商品！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	//找到后
+	cout << "请输入数量： ";
+	string gnumb;
+	cin.sync();
+	getline(cin, gnumb);
+	//判断输入是否为数字
+	if (!isNumber(gnumb)) {
+		cout << "输入有误！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//判断是否为整数
+	int k = 0;
+	for (k; k < gnumb.length(); k++) {
+		if (gnumb[k] == '.') break;
+	}
+	if (gnumb.length() != k) {
+		cout << "输入数量不是整数！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	//判断商品数量够不够
+	if (stoi(gnumb) > stoi((*it)->number)) {	//库存不足的情况
+		cout << "没有足够库存！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	//交易额
+	double prcsum = stoi(gnumb) * stod((*it)->price);
+	//判断交易额与买家余额关系
+	if (prcsum > (*bt)->balance) {
+		cout << "没有足够余额！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	/////////////////////获取时间
+	struct tm* tm_ptr;
+	time_t the_time;
+	(void)time(&the_time);
+	tm_ptr = gmtime(&the_time);
+	int year = tm_ptr->tm_year + 1900;
+	int month = tm_ptr->tm_mon + 1;
+	int day = tm_ptr->tm_mday;
+	string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day);
+	/////////////////////////////////
+
+
+	//商品够并且买家余额足够，生成订单
+	Order* order = new Order(ORDERIDback(numborder + 1), (*it)->commodityID, (*it)->price, gnumb, theTime, (*it)->sellerID, this->userID);
+	orvec.push_back(order);
+
+	//进行商品修改
+	int remainNumb = stoi((*it)->number) - stoi(gnumb);//剩余商品数量
+	(*it)->number = to_string(remainNumb);
+	//进一步修改商品状态及商品种类数
+	if (remainNumb == 0) {
+		(*it)->state = "已下架";
+	}
+
+	//利用iterator找到商品对应的卖家
+	vector<User*>::iterator sut = usvec.begin();
+	for (sut; sut != usvec.end(); sut++) {
+		if ((*it)->sellerID == (*sut)->userID) break;
+	}
+
+	//进行买卖家余额变动
+	(*sut)->balance += prcsum;
+	(*bt)->balance -= prcsum;
+
+
+	cout << "**************************************" << endl;
+	cout << "**交易提醒*************************" << endl;
+	cout << "交易时间：" << theTime << endl;
+	cout << "交易单价：" << (*it)->price << endl;
+	cout << "交易数量：" << gnumb << endl;
+	cout << "交易状态：交易成功"<< endl;
+	cout << "您的余额：" << (*bt)->balance << endl;
+	cout << "**************************************" << endl;
+	cout << endl;
+
+	saveGOOD(gdvec);
+	saveORDER(orvec);
+
+	system("pause");
+	system("cls");
+};
+
+//搜索商品（只能看到在售）
+void Buyer::searchGOODS(vector<Goods*>& gdvec) {
+	string gname;
+	cout << "请输入您要查找的商品名：";
+	cin.sync();
+	getline(cin, gname);
+
+	cout << "****************************************" << endl;
+	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
+		<< "上架时间" << "\t" << "卖家ID" << endl;
+
+	//寻找商品再vec中的位置
+	bool flag = false;
+	int i = 0;
+	vector<Goods*>::iterator it = gdvec.begin();
+	for (it; it != gdvec.end(); it++) {
+		//寻找字符
+		int fdstr = (*it)->commodityName.find(gname, 0);
+		//若找到，则记录当前vec下标位置，进行输出
+		if (fdstr < (*it)->commodityName.length() && (*it)->state == "销售中") {
+			cout << (*it)->commodityID << "\t";
+			cout << (*it)->commodityName << "\t";
+			cout << (*it)->price << "\t";
+			cout << (*it)->addedDate << "\t";
+			cout << (*it)->sellerID << endl;
+			flag = true;
+		}
+		i++;
+	}
+	//没有商品存在
+	if (!flag) {
+		cout << "------没有该商品！！-------" << endl;
+		cout << "**************************************" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	cout << "**************************************" << endl;
+	system("pause");
+	system("cls");
+
+};
+
+//查看历史订单
+void Buyer::viewBORDER(vector<Order*>& orvec) {
+	cout << endl;
+	cout << "*****************************************" << endl;
+	cout << "订单ID" << "\t" << "商品ID" << "\t" << "交易单价" << "\t"
+		<< "数量" << "\t" << "交易时间" << "\t" << "卖家ID" << endl;
+
+	for (vector<Order*>::iterator it = orvec.begin(); it != orvec.end(); it++) {
+		if ((*it)->buyerID == this->userID) {
+			cout << (*it)->orderID << "\t";
+			cout << (*it)->commodityID << "\t";
+			cout << (*it)->unitPrice << "\t";
+			cout << (*it)->number << "\t";
+			cout << (*it)->date << "\t";
+			cout << (*it)->sellerID << endl;
+		}
+
+	}
+	cout << "*****************************************" << endl;
+
+	system("pause");
+	system("cls");
+
+};
+
+//查看商品详细信息
+void Buyer::detailGOODS(vector<Goods*>& gdvec) {
+	cout << endl;
+
+	string gID;
+
+	cout << "请输入想要查看的商品ID：";
+	cin.sync();
+	getline(cin, gID);
+
+	//利用iterator找到商品所在位置
+	vector<Goods*>::iterator it = gdvec.begin();
+	for (it; it != gdvec.end(); it++) {
+		if ((*it)->commodityID == gID && (*it)->state == "销售中") break;
+	}
+	if (it == gdvec.end()) {
+		cout << "无此商品！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	//找到商品
+	cout << endl;
+	cout << "*****************************************" << endl;
+	cout << "商品ID：" << (*it)->commodityID << endl;
+	cout << "商品名称：" << (*it)->commodityName << endl;
+	cout << "商品价格：" << (*it)->price << endl;
+	cout << "上架时间：" << (*it)->addedDate << endl;
+	cout << "商品描述：" << (*it)->description << endl;
+	cout << "商品卖家: " << (*it)->sellerID << endl;
+	cout << "*****************************************" << endl;
+
+	system("pause");
+	system("cls");
+
+};
+
+//返回用户主界面
+void Buyer::exitBUYER() {
+	system("pause");
+	system("cls");
+};
+
+
+
 
 //---------------------卖家菜单
 
@@ -201,7 +528,6 @@ void Seller::showSELLERMenu() {
 	cout << "==============================================================================" << endl;
 	cout << "1.发布商品  2.查看发布商品  3.修改商品信息  4.下架商品 5.查看历史订单  6.返回用户主界面" << endl;
 	cout << "==============================================================================" << endl;
-
 };
 
 //发布商品
@@ -255,10 +581,10 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	}
 	//判断是否为整数
 	int k = 0;
-	for (k; k < gprice.length(); k++) {
-		if (gprice[k] == '.') break;
+	for (k; k < gnumb.length(); k++) {
+		if (gnumb[k] == '.') break;
 	}
-	if (gprice.length() != k) {
+	if (gnumb.length() != k) {
 		cout << "输入数量不是整数！！发布失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -559,6 +885,7 @@ void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
 	system("pause");
 	system("cls");
 };
+
 //返回用户主界面
 void Seller::exitSELLER() {
 	system("pause");
@@ -817,6 +1144,21 @@ string GOODSIDback(int i) {
 	return kksk;
 }
 
+string ORDERIDback(int i) {
+
+	string kksk;
+	if (i < 10) {
+		kksk = "T00" + to_string(i);
+	}
+	else if (i < 100) {
+		kksk = "T0" + to_string(i);
+	}
+	else if (i < 1000) {
+		kksk = "T" + to_string(i);
+	}
+	return kksk;
+}
+
 void saveGOOD(vector<Goods*> gdvec) {
 	ofstream ofs;
 	ofs.open(FILEGOODS, ios::out);
@@ -841,6 +1183,29 @@ void saveGOOD(vector<Goods*> gdvec) {
 	}
 	ofs.close();
 
+}
+
+void saveORDER(vector<Order*> orvec) {
+	ofstream ofs;
+	ofs.open(FILEORDER, ios::out);
+	if (!ofs.is_open()) {
+		cout << "FILE OPEN WRONG (Us::saveGoods)";
+		return;
+	}
+
+	ofs << "订单ID,商品ID,交易单价,数量,交易时间,卖家ID,买家ID" << endl;
+
+	//用户vec写入
+	for (vector<Order*>::iterator it = orvec.begin(); it != orvec.end(); it++) {
+		ofs << (*it)->orderID << ","
+			<< (*it)->commodityID << ","
+			<< (*it)->unitPrice << ","
+			<< (*it)->number << ","
+			<< (*it)->date << ","
+			<< (*it)->sellerID << ","
+			<< (*it)->buyerID << endl;
+	}
+	ofs.close();
 }
 
 bool isNumber(const string& str) {

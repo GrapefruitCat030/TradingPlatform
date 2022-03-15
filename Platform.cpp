@@ -239,7 +239,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 			switch (choiceuu[0])
 			{
 			case '1':	//我是买家
-				n_user->Module_BUYER();
+				n_user->Module_BUYER(m_Admin.numbGoods,m_Admin.numbOrder, m_Admin.userVec, m_Admin.goodsVec, m_Admin.orderVec);
 				break;
 			case '2':	//我是卖家
 				//引用传参

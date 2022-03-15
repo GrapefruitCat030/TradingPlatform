@@ -34,3 +34,13 @@ Order::Order(vector<string> vcstr) {
 
 	}
 }
+
+Order::Order(string ordID, string gID, string price, string numb, string theTime, string seID, string buyID) {
+	this->orderID = ordID;
+	this->commodityID = gID;
+	this->unitPrice = price;
+	this->number = numb;
+	this->date = theTime;
+	this->sellerID = seID;
+	this->buyerID = buyID;
+}

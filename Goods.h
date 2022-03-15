@@ -10,9 +10,9 @@ public:
 	string commodityID;
 	//名称
 	string commodityName;
-	//价格(需要时再进行转换)
+	//价格(需要时再进行转换),一位小数
 	string price;
-	//数量(需要时再进行转换)
+	//数量(需要时再进行转换),一定为整数
 	string number;
 	//描述
 	string description;

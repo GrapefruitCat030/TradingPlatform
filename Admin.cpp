@@ -210,6 +210,7 @@ void Admin::removeGoods() {
 		cout << "È¡ÏûÏÂ¼Ü" << endl;
 
 
+
 	this->saveGOODFILE();
 
 	system("pause");

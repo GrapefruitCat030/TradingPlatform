@@ -16,6 +16,7 @@ using namespace std;
 #pragma once
 
 #define FILEGOODS "commodity.txt"
+#define FILEORDER "order.txt"
 
 
 class User {
@@ -46,7 +47,7 @@ public:
 	void showUSERMenu();
 
 	//买家模式
-	void Module_BUYER();
+	void Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec, vector<Goods*>& gdvec, vector<Order*>& orvec);
 
 	//卖家模式
 	void Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec); // i为商品数量, gdvec传值传参
@@ -101,15 +102,15 @@ public:
 	//买家菜单展示
 	void showBUYERMenu();
 	//查看商品列表（只能看到在售）
-	void viewBGOODS();
+	void viewBGOODS(vector<Goods*>& gdvec);
 	//购买商品
-	void buyGOODS();
+	void buyGOODS(int& numbgoods, int& numborder,vector <User*>& userVec, vector<Goods*>& gdvec, vector<Order*>& orvec);
 	//搜索商品
-	void searchGOODS();
+	void searchGOODS(vector<Goods*>& gdvec);
 	//查看历史订单
-	void viewBORDER();
+	void viewBORDER(vector<Order*>& orvec);
 	//查看商品详细信息
-	void detailGOODS();
+	void detailGOODS(vector<Goods*>& gdvec);
 	//返回用户主界面
 	void exitBUYER();
 
@@ -119,7 +120,14 @@ public:
 
 //返回商品ID的string
 string GOODSIDback(int i);
+
+//返回订单ID
+string ORDERIDback(int i);
+
 //保存商品列表
 void saveGOOD(vector<Goods*> gdvec);
+//保存订单列表
+void saveORDER(vector<Order*> orvec);
+
 //判断输入是否为数字
 bool isNumber(const string& str);
