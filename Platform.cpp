@@ -88,6 +88,23 @@ void Platform::User_register(Admin& m_Admin) {
 	cout << "请输入手机号(最多20个数字)：";
 	cin.sync();
 	getline(cin, phnNumber);
+	if (!isNumber(phnNumber)) {
+		cout << "不是数字！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//判断是否为整数,先找到小数点，再进行长度相减
+	int k = 0;
+	for (k; k < phnNumber.length(); k++) {
+		if (phnNumber[k] == '.') break;
+	}
+	if (phnNumber.length() != k) {
+		cout << "输入数量不是整数！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 	if (size(phnNumber) > 20) {
 		cout << "手机号超过长度！！" << endl;
 		system("pause");
@@ -303,5 +320,4 @@ void Platform::saveFILE(Admin& m_Admin) {
 	}
 	ofs.close();
 };
-
 

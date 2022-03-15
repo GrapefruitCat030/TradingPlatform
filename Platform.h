@@ -38,7 +38,8 @@ public:
 	void saveFILE(Admin& m_Admin);
 };
 
+/*************协助性函数****************************************/
+
 //做出用户ID的字符数组；(注意数据放在堆区，记得用后delete！）
 string UIDback(int i);
-
 

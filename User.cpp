@@ -218,12 +218,55 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	cout << "请输入商品名称：";
 	cin.sync();
 	getline(cin, gname);
-	cout << "请输入商品价值：";
+
+	cout << "请输入商品价值：（需要一位小数） ";
 	cin.sync();
 	getline(cin, gprice);
+	//判断是否为一位小数
+	//判断输入是否为数字
+	if (!isNumber(gprice)) {
+		cout << "输入有误！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//判断是否为保留一位小数,先找到小数点，再进行长度相减
+	int i = 0;
+	for (i; i < gprice.length(); i++) {
+		if (gprice[i] == '.') break;
+	}
+	if (gprice.length() - i - 1 > 1) {
+		//超出小数位长度
+		cout << "输入超出小数位长度！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+
 	cout << "请输入商品数量：";
 	cin.sync();
 	getline(cin, gnumb);
+	//判断输入是否为数字
+	if (!isNumber(gnumb)) {
+		cout << "输入有误！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//判断是否为整数
+	int k = 0;
+	for (k; k < gprice.length(); k++) {
+		if (gprice[k] == '.') break;
+	}
+	if (gprice.length() != k) {
+		cout << "输入数量不是整数！！发布失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+
 	cout << "请输入商品描述：";
 	cin.sync();
 	getline(cin, gdescrib);
@@ -300,9 +343,144 @@ void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
 	system("cls");
 };
 
-
 //修改商品信息
-void Seller::modifyGOODS(vector<Goods*>& gdvec) {};
+void Seller::modifyGOODS(vector<Goods*>& gdvec) {
+	cout << endl;
+
+	string gID;
+	string gchoose;
+
+	cout << "请输入需要修改的商品ID：";
+	cin.sync();
+	getline(cin, gID);
+
+	//利用iterator找到商品所在位置
+	vector<Goods*>::iterator it = gdvec.begin();
+	for (it; it != gdvec.end(); it++) {
+		if ((*it)->commodityID == gID && (*it)->sellerID == this->userID) break;
+	}
+	if (it == gdvec.end()) {
+		cout << "无此商品！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	cout << "请输入需要修改的商品属性：（1.价格 2.描述） ";
+	cin.sync();
+	while (getline(cin, gchoose)) {
+		if (gchoose.length() > 1 ) {
+			cout << "输入有误！！请重新输入！！" << endl;
+			cout << "请输入需要修改的商品属性：（1.价格 2.描述） ";
+			cin.sync();
+			continue;
+		}
+		if (gchoose != "1" && gchoose != "2") {
+			cout << "输入有误！！请重新输入！！" << endl;
+			cout << "请输入需要修改的商品属性：（1.价格 2.描述） ";
+			cin.sync();
+			continue;
+		}
+		//修改描述
+		if (gchoose == "2") {
+			cout << "请输入修改商品的描述： ";
+			string desci;
+			cin.sync();
+			getline(cin, desci);
+			
+			cout << "请确定商品信息无误！！" << endl;
+			cout << "*****************************************" << endl;
+			cout << "商品名称：" << gID << endl;
+			cout << "商品价格：" << (*it)->commodityName << endl;
+			cout << "商品数量：" << (*it)->price << endl;
+			cout << "商品描述：" << desci << endl;
+			cout << "*****************************************" << endl;
+
+			cout << "确定修改？(y/n) ";
+			string judge;
+			cin.sync();
+			getline(cin, judge);
+
+			//---修改并进行文件写入
+			if (judge != "y") {
+				cout << "已取消修改。" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+			else {
+				//进行修改
+				(*it)->description = desci;
+				saveGOOD(gdvec);
+				cout << "修改成功！！" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+
+		}
+		//修改价格
+		if (gchoose == "1") {
+			cout << "请输入修改商品的价格：（需要一位小数） ";
+			string prc;
+			cin.sync();
+			getline(cin, prc);
+
+			//判断输入是否为数字
+			if (!isNumber(prc)) {
+				cout << "输入有误！！修改失败！！" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+
+			//判断是否为保留一位小数,先找到小数点，再进行长度相减
+			int i = 0;
+			for (i; i < prc.length(); i++) {
+				if (prc[i] == '.') break;
+			}
+			if (prc.length() - i - 1 > 1) {
+				//超出小数位长度
+				cout << "输入超出小数位长度！！修改失败！！" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+
+
+			cout << "请确定商品信息无误！！" << endl;
+			cout << "*****************************************" << endl;
+			cout << "商品名称：" << gID << endl;
+			cout << "商品价格：" << (*it)->commodityName << endl;
+			cout << "商品数量：" << prc << endl;
+			cout << "商品描述：" << (*it)->description << endl;
+			cout << "*****************************************" << endl;
+
+			cout << "确定修改？(y/n) ";
+			string judge;
+			cin.sync();
+			getline(cin, judge);
+
+			//---修改并进行文件写入
+			if (judge != "y") {
+				cout << "已取消修改。" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+			else {
+				//进行修改
+				(*it)->price = prc;
+				saveGOOD(gdvec);
+				cout << "修改成功！！" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+		}
+	}
+}
+
 //下架商品
 void Seller::removeGOODS(vector<Goods*>& gdvec) {};
 //查看历史订单
