@@ -469,14 +469,37 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 void User::Topup_Userbalance() {
 
-	double money;
-	cout << "请输入要充值的金额：";
+	string money;
+	cout << "请输入要充值的金额：（要求一位小数） ";
 	cin.sync();
-	(cin >> money).get();	//cin>>的结束符，回车，或者空格都可以，但是当cin读取结束后，cin的结束符还会再缓冲区中存在，并让下次需要读取时进行读取
-							//添加了.get(),用cin.get()来消除缓冲区中残留的‘\n’
+	getline(cin, money);
 
+	//if (!(cin >> money).get())			//cin>>的结束符，回车，或者空格都可以，但是当cin读取结束后，cin的结束符还会再缓冲区中存在，并让下次需要读取时进行读取
+	//	cout << "输入有误！！" << endl;	//添加了.get(),用cin.get()来消除缓冲区中残留的‘\n’
 	//cin.ignore(numeric_limits<std::streamsize>::max());				//清空缓冲区(清除输入缓冲区的所有内容) //放屁
-	this->balance += money;
+
+	//判断输入是否为数字
+	if (!isNumber(money)) {
+		cout << "输入有误！！充值失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	
+	////判断是否为保留一位小数,先找到小数点，再进行长度相减
+	int i = 0;
+	for (i; i < money.length(); i++) {
+		if (money[i] == '.') break;
+	}
+	if (money.length() - i - 1 > 1) {
+		//超出小数位长度
+		cout << "输入超出小数位长度！！充值失败！！" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	//终于搞好
+	this->balance += stod(money);
 
 	cout << "充值成功！！" << endl;
 
@@ -532,7 +555,7 @@ void User::Topup_Userbalance() {
 	//先前已经有文件存在
 	ofs << setw(20) << setiosflags(ios::left) << this->userID
 		<< setw(20) << setiosflags(ios::left) << money
-		<< setw(30) << setiosflags(ios::left) << theTime;
+		<< setw(30) << setiosflags(ios::left) << theTime << endl;
 
 	//关闭文件
 	ofs.close();
@@ -567,7 +590,6 @@ string GOODSIDback(int i) {
 	return kksk;
 }
 
-
 void saveGOOD(vector<Goods*> gdvec) {
 	ofstream ofs;
 	ofs.open(FILEGOODS, ios::out);
@@ -592,4 +614,10 @@ void saveGOOD(vector<Goods*> gdvec) {
 	}
 	ofs.close();
 
+}
+
+bool isNumber(const string& str) {
+	istringstream sin(str);
+	double test;
+	return sin >> test && sin.eof();
 }

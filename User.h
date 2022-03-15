@@ -3,6 +3,7 @@ using namespace std;
 #include<vector>
 #include<iostream>
 #include<fstream>
+#include<sstream>
 #include<iomanip>
 #include<iomanip>
 #include"Goods.h"
@@ -120,3 +121,5 @@ public:
 string GOODSIDback(int i);
 //保存商品列表
 void saveGOOD(vector<Goods*> gdvec);
+//判断输入是否为数字
+bool isNumber(const string& str);
