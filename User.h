@@ -4,10 +4,14 @@ using namespace std;
 #include<iostream>
 #include<fstream>
 #include<iomanip>
-#include<time.h>
 #include<iomanip>
 #include"Goods.h"
 #include"Order.h"
+
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #pragma once
 
 #define FILEGOODS "commodity.txt"
@@ -71,9 +75,6 @@ class Seller : public User {
 public:
 
 	using User::User;
-
-	//发布增加的商品种类数量（行数）
-	int plbgoodnumb;
 
 	//卖家菜单展示
 	void showSELLERMenu();

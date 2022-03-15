@@ -251,7 +251,18 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	}
 	else {
 		string st = "销售中";
-		string theTime = "2022-02-21";
+
+		/////////////////////获取时间
+		struct tm* tm_ptr;
+		time_t the_time;
+		(void)time(&the_time);
+		tm_ptr = gmtime(&the_time);
+		int year = tm_ptr->tm_year + 1900;
+		int month = tm_ptr->tm_mon + 1;
+		int day = tm_ptr->tm_mday;
+		string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day);
+		/////////////////////////////////
+
 		Goods* good = new Goods(GOODSIDback(numbgoods + 1), gname, gprice, gnumb, gdescrib, this->userID, theTime, st);
 		gdvec.push_back(good);
 		numbgoods++;
@@ -476,8 +487,15 @@ void User::Topup_Userbalance() {
 	ifstream ifs("balance.txt", ios::in);
 
 	//拿到当前充值的系统时间
-	time_t blcTime;
-	time(&blcTime);
+	struct tm* tm_ptr;
+	time_t the_time;
+	(void)time(&the_time);
+	tm_ptr = gmtime(&the_time);
+	int year = tm_ptr->tm_year + 1900;
+	int month = tm_ptr->tm_mon + 1;
+	int day = tm_ptr->tm_mday;
+	string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day);
+
 
 	//无文件，进行创建
 	if (!ofs.is_open()) {
@@ -514,7 +532,7 @@ void User::Topup_Userbalance() {
 	//先前已经有文件存在
 	ofs << setw(20) << setiosflags(ios::left) << this->userID
 		<< setw(20) << setiosflags(ios::left) << money
-		<< setw(30) << setiosflags(ios::left) << ctime(&blcTime);
+		<< setw(30) << setiosflags(ios::left) << theTime;
 
 	//关闭文件
 	ofs.close();
