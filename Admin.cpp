@@ -339,7 +339,10 @@ void Admin::USERINIT() {
 
 	//打开失败
 	if (!ifs.is_open()) {
-		cout << "user txt open failed!" << endl;
+		//cout << "user txt open failed!" << endl;
+		//cout << "现在创建文件" << endl;
+		ofstream ofs(FILEUSER, ios::out);
+		ofs.close();
 		return;
 	}
 
@@ -379,7 +382,9 @@ void Admin::GOODSINIT() {
 
 	//打开失败
 	if (!ifs.is_open()) {
-		cout << "goods txt open failed!" << endl;
+		//cout << "goods txt open failed!" << endl;
+		//cout << "现在创建文件" << endl;
+		ofstream ofs(FILEGOOD, ios::out);
 		return;
 	}
 
@@ -418,7 +423,9 @@ void Admin::ORDERINIT() {
 
 	//打开失败
 	if (!ifs.is_open()) {
-		cout << "order txt open failed!" << endl;
+		//cout << "order txt open failed!" << endl;
+		//cout << "现在创建文件" << endl;
+		ofstream ofs("order.txt", ios::out);
 		return;
 	}
 
