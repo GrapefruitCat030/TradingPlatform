@@ -82,10 +82,11 @@ void Admin::Module_Admin() {
 }
 
 void Admin::show_Menu() {
-	cout << "-----您现在处于管理员模式-----" << endl;
-	cout << "====================================================================" << endl;
+	cout << "========================================================================================" << endl;
+	cout << "------------------------------您现在处于管理员模式--------------------------------------"<< endl;
+	cout << "========================================================================================" << endl;
 	cout << "  1.查看所有商品 2.搜索商品 3.下架商品 4.查看所有订单 5.查看所有用户 6.封禁用户 7.注销" << endl;
-	cout << "===================================================================" << endl;
+	cout << "========================================================================================" << endl;
 
 }
 
@@ -97,21 +98,24 @@ void Admin::exitAD() {
 }
 
 void Admin::Goods_show() {
-	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
-		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t" 
-		<< "上架时间" << "\t"<<"商品状态"<<endl;
+	cout << endl;
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
+		<< "数量" << setw(20) << "描述" << setw(20) << "卖家ID" << setw(20)
+		<< "上架时间" << setw(20) << "商品状态" << setw(20) << endl;
 
 	for (vector<Goods*>::iterator it = this->goodsVec.begin(); it != this->goodsVec.end(); it++) {
-		cout << (*it)->commodityID << "\t";
-		cout << (*it)->commodityName << "\t";
-		cout << (*it)->price << "\t";
-		cout << (*it)->number << "\t";
-		cout << (*it)->description << "\t";
-		cout << (*it)->sellerID << "\t";
-		cout << (*it)->addedDate << "\t";
-		cout << (*it)->state << endl;
+		cout << left << setw(20) << (*it)->commodityID << setw(20)
+			<< (*it)->commodityName << setw(20)
+			<< (*it)->price << setw(20)
+			<< (*it)->number << setw(20)
+			<< (*it)->description << setw(20)
+			<< (*it)->sellerID << setw(20)
+			<< (*it)->addedDate << setw(20)
+			<< (*it)->state << setw(20) << endl;
 	}
-
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << endl;
 };
 
 void Admin::searchGoods() {
@@ -120,10 +124,11 @@ void Admin::searchGoods() {
 	cin.sync();
 	getline(cin, gname);
 
-	cout << "****************************************" << endl;
-	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
-		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t"
-		<< "上架时间" << "\t" << "商品状态" << endl;
+	cout << endl;
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
+		<< "数量" << setw(20) << "描述" << setw(20) << "卖家ID" << setw(20)
+		<< "上架时间" << setw(20) << "商品状态" << endl;
 
 	//寻找商品再vec中的位置
 	bool flag = false;
@@ -134,37 +139,41 @@ void Admin::searchGoods() {
 		int fdstr = (*it)->commodityName.find(gname, 0);
 		//若找到，则记录当前vec下标位置，进行输出
 		if (fdstr < (*it)->commodityName.length()) {
-			cout << (*it)->commodityID << "\t";
-			cout << (*it)->commodityName << "\t";
-			cout << (*it)->price << "\t";
-			cout << (*it)->number << "\t";
-			cout << (*it)->description << "\t";
-			cout << (*it)->sellerID << "\t";
-			cout << (*it)->addedDate << "\t";
-			cout << (*it)->state << endl;
+			cout << left << setw(20) << (*it)->commodityID << setw(20)
+				<< (*it)->commodityName << setw(20)
+				<< (*it)->price << setw(20)
+				<< (*it)->number << setw(20)
+				<< (*it)->description << setw(20)
+				<< (*it)->sellerID << setw(20)
+				<< (*it)->addedDate << setw(20)
+				<< (*it)->state << endl;
 			flag = true;
 		}
 		i++;
 	}
 	//没有商品存在
 	if (!flag) {
-		cout << "------没有该商品！！-------" << endl;
-		cout << "**************************************" << endl;
+		cout << endl;
+		cout << "                                   没有该商品！！                                         " << endl;
+		cout << endl;
+		cout << "**********************************************************************************************************************************************************" << endl;
+		cout << endl;
+
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "**************************************" << endl;
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << endl;
+	
 	system("pause");
 	system("cls");
 };
 
 void Admin::removeGoods() {
 	//先查看一下商品列表
-	cout << "****************************************" << endl;
 	this->Goods_show();
-	cout << "****************************************" << endl;
 
 	string gstr;
 	cout << "输入想要下架的商品：";
@@ -183,19 +192,21 @@ void Admin::removeGoods() {
 	}
 
 	cout << "确定下架该商品吗?" << endl;
-	cout << "****************************************" << endl;
-	cout << "商品ID" << "\t" << "名称" << "\t" << "价格" << "\t"
-		<< "数量" << "\t" << "描述" << "\t" << "卖家ID" << "\t"
-		<< "上架时间" << "\t" << "商品状态" << endl;
-	cout << (*it)->commodityID << "\t";
-	cout << (*it)->commodityName << "\t";
-	cout << (*it)->price << "\t";
-	cout << (*it)->number << "\t";
-	cout << (*it)->description << "\t";
-	cout << (*it)->sellerID << "\t";
-	cout << (*it)->addedDate << "\t";
-	cout << (*it)->state << endl;
-	cout << "****************************************" << endl;
+	cout << endl;
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
+		<< "数量" << setw(20) << "描述" << setw(20) << "卖家ID" << setw(20)
+		<< "上架时间" << setw(20) << "商品状态" << setw(20) << endl;
+	cout << left << setw(20) << (*it)->commodityID << setw(20)
+		<< (*it)->commodityName << setw(20)
+		<< (*it)->price << setw(20)
+		<< (*it)->number << setw(20)
+		<< (*it)->description << setw(20)
+		<< (*it)->sellerID << setw(20)
+		<< (*it)->addedDate << setw(20)
+		<< (*it)->state << setw(20) << endl;
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << endl;
 	cout << "请选择：(y/n)  ";
 
 	string flag;
@@ -207,7 +218,7 @@ void Admin::removeGoods() {
 		cout << "下架成功！！" << endl;
 	}
 	else
-		cout << "取消下架" << endl;
+		cout << "取消下架!!" << endl;
 
 
 
@@ -218,48 +229,63 @@ void Admin::removeGoods() {
 };
 
 void Admin::Order_show() {
-	cout << "订单ID" << "\t" << "商品ID" << "\t" << "交易单价" << "\t"
-		<< "数量" << "\t" << "交易时间" << "\t" << "卖家ID" << "\t"
+	cout << endl;
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << left << setw(20) << "订单ID" << setw(20) << "商品ID" << setw(20) << "交易单价" << setw(20)
+		<< "数量" << setw(20) << "交易时间" << setw(20) << "卖家ID" << setw(20)
 		<< "买家ID" << endl;
 
 	for (vector<Order*>::iterator it = this->orderVec.begin(); it != this->orderVec.end(); it++) {
-		cout << (*it)->orderID << "\t";
-		cout << (*it)->commodityID << "\t";
-		cout << (*it)->unitPrice << "\t";
-		cout << (*it)->number << "\t";
-		cout << (*it)->date << "\t";
-		cout << (*it)->sellerID << "\t";
-		cout << (*it)->buyerID << endl;
+		cout << left << setw(20) << (*it)->orderID << setw(20)
+			<< (*it)->commodityID << setw(20)
+			<< (*it)->unitPrice << setw(20)
+			<< (*it)->number << setw(20)
+			<< (*it)->date << setw(20)
+			<< (*it)->sellerID << setw(20)
+			<< (*it)->buyerID << endl;
 	}
+	cout << "**********************************************************************************************************************************************************" << endl;
+	cout << endl;
+
 	system("pause");
 	system("cls");
 };
 
 void Admin::User_show() {
-	cout << "用户ID" << "\t" << "姓名" << "\t" << "密码" <<"\t" 
-		<<"手机号" << "\t" <<"地址" << "\t" << "用户余额" << "\t" << "用户状态" << endl;
+	cout << endl;
+	cout << "*******************************************************************************************************************************************" << endl;
+	cout << left<< setw(20)<<"用户ID" << setw(20) << "姓名" << setw(20) << "密码" << setw(20)
+		<<"手机号" << setw(20) <<"地址" << setw(20) << "用户余额" << setw(20) << "用户状态" << endl;
 	if (!this->numbUser) {
-		cout << "----------无用户！！-----------" << endl;
+		cout << endl;
+		cout << "       无用户！！      " << endl;
+		cout << endl;
+		cout << "*******************************************************************************************************************************************" << endl;
+		cout << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 	for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
-		cout << (*it)->userID << "\t";
-		cout << (*it)->username << "\t";
-		cout << (*it)->password << "\t";
-		cout << (*it)->phoneNumber << "\t";
-		cout << (*it)->address << "\t";
-		cout << (*it)->balance << "\t";
+		cout << left << setw(20) << (*it)->userID << setw(20)
+			<< (*it)->username << setw(20)
+			<< (*it)->password << setw(20)
+			<< (*it)->phoneNumber << setw(20)
+			<< (*it)->address << setw(20)
+			<< (*it)->balance << setw(20);
 		if ((*it)->userState == 1) {
-			cout << "正常";
+			cout << "正常" << setw(20);
 		}
 		else {
-			cout << "封禁";
+			cout << "封禁" << setw(20);
 		}
 
 		cout << endl;
+
 	}
+	cout << "*******************************************************************************************************************************************" << endl;
+	cout << endl;
+
 	system("pause");
 	system("cls");
 

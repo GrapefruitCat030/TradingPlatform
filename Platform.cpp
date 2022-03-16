@@ -9,8 +9,11 @@ Platform::~Platform() {};
 
 void Platform::show_Menu() {
 	cout << "===============================================================" << endl;
+	cout << "============      欢迎使用冬奥纪念品交易平台     =============" << endl;
+	cout << "===============================================================" << endl;
 	cout << "  1.管理员登录	 2.用户注册	3.用户登录	4.退出系统" << endl;
 	cout << "===============================================================" << endl;
+	cout << endl;
 }
 
 void Platform::exitPlatform() {
@@ -52,6 +55,7 @@ void Platform::User_register(Admin& m_Admin) {
 	string phnNumber;
 	string address;
 
+	cout << endl;
 	cout << "请输入用户名(最大10位)：";
 	cin.sync();
 	getline(cin, Uname);
@@ -179,6 +183,8 @@ void Platform::User_register(Admin& m_Admin) {
 };
 
 void Platform::UserLogin(Admin& m_Admin) {
+
+	cout << endl;
 	//创建新用户指针，后指向用户数据
 	User* n_user;
 
@@ -265,7 +271,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 
 	}
 	else {
-		cout << "fail to login" << endl;
+		cout << "登录失败！请检查用户名或密码是否正确！" << endl;
 		system("pause");
 		system("cls");
 	}
