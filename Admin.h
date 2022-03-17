@@ -9,6 +9,7 @@ using namespace std;
 #include"User.h"
 #include"Goods.h"
 #include"Order.h"
+#include"SQL.h"
 
 #define FILEUSER "user.txt"
 #define FILEGOOD "commodity.txt"

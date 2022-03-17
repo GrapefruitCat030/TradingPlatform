@@ -49,6 +49,7 @@ void Admin::Module_Admin() {
 		switch (choicecc[0])
 		{
 		case '1':	//查看所有商品
+			
 			this->Goods_show();
 			system("pause");
 			system("cls");
