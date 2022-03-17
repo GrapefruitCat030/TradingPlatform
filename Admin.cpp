@@ -48,11 +48,13 @@ void Admin::Module_Admin() {
 		//char kksk = choicecc[0];
 		switch (choicecc[0])
 		{
-		case '1':	//查看所有商品
-			
+		case '1':	{//查看所有商品
+			string sqlstr = SQLshow_goods(ADMIN, "NONE");
+			//analySQL(sqlstr);
 			this->Goods_show();
 			system("pause");
 			system("cls");
+		}
 			break;
 		case '2':	//搜索商品
 			this->searchGoods();
@@ -125,6 +127,10 @@ void Admin::searchGoods() {
 	cin.sync();
 	getline(cin, gname);
 
+	//SSSQQQLLL
+	string sqlstr = SQLsearch_goods(ADMIN, gname);
+	//analySQL(sqlstr);
+
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
 	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
@@ -175,10 +181,15 @@ void Admin::searchGoods() {
 void Admin::removeGoods() {
 	//先查看一下商品列表
 	this->Goods_show();
-
+	
 	string gstr;
 	cout << "输入想要下架的商品：";
 	getline(cin, gstr);
+
+	//SSSQQQLLL
+	string sqlstr = SQLremove_goods(ADMIN, gstr);
+	//analySQL(sqlstr);
+
 	//遍历
 	vector<Goods*>::iterator it = this->goodsVec.begin();
 	for (it; it != this->goodsVec.end(); it++) {
@@ -230,6 +241,12 @@ void Admin::removeGoods() {
 };
 
 void Admin::Order_show() {
+
+	//SSSQQQLLL
+	string sqlstr = SQLshow_order(ADMIN, "NONE");
+	//analySQL(sqlstr1);
+
+
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
 	cout << left << setw(20) << "订单ID" << setw(20) << "商品ID" << setw(20) << "交易单价" << setw(20)
@@ -253,6 +270,12 @@ void Admin::Order_show() {
 };
 
 void Admin::User_show() {
+
+	//SSSQQQLLL
+	string sqlstr = SQLshow_user();
+	//analySQL(sqlstr1);
+
+
 	cout << endl;
 	cout << "*******************************************************************************************************************************************" << endl;
 	cout << left<< setw(20)<<"用户ID" << setw(20) << "姓名" << setw(20) << "密码" << setw(20)
@@ -302,6 +325,7 @@ void Admin::banUser() {
 	cin.sync();
 	getline(cin, judge);
 
+
 	if (judge != "Y") {
 		cout << "放弃封禁！！" << endl;
 		system("pause");
@@ -309,6 +333,16 @@ void Admin::banUser() {
 		return;
 	}
 	else {
+
+
+		//SSSQQQLLL
+		string sqlstr1 = SQLban_userGOOD(UID);
+		string sqlstr2 = SQLban_userUSER(UID);
+
+		//analySQL(sqlstr1);
+		//analySQL(sqlstr2);
+
+
 		for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
 			string theID;
 			theID = (*it)->userID;

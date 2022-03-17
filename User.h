@@ -14,6 +14,7 @@ using namespace std;
 #include <stdlib.h>
 
 #include"Calculator.h"
+#include"SQL.h"
 
 #pragma once
 

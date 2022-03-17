@@ -150,7 +150,7 @@ string SQLbuy_goodsOrder(string TID, string MID, string price, string numb, stri
 	string behind;
 
 	behind = "INSERT INTO order VALUES \
-		(T001, M001, 10.0, 2, 2022 - 02 - 13, U002, U001)";
+		(" +TID + "," + MID + "," + price + "," + numb + "," + TIME + "," + SID + "," + BID + ")";
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -262,18 +262,24 @@ string backTime() {
 
 void SQLsaveFile(string command) {
 	//以写入和追加方式打开文件
-	ofstream ofs("command.txt", ios::out | ios::app);
+	ofstream ofs("commands.txt", ios::out | ios::app);
 
 	//无文件，进行创建
 	if (!ofs.is_open()) {
 		cout << "现在创建SQLcommand文件";
 	}
-
-	//先前已经有文件存在
-	ofs << command;
+	ifstream ifs("commands.txt", ios::in);
+	char ch;
+	if (!ifs.get(ch)) {
+		ofs << command << endl;
+	}
+	else {
+		ofs << endl << command << endl;
+	}
 
 	//关闭文件
 	ofs.close();
+	ifs.close();
 }
 
 

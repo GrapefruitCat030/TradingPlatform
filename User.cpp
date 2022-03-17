@@ -259,6 +259,11 @@ void Buyer::showBUYERMenu() {
 
 //查看商品列表（只能看到在售）
 void Buyer::viewBGOODS(vector<Goods*>& gdvec) {
+
+	//SSSQQQLLL
+	string sqlstr = SQLshow_goods(BUYER, this->userID);
+	//analySQL(sqlstr1);
+
 	cout << endl;
 	cout << "************************************************************************************************************" << endl;
 	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
@@ -363,6 +368,11 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day);
 	/////////////////////////////////
 
+	//SSSQQQLLL
+	string sqlstr1 = SQLbuy_goodsOrder(ORDERIDback(numborder + 1), (*it)->commodityID, (*it)->price, gnumb, theTime, (*it)->sellerID, this->userID);
+	string sqlstr2 = SQLbuy_goodsGoods((*it)->commodityID, gnumb);
+	//analySQL(sqlstr1);
+	//analySQL(sqlstr2);
 
 	//商品够并且买家余额足够，生成订单
 	Order* order = new Order(ORDERIDback(numborder + 1), (*it)->commodityID, (*it)->price, gnumb, theTime, (*it)->sellerID, this->userID);
@@ -374,6 +384,11 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	//进一步修改商品状态及商品种类数
 	if (remainNumb == 0) {
 		(*it)->state = "已下架";
+
+		//SSSQQQLLL
+		string sqlstr3 = SQLnone_goods((*it)->commodityID);
+		//analySQL(sqlstr3);
+
 	}
 
 	//利用iterator找到商品对应的卖家
@@ -385,6 +400,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	//进行买卖家余额变动
 	(*sut)->balance += prcsum;
 	(*bt)->balance -= prcsum;
+
 
 
 	cout << "**************************************" << endl;
@@ -406,6 +422,11 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 
 //搜索商品（只能看到在售）
 void Buyer::searchGOODS(vector<Goods*>& gdvec) {
+
+	//SSSQQQLLL
+	string sqlstr = SQLsearch_goods(BUYER, this->userID);
+	//analySQL(sqlstr1);
+
 	string gname;
 	cout << "请输入您要查找的商品名：";
 	cin.sync();
@@ -453,6 +474,12 @@ void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 
 //查看历史订单
 void Buyer::viewBORDER(vector<Order*>& orvec) {
+
+	//SSSQQQLLL
+	string sqlstr = SQLshow_order(BUYER, this->userID);
+	//analySQL(sqlstr1);
+
+
 	cout << endl;
 	cout << "************************************************************************************************************" << endl;
 	cout << left << setw(20) << "订单ID" << setw(20) << "商品ID" << setw(20) << "交易单价" << setw(20)
@@ -479,6 +506,11 @@ void Buyer::viewBORDER(vector<Order*>& orvec) {
 
 //查看商品详细信息
 void Buyer::detailGOODS(vector<Goods*>& gdvec) {
+
+	//SSSQQQLLL
+	string sqlstr = SQLdetail_goods();
+	//analySQL(sqlstr1);
+
 	cout << endl;
 
 	string gID;
@@ -536,6 +568,7 @@ void Seller::showSELLERMenu() {
 
 //发布商品
 void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
+
 
 	cout << endl << endl;
 
@@ -638,6 +671,12 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 		string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day);
 		/////////////////////////////////
 
+		//SSSQQQLLL
+		string sqlstr = SQLpublish_goods(gname, gprice, gnumb, gdescrib);
+		//analySQL(sqlstr1);
+
+
+
 		Goods* good = new Goods(GOODSIDback(numbgoods + 1), gname, gprice, gnumb, gdescrib, this->userID, theTime, st);
 		gdvec.push_back(good);
 		numbgoods++;
@@ -653,6 +692,11 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 
 //查看发布商品
 void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
+
+	//SSSQQQLLL
+	string sqlstr = SQLshow_goods(SELLER, this->userID);
+	//analySQL(sqlstr1);
+
 	cout << endl;
 	cout << "************************************************************************************************************************" << endl;
 	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
@@ -679,6 +723,7 @@ void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
 
 //修改商品信息
 void Seller::modifyGOODS(vector<Goods*>& gdvec) {
+
 	cout << endl;
 
 	string gID;
@@ -743,6 +788,11 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 				return;
 			}
 			else {
+
+				//SSSQQQLLL
+				string sqlstr = SQLmodify_goodsDescr(desci, (*it)->commodityID);
+				//analySQL(sqlstr1);
+
 				//进行修改
 				(*it)->description = desci;
 				saveGOOD(gdvec);
@@ -803,6 +853,11 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 				return;
 			}
 			else {
+
+				//SSSQQQLLL
+				string sqlstr = SQLmodify_goodsPrice(prc, (*it)->commodityID);
+				//analySQL(sqlstr1);
+
 				//进行修改
 				(*it)->price = prc;
 				saveGOOD(gdvec);
@@ -817,6 +872,7 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 
 //下架商品
 void Seller::removeGOODS(vector<Goods*>& gdvec) {
+
 	cout << endl;
 
 	string gID;
@@ -863,6 +919,11 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 		return;
 	}
 	else {
+
+		//SSSQQQLLL
+		string sqlstr = SQLremove_goods(SELLER, (*it)->commodityID);
+		//analySQL(sqlstr1);
+
 		//进行修改
 		(*it)->state = "已下架";
 		saveGOOD(gdvec);
@@ -875,6 +936,11 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 
 //查看历史订单
 void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
+
+	//SSSQQQLLL
+	string sqlstr = SQLshow_order(SELLER, this->userID);
+	//analySQL(sqlstr1);
+
 	cout << endl;
 	cout << "************************************************************************************************************************" << endl;
 	cout << left << setw(20) << "订单ID" << setw(20) << "商品ID" << setw(20) << "交易单价" << setw(20)
