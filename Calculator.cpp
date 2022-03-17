@@ -1,7 +1,7 @@
 #include"Calculator.h"
 
 
-bool isNumber(const string& str) {
+bool CisNumber(const string& str) {
 	istringstream sin(str);
 	double test;
 	return sin >> test && sin.eof();
@@ -41,6 +41,15 @@ bool judgecin(const string& kksk) {
 	if (kksk[kksk.length() - 1] == '.') {
 		cout << "小数点使用错误！" << endl;
 		return false;
+	}
+	//两位小数输入错误判断
+	for (int k = 1; k <= kksk.length() - 3; k++) {
+		if (kksk[k] == '.') {
+			if (isdigit(kksk[k + 1]) && isdigit(kksk[k+2])) {
+				cout << "只能为一位小数！" << endl;
+				return false;
+			}
+		}
 	}
 	for (int k = 0; k <= kksk.length() - 1; k++) {
 		//防止下标溢出
@@ -148,6 +157,7 @@ bool judgecin(const string& kksk) {
 		else if (kksk[s] == '.' || kksk[s] == ' ') {
 			continue;
 		}
+
 		//当前s为操作符
 		else if (kksk[s] == '+' || kksk[s] == '-' || kksk[s] == '*' || kksk[s] == '/') {
 

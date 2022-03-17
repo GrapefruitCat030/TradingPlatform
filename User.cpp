@@ -1,6 +1,5 @@
 #include"User.h"
 
-
 User::User() { userState = 1; balance = 0.0; };
 User::User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState) {
 	this->userID = userID;
@@ -192,7 +191,7 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 
 };
 														//外面PL的switch语句中已经有保存函数
-void User::infoManageUSER(vector<User*> vec) {
+void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
 	//先进行清屏，然后用户菜单展示
 	system("cls");
 	//用来储存用户选项
@@ -216,7 +215,7 @@ void User::infoManageUSER(vector<User*> vec) {
 		switch (choiceii[0])
 		{
 		case '1':	//查看信息
-			this->GetUserinfo();
+			this->GetUserinfo(orvec);
 			break;
 		case '2':	//修改信息
 			this->ModifyUserinfo(vec);
@@ -915,12 +914,19 @@ void User::showINFOMenu() {
 
 };
 
-void User::GetUserinfo() {
+void User::GetUserinfo(vector<Order*>& orvec) {
+
+	cout << endl;
+	//获取余额算式并进行计算
+	string Balc = createBlcStr(orvec, this->userID);
+	double blc = useCal(Balc);
+	cout << endl;
+
 	cout << "==============================" << endl;
 	cout << "用户名："<<this->username << endl;
 	cout << "联系方式："<<this->phoneNumber << endl;
 	cout << "地址："<<this->address << endl;
-	cout << "钱包余额："<<this->balance << endl;
+	cout << "钱包余额："<<blc << endl;
 	cout << "==============================" << endl;
 	system("pause");
 	system("cls");
@@ -1115,14 +1121,14 @@ void User::Topup_Userbalance() {
 	//判断文件为空(eof)
 	char ch;
 	if (!ifs.get(ch)) {
-		ofs << setw(20) << setiosflags(ios::left) << "充值用户ID"
-			<< setw(20) << setiosflags(ios::left) << "充值金额"
-			<< setw(30) << setiosflags(ios::left) << "充值时间" << endl;
+		ofs << left << setw(20) << "充值用户ID"
+			<< setw(20) << "充值金额"
+			<< setw(30) << "充值时间" << endl;
 	}
 	//先前已经有文件存在
-	ofs << setw(20) << setiosflags(ios::left) << this->userID
-		<< setw(20) << setiosflags(ios::left) << money
-		<< setw(30) << setiosflags(ios::left) << theTime << endl;
+	ofs << left << setw(20) << this->userID
+		<< setw(20) << money
+		<< setw(30) << theTime << endl;
 
 	//关闭文件
 	ofs.close();
@@ -1225,4 +1231,69 @@ bool isNumber(const string& str) {
 	istringstream sin(str);
 	double test;
 	return sin >> test && sin.eof();
+}
+
+string createBlcStr(vector<Order*> orvec, string inID) {
+
+	//打开充值文件，抓取用户充值数据
+	ifstream ifs("balance.txt", ios::in);
+	//未有文件
+	if (!ifs.is_open()) {
+		return "0.0";
+	}
+	vector<string> AddBlc; //储存充值数
+	string str;
+	//去掉没用的第一行
+	getline(ifs, str);
+	string UID, Balc, BTime;
+	while (ifs >> UID && ifs >> Balc && ifs >> BTime) {
+		if (inID == UID) {
+			AddBlc.push_back(Balc);
+		}
+	}
+	string rel1;
+	for (vector<string>::iterator it = AddBlc.begin(); it != AddBlc.end(); it++) {
+		rel1 += (*it);
+		if (it + 1 != AddBlc.end()) rel1 += " + "; //可能需要保留末尾加号
+	}
+
+
+	//遍历订单文件，生成订单式子
+	string bbb;
+	string sss;
+	vector<string> BuyPrc; //储存买家数
+	vector<string> SelPrc; //储存卖家数
+
+	vector<Order*>::iterator ot = orvec.begin();
+	for (ot; ot != orvec.end(); ot++) {
+		//买家减余额
+		if ((*ot)->buyerID == inID) {
+			bbb = (*ot)->unitPrice + " * " + (*ot)->number;
+			BuyPrc.push_back(bbb);
+		}
+		//卖家加余额
+		if ((*ot)->sellerID == inID) {
+			sss = (*ot)->unitPrice + " * " + (*ot)->number;
+			SelPrc.push_back(sss);
+		}
+	}
+
+	string rel2;
+	for (vector<string>::iterator bt = BuyPrc.begin(); bt != BuyPrc.end(); bt++) {
+		rel2 += (*bt);
+		if (bt + 1 != BuyPrc.end()) rel2 += " - "; //可能需要保留末尾加号
+	}
+
+	string rel3;
+	for (vector<string>::iterator st = SelPrc.begin(); st != SelPrc.end(); st++) {
+		rel3 += (*st);
+		if (st + 1 != SelPrc.end()) rel3 += " + "; //可能需要保留末尾加号
+	}
+
+
+	string result = rel1;
+	if (!rel2.empty()) result = result + " - " + rel2;
+	if (!rel3.empty()) result = result + " + " + rel3;
+
+	return result;
 }

@@ -8,7 +8,7 @@ using namespace std;
 #include<sstream>
 
 //判断str是否为数字
-bool isNumber(const string& str);
+bool CisNumber(const string& str);
 //判断输入表达式
 bool judgecin(const string& kksk);
 //进行表达式转后缀

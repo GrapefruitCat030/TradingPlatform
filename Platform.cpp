@@ -253,7 +253,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 				break;
 			case '3':	//个人信息管理
 				//传值传参，不怕原vector修改
-				n_user->infoManageUSER(m_Admin.userVec);
+				n_user->infoManageUSER(m_Admin.userVec, m_Admin.orderVec);
 				//保存数据
 				this->saveFILE(m_Admin);
 				break;

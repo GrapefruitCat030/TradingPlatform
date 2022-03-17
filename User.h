@@ -13,6 +13,8 @@ using namespace std;
 #include <stdio.h>
 #include <stdlib.h>
 
+#include"Calculator.h"
+
 #pragma once
 
 #define FILEGOODS "commodity.txt"
@@ -53,7 +55,7 @@ public:
 	void Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec); // i为商品数量, gdvec传值传参
 
 	//个人信息管理,传入vector以方便用户信息修改时进行用户名的遍历
-	void infoManageUSER(vector<User*> vec);
+	void infoManageUSER(vector<User*> vec, vector<Order*>& orvec);
 
 	//注销登录
 	void exitUSER();
@@ -62,7 +64,7 @@ public:
 	//信息管理菜单显示
 	void showINFOMenu();
 	//查看信息
-	void GetUserinfo();
+	void GetUserinfo(vector<Order*>& orvec);
 	//修改信息
 	void ModifyUserinfo(vector<User*> vec);
 	//充值
@@ -131,3 +133,6 @@ void saveORDER(vector<Order*> orvec);
 
 //判断输入是否为数字
 bool isNumber(const string& str);
+
+//余额式子生成
+string createBlcStr(vector<Order*> orvec, string inID);

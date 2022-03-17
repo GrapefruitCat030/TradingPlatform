@@ -317,7 +317,7 @@ void Admin::banUser() {
 				//顺便下架商品
 				for (vector<Goods*>::iterator gt = this->goodsVec.begin(); gt != this->goodsVec.end(); gt++) {
 					if ((*gt)->sellerID == theID) {
-						(*gt)->state == "已下架";
+						(*gt)->state = "已下架";
 					}
 				}
 
