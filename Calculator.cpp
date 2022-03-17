@@ -43,12 +43,17 @@ bool judgecin(const string& kksk) {
 		return false;
 	}
 	//两位小数输入错误判断
-	for (int k = 1; k <= kksk.length() - 3; k++) {
-		if (kksk[k] == '.') {
-			if (isdigit(kksk[k + 1]) && isdigit(kksk[k+2])) {
+	for (int k = 0; k <= kksk.length() - 1; k++) {
+		if (kksk[k] == '.' && k + 2 <= kksk.length() - 1) {
+			if (isdigit(kksk[k + 1]) && isdigit(kksk[k + 2])) {
 				cout << "只能为一位小数！" << endl;
 				return false;
 			}
+			if (isdigit(kksk[k + 1]) && kksk[k + 2] == '.') {
+				cout << "小数点误用！" << endl;
+				return false;
+			}
+
 		}
 	}
 	for (int k = 0; k <= kksk.length() - 1; k++) {
@@ -120,9 +125,14 @@ bool judgecin(const string& kksk) {
 			bool spaceFlag = false;
 			for (int i = s + 1; i <= kksk.length() - 1; i++) {
 				if (kksk[i] == '+' || kksk[i] == '*' || kksk[i] == '/') {
-					cout << "空格使用错误！左括号不能直接跟操作符！" << endl;
+					cout << "左括号不能直接跟操作符！" << endl;
 					return false;
 				}
+				else if (kksk[i] == ')') {
+					cout << "左括号不能直接跟右括号！" << endl;
+					return false;
+				}
+
 				else {
 					if (kksk[i] == ' ') {
 						spaceFlag = true;
@@ -188,7 +198,6 @@ bool judgecin(const string& kksk) {
 
 	return true;
 }
-
 
 void transform(vector<string>& stk, string str) {
 
@@ -379,7 +388,6 @@ double calcalcal(vector<string> vcstr) {
 
 		i++;
 	}
-
 	return ssk.top();
 }
 
