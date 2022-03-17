@@ -313,10 +313,18 @@ void Admin::banUser() {
 			theID = (*it)->userID;
 			if (UID == theID) {
 				(*it)->userState = 0;
+
+				//顺便下架商品
+				for (vector<Goods*>::iterator gt = this->goodsVec.begin(); gt != this->goodsVec.end(); gt++) {
+					if ((*gt)->sellerID == theID) {
+						(*gt)->state == "已下架";
+					}
+				}
+
 				cout << "封禁成功！！" << endl;
 
 				this->saveUSERFILE();
-
+				this->saveGOODFILE();
 				system("pause");
 				system("cls");
 				return;
