@@ -5,7 +5,6 @@ using namespace std;
 
 
 int main() {
-
 	//实例化平台对象
 	Platform PL;
 	//实例化管理者对象

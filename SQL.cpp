@@ -149,8 +149,7 @@ string SQLbuy_goodsOrder(string TID, string MID, string price, string numb, stri
 	string front = backTime();
 	string behind;
 
-	behind = "INSERT INTO order VALUES \
-		(" +TID + "," + MID + "," + price + "," + numb + "," + TIME + "," + SID + "," + BID + ")";
+	behind = "INSERT INTO order VALUES (" +TID + "," + MID + "," + price + "," + numb + "," + TIME + "," + SID + "," + BID + ")";
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -161,8 +160,7 @@ string SQLbuy_goodsGoods(string MID, string numb) {
 	string front = backTime();
 	string behind;
 
-	behind = "UPDATE commodity SET \
-		数量 = " + numb + " WHERE 商品ID = " + MID;
+	behind = "UPDATE commodity SET 数量 = " + numb + " WHERE 商品ID = " + MID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -201,8 +199,7 @@ string SQLpublish_goods(string Gname, string Gprice, string Gnumb, string Gdescr
 	string front = backTime();
 	string behind;
 
-	behind = "INSERT INTO commodity VALUES \
-				(" + Gname + "," + "," + Gprice + "," + Gnumb + "," + Gdescr + ")";
+	behind = "INSERT INTO commodity VALUES (" + Gname + "," + "," + Gprice + "," + Gnumb + "," + Gdescr + ")";
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -216,8 +213,7 @@ string SQLmodify_goodsPrice(string Gprice, string ID) {
 	string front = backTime();
 	string behind;
 
-	behind = "UPDATE commodity SET \
-		价格 = " + Gprice + " WHERE 商品ID = " + ID;
+	behind = "UPDATE commodity SET 价格 = " + Gprice + " WHERE 商品ID = " + ID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -229,8 +225,7 @@ string SQLmodify_goodsDescr(string Gdescr, string ID) {
 	string front = backTime();
 	string behind;
 
-	behind = "UPDATE commodity SET \
-		描述 = " + Gdescr + " WHERE 商品ID = " + ID;
+	behind = "UPDATE commodity SET 描述 = " + Gdescr + " WHERE 商品ID = " + ID;
 
 	string result = front + behind;
 	SQLsaveFile(result);

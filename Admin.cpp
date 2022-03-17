@@ -34,7 +34,6 @@ void Admin::Module_Admin() {
 		cin.sync();
 		getline(cin, choicecc);
 		//if (cin >> choicecc) {
-
 		//}
 		//else {
 		//	cin.clear();
@@ -419,7 +418,6 @@ void Admin::USERINIT() {
 
 
 }
-
 void Admin::GOODSINIT() {
 	ifstream ifs(FILEGOOD, ios::in);
 
@@ -460,10 +458,8 @@ void Admin::GOODSINIT() {
 	ifs.close();
 
 };
-
 void Admin::ORDERINIT() {
 	ifstream ifs("order.txt", ios::in);
-
 	//打开失败
 	if (!ifs.is_open()) {
 		//cout << "order txt open failed!" << endl;
@@ -471,7 +467,6 @@ void Admin::ORDERINIT() {
 		ofstream ofs("order.txt", ios::out);
 		return;
 	}
-
 	//每行读入
 	string str;
 	//去掉没用的第一行
@@ -496,11 +491,7 @@ void Admin::ORDERINIT() {
 		//装进向量里面
 		this->orderVec.push_back(gd);
 	}
-
-
 	ifs.close();
-
-
 }
 
 
