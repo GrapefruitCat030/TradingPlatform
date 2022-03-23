@@ -1,4 +1,4 @@
-#include"User.h"
+ï»¿#include"User.h"
 
 User::User() { userState = 1; balance = 0.0; };
 User::User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState) {
@@ -11,8 +11,8 @@ User::User(string userID, string username, string password, string phoneNumber, 
 	this->userState = userState;
 };
 User::User(vector<string> vcstr) {
-	//ÓÃ»§ID,ÓÃ»§Ãû,ÃÜÂë,ÁªÏµ·½Ê½,µØÖ·,Ç®°üÓà¶î,ÓÃ»§×´Ì¬
-	//U001, ÄÏ´ó, 123456, 12345678, ÏÉÁÖ´óµÀ163ºÅ, 1024.0, Õı³£
+	//ç”¨æˆ·ID,ç”¨æˆ·å,å¯†ç ,è”ç³»æ–¹å¼,åœ°å€,é’±åŒ…ä½™é¢,ç”¨æˆ·çŠ¶æ€
+	//U001, å—å¤§, 123456, 12345678, ä»™æ—å¤§é“163å·, 1024.0, æ­£å¸¸
 	//											double	int
 	balance = 0.0;
 	userState = 1;
@@ -44,21 +44,21 @@ User::User(vector<string> vcstr) {
 			balance = stod(blcstr);
 			//balance = vcstr.at(i);
 		}
-			break;
+		break;
 		case 6:
 		{
 			userState = 1;
 			//state
-			string usstr = vcstr.at(i);	//	´«ÈëµÄÊÇ Õı³£/·â½û
-			if (usstr == "Õı³£") {
+			string usstr = vcstr.at(i);	//	ä¼ å…¥çš„æ˜¯ æ­£å¸¸/å°ç¦
+			if (usstr == "æ­£å¸¸") {
 				userState = 1;
 			}
-			if (usstr == "·â½û") {
+			if (usstr == "å°ç¦") {
 				userState = 0;
 			}
 			//userState = vcstr.at(i);
 		}
-			break;
+		break;
 		default:
 			break;
 		}
@@ -69,11 +69,11 @@ User::User(vector<string> vcstr) {
 
 
 
-//----------------------ÓÃ»§º¯Êı
+//----------------------ç”¨æˆ·å‡½æ•°
 void User::showUSERMenu() {
-	cout << "¡ª¡ª¡ª¡ª¡ª¡ªÏÖÔÚ´¦ÓÚÓÃ»§Ä£Ê½¡ª¡ª¡ª¡ª¡ª¡ª" << endl;
+	cout << "â€”â€”â€”â€”â€”â€”ç°åœ¨å¤„äºç”¨æˆ·æ¨¡å¼â€”â€”â€”â€”â€”â€”" << endl;
 	cout << "==================================================" << endl;
-	cout << "1.ÎÒÊÇÂò¼Ò  2.ÎÒÊÇÂô¼Ò  3.¸öÈËĞÅÏ¢¹ÜÀí  4.ÍË³öµÇÂ¼" << endl;
+	cout << "1.æˆ‘æ˜¯ä¹°å®¶  2.æˆ‘æ˜¯å–å®¶  3.ä¸ªäººä¿¡æ¯ç®¡ç†  4.é€€å‡ºç™»å½•" << endl;
 	cout << "=================================================" << endl;
 
 };
@@ -82,21 +82,21 @@ void User::Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec,
 	Buyer n_buyer;
 	n_buyer.userID = this->userID;
 
-	//ÏÈ½øĞĞÇåÆÁ£¬È»ºóÓÃ»§²Ëµ¥Õ¹Ê¾
+	//å…ˆè¿›è¡Œæ¸…å±ï¼Œç„¶åç”¨æˆ·èœå•å±•ç¤º
 	system("cls");
-	//ÓÃÀ´´¢´æÓÃ»§Ñ¡Ïî
+	//ç”¨æ¥å‚¨å­˜ç”¨æˆ·é€‰é¡¹
 	string choicebb;
 	bool judge = true;
 
 	while (judge) {
 
 		n_buyer.showBUYERMenu();
-		cout << "ÊäÈëÑ¡Ïî£º";
+		cout << "è¾“å…¥é€‰é¡¹ï¼š";
 		cin.sync();
 		getline(cin, choicebb);
 
 		if (size(choicebb) > 1) {
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
 			system("cls");
 			continue;
@@ -104,30 +104,30 @@ void User::Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec,
 
 		switch (choicebb[0])
 		{
-		case '1':	//²é¿´ÉÌÆ·ÁĞ±í£¨Ö»ÄÜ¿´µ½ÔÚÊÛ£©
+		case '1':	//æŸ¥çœ‹å•†å“åˆ—è¡¨ï¼ˆåªèƒ½çœ‹åˆ°åœ¨å”®ï¼‰
 			n_buyer.viewBGOODS(gdvec);
 			break;
-		case '2':	//¹ºÂòÉÌÆ·
-			n_buyer.buyGOODS(numbgoods,numborder,userVec,gdvec,orvec);
+		case '2':	//è´­ä¹°å•†å“
+			n_buyer.buyGOODS(numbgoods, numborder, userVec, gdvec, orvec);
 			break;
-		case '3':	//ËÑË÷ÉÌÆ·
+		case '3':	//æœç´¢å•†å“
 			n_buyer.searchGOODS(gdvec);
 			break;
-		case '4':	//²é¿´ÀúÊ·¶©µ¥
+		case '4':	//æŸ¥çœ‹å†å²è®¢å•
 			n_buyer.viewBORDER(orvec);
 			break;
-		case '5':	//²é¿´ÉÌÆ·ÏêÏ¸ĞÅÏ¢
+		case '5':	//æŸ¥çœ‹å•†å“è¯¦ç»†ä¿¡æ¯
 			n_buyer.detailGOODS(gdvec);
 			break;
-		case '6':	//·µ»ØÓÃ»§Ö÷½çÃæ
+		case '6':	//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 			n_buyer.exitBUYER();
 			judge = false;
 			break;
 
 		default:
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
-			system("cls"); //ÇåÆÁ
+			system("cls"); //æ¸…å±
 			break;
 		}
 	}
@@ -137,21 +137,21 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 	Seller n_seller;
 	n_seller.userID = this->userID;
 
-	//ÏÈ½øĞĞÇåÆÁ£¬È»ºóÓÃ»§²Ëµ¥Õ¹Ê¾
+	//å…ˆè¿›è¡Œæ¸…å±ï¼Œç„¶åç”¨æˆ·èœå•å±•ç¤º
 	system("cls");
-	//ÓÃÀ´´¢´æÓÃ»§Ñ¡Ïî
+	//ç”¨æ¥å‚¨å­˜ç”¨æˆ·é€‰é¡¹
 	string choicess;
 	bool judge = true;
 
 	while (judge) {
 
 		n_seller.showSELLERMenu();
-		cout << "ÊäÈëÑ¡Ïî£º";
+		cout << "è¾“å…¥é€‰é¡¹ï¼š";
 		cin.sync();
 		getline(cin, choicess);
 
 		if (size(choicess) > 1) {
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
 			system("cls");
 			continue;
@@ -159,30 +159,30 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 
 		switch (choicess[0])
 		{
-		case '1':	//·¢²¼ÉÌÆ·
-			n_seller.publishGOODS(numbgoods,gdvec);
+		case '1':	//å‘å¸ƒå•†å“
+			n_seller.publishGOODS(numbgoods, gdvec);
 			break;
-		case '2':	//²é¿´·¢²¼ÉÌÆ·
-			n_seller.viewSGOODS(userID,gdvec);
+		case '2':	//æŸ¥çœ‹å‘å¸ƒå•†å“
+			n_seller.viewSGOODS(userID, gdvec);
 			break;
-		case '3':	//ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+		case '3':	//ä¿®æ”¹å•†å“ä¿¡æ¯
 			n_seller.modifyGOODS(gdvec);
 			break;
-		case '4':	//ÏÂ¼ÜÉÌÆ·
+		case '4':	//ä¸‹æ¶å•†å“
 			n_seller.removeGOODS(gdvec);
 			break;
-		case '5':	//²é¿´ÀúÊ·¶©µ¥
+		case '5':	//æŸ¥çœ‹å†å²è®¢å•
 			n_seller.viewSORDER(userID, orvec);
 			break;
-		case '6':	//·µ»ØÓÃ»§Ö÷½çÃæ
+		case '6':	//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 			n_seller.exitSELLER();
 			judge = false;
 			break;
 
 		default:
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
-			system("cls"); //ÇåÆÁ
+			system("cls"); //æ¸…å±
 			break;
 		}
 	}
@@ -190,23 +190,23 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 
 
 };
-														//ÍâÃæPLµÄswitchÓï¾äÖĞÒÑ¾­ÓĞ±£´æº¯Êı
+//å¤–é¢PLçš„switchè¯­å¥ä¸­å·²ç»æœ‰ä¿å­˜å‡½æ•°
 void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
-	//ÏÈ½øĞĞÇåÆÁ£¬È»ºóÓÃ»§²Ëµ¥Õ¹Ê¾
+	//å…ˆè¿›è¡Œæ¸…å±ï¼Œç„¶åç”¨æˆ·èœå•å±•ç¤º
 	system("cls");
-	//ÓÃÀ´´¢´æÓÃ»§Ñ¡Ïî
+	//ç”¨æ¥å‚¨å­˜ç”¨æˆ·é€‰é¡¹
 	string choiceii;
 	bool judge = true;
 
 	while (judge) {
 
 		this->showINFOMenu();
-		cout << "ÊäÈëÑ¡Ïî£º";
+		cout << "è¾“å…¥é€‰é¡¹ï¼š";
 		cin.sync();
 		getline(cin, choiceii);
 
 		if (size(choiceii) > 1) {
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
 			system("cls");
 			continue;
@@ -214,23 +214,23 @@ void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
 
 		switch (choiceii[0])
 		{
-		case '1':	//²é¿´ĞÅÏ¢
+		case '1':	//æŸ¥çœ‹ä¿¡æ¯
 			this->GetUserinfo(orvec);
 			break;
-		case '2':	//ĞŞ¸ÄĞÅÏ¢
+		case '2':	//ä¿®æ”¹ä¿¡æ¯
 			this->ModifyUserinfo(vec);
 			break;
-		case '3':	//³äÖµ
+		case '3':	//å……å€¼
 			this->Topup_Userbalance();
 			break;
-		case '4':	//·µ»ØÓÃ»§Ö÷½çÃæ
+		case '4':	//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 			this->exitINFO();
 			judge = false;
 			break;
 		default:
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
-			system("cls"); //ÇåÆÁ
+			system("cls"); //æ¸…å±
 			break;
 		}
 	}
@@ -238,7 +238,7 @@ void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
 };
 
 void User::exitUSER() {
-	cout << "»¶Ó­ÏÂ´ÎÊ¹ÓÃ£¡£¡" << endl;
+	cout << "æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨ï¼ï¼" << endl;
 	system("pause");
 	system("cls");
 	return;
@@ -247,17 +247,17 @@ void User::exitUSER() {
 
 
 
-//---------------------Âò¼Ò²Ëµ¥
+//---------------------ä¹°å®¶èœå•
 
-//Âò¼Ò²Ëµ¥Õ¹Ê¾
+//ä¹°å®¶èœå•å±•ç¤º
 void Buyer::showBUYERMenu() {
-	cout << "¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª          ÏÖÔÚ´¦ÓÚÓÃ»§Âò¼ÒÄ£Ê½          ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª" << endl;
+	cout << "â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”          ç°åœ¨å¤„äºç”¨æˆ·ä¹°å®¶æ¨¡å¼          â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”" << endl;
 	cout << "============================================================================================" << endl;
-	cout << "1.²é¿´ÉÌÆ·ÁĞ±í  2.¹ºÂòÉÌÆ·  3.ËÑË÷ÉÌÆ· 4.²é¿´ÀúÊ·¶©µ¥  5.²é¿´ÉÌÆ·ÏêÏ¸ĞÅÏ¢  6.·µ»ØÓÃ»§Ö÷½çÃæ" << endl;
+	cout << "1.æŸ¥çœ‹å•†å“åˆ—è¡¨  2.è´­ä¹°å•†å“  3.æœç´¢å•†å“ 4.æŸ¥çœ‹å†å²è®¢å•  5.æŸ¥çœ‹å•†å“è¯¦ç»†ä¿¡æ¯  6.è¿”å›ç”¨æˆ·ä¸»ç•Œé¢" << endl;
 	cout << "============================================================================================" << endl;
 };
 
-//²é¿´ÉÌÆ·ÁĞ±í£¨Ö»ÄÜ¿´µ½ÔÚÊÛ£©
+//æŸ¥çœ‹å•†å“åˆ—è¡¨ï¼ˆåªèƒ½çœ‹åˆ°åœ¨å”®ï¼‰
 void Buyer::viewBGOODS(vector<Goods*>& gdvec) {
 
 	//SSSQQQLLL
@@ -266,16 +266,16 @@ void Buyer::viewBGOODS(vector<Goods*>& gdvec) {
 
 	cout << endl;
 	cout << "************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÉÏ¼ÜÊ±¼ä" << setw(20) << "Âô¼ÒID" << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "ä¸Šæ¶æ—¶é—´" << setw(20) << "å–å®¶ID" << endl;
 
 	for (vector<Goods*>::iterator it = gdvec.begin(); it != gdvec.end(); it++) {
-		if ((*it)->state == "ÏúÊÛÖĞ") {
+		if ((*it)->state == "é”€å”®ä¸­") {
 			cout << left << setw(20) << (*it)->commodityID << setw(20)
-			 << (*it)->commodityName << setw(20)
-			 << (*it)->price << setw(20)
-			 << (*it)->addedDate << setw(20)
-			 << (*it)->sellerID << endl;
+				<< (*it)->commodityName << setw(20)
+				<< (*it)->price << setw(20)
+				<< (*it)->addedDate << setw(20)
+				<< (*it)->sellerID << endl;
 		}
 
 	}
@@ -287,77 +287,77 @@ void Buyer::viewBGOODS(vector<Goods*>& gdvec) {
 
 };
 
-//¹ºÂòÉÌÆ·
+//è´­ä¹°å•†å“
 void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vector<Goods*>& gdvec, vector<Order*>& orvec) {
-	
-	//ÀûÓÃiteratorÕÒµ½ÉÌÆ·¶ÔÓ¦µÄÂò¼Ò
+
+	//åˆ©ç”¨iteratoræ‰¾åˆ°å•†å“å¯¹åº”çš„ä¹°å®¶
 	vector<User*>::iterator bt = usvec.begin();
 	for (bt; bt != usvec.end(); bt++) {
 		if (this->userID == (*bt)->userID) break;
 	}
 
-	
-	
-	cout << "ÇëÊäÈëÉÌÆ·ID£º ";
+
+
+	cout << "è¯·è¾“å…¥å•†å“IDï¼š ";
 	string gID;
 	cin.sync();
 	getline(cin, gID);
 
-	//ÀûÓÃiteratorÕÒµ½ÉÌÆ·ËùÔÚÎ»ÖÃ
+	//åˆ©ç”¨iteratoræ‰¾åˆ°å•†å“æ‰€åœ¨ä½ç½®
 	vector<Goods*>::iterator it = gdvec.begin();
 	for (it; it != gdvec.end(); it++) {
-		if ((*it)->commodityID == gID && (*it)->state == "ÏúÊÛÖĞ") break;
+		if ((*it)->commodityID == gID && (*it)->state == "é”€å”®ä¸­") break;
 	}
 	if (it == gdvec.end()) {
-		cout << "ÎŞ´ËÉÌÆ·£¡£¡" << endl;
+		cout << "æ— æ­¤å•†å“ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	//ÕÒµ½ºó
-	cout << "ÇëÊäÈëÊıÁ¿£º ";
+	//æ‰¾åˆ°å
+	cout << "è¯·è¾“å…¥æ•°é‡ï¼š ";
 	string gnumb;
 	cin.sync();
 	getline(cin, gnumb);
-	//ÅĞ¶ÏÊäÈëÊÇ·ñÎªÊı×Ö
+	//åˆ¤æ–­è¾“å…¥æ˜¯å¦ä¸ºæ•°å­—
 	if (!isNumber(gnumb)) {
-		cout << "ÊäÈëÓĞÎó£¡£¡·¢²¼Ê§°Ü£¡£¡" << endl;
+		cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼å‘å¸ƒå¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//ÅĞ¶ÏÊÇ·ñÎªÕûÊı
+	//åˆ¤æ–­æ˜¯å¦ä¸ºæ•´æ•°
 	int k = 0;
 	for (k; k < gnumb.length(); k++) {
 		if (gnumb[k] == '.') break;
 	}
 	if (gnumb.length() != k) {
-		cout << "ÊäÈëÊıÁ¿²»ÊÇÕûÊı£¡£¡·¢²¼Ê§°Ü£¡£¡" << endl;
+		cout << "è¾“å…¥æ•°é‡ä¸æ˜¯æ•´æ•°ï¼ï¼å‘å¸ƒå¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	//ÅĞ¶ÏÉÌÆ·ÊıÁ¿¹»²»¹»
-	if (stoi(gnumb) > stoi((*it)->number)) {	//¿â´æ²»×ãµÄÇé¿ö
-		cout << "Ã»ÓĞ×ã¹»¿â´æ£¡£¡" << endl;
+	//åˆ¤æ–­å•†å“æ•°é‡å¤Ÿä¸å¤Ÿ
+	if (stoi(gnumb) > stoi((*it)->number)) {	//åº“å­˜ä¸è¶³çš„æƒ…å†µ
+		cout << "æ²¡æœ‰è¶³å¤Ÿåº“å­˜ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	//½»Ò×¶î
+	//äº¤æ˜“é¢
 	double prcsum = stoi(gnumb) * stod((*it)->price);
-	//ÅĞ¶Ï½»Ò×¶îÓëÂò¼ÒÓà¶î¹ØÏµ
+	//åˆ¤æ–­äº¤æ˜“é¢ä¸ä¹°å®¶ä½™é¢å…³ç³»
 	if (prcsum > (*bt)->balance) {
-		cout << "Ã»ÓĞ×ã¹»Óà¶î£¡£¡" << endl;
+		cout << "æ²¡æœ‰è¶³å¤Ÿä½™é¢ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	/////////////////////»ñÈ¡Ê±¼ä
+	/////////////////////è·å–æ—¶é—´
 	struct tm* tm_ptr;
 	time_t the_time;
 	(void)time(&the_time);
@@ -374,16 +374,16 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	//analySQL(sqlstr1);
 	//analySQL(sqlstr2);
 
-	//ÉÌÆ·¹»²¢ÇÒÂò¼ÒÓà¶î×ã¹»£¬Éú³É¶©µ¥
+	//å•†å“å¤Ÿå¹¶ä¸”ä¹°å®¶ä½™é¢è¶³å¤Ÿï¼Œç”Ÿæˆè®¢å•
 	Order* order = new Order(ORDERIDback(numborder + 1), (*it)->commodityID, (*it)->price, gnumb, theTime, (*it)->sellerID, this->userID);
 	orvec.push_back(order);
 
-	//½øĞĞÉÌÆ·ĞŞ¸Ä
-	int remainNumb = stoi((*it)->number) - stoi(gnumb);//Ê£ÓàÉÌÆ·ÊıÁ¿
+	//è¿›è¡Œå•†å“ä¿®æ”¹
+	int remainNumb = stoi((*it)->number) - stoi(gnumb);//å‰©ä½™å•†å“æ•°é‡
 	(*it)->number = to_string(remainNumb);
-	//½øÒ»²½ĞŞ¸ÄÉÌÆ·×´Ì¬¼°ÉÌÆ·ÖÖÀàÊı
+	//è¿›ä¸€æ­¥ä¿®æ”¹å•†å“çŠ¶æ€åŠå•†å“ç§ç±»æ•°
 	if (remainNumb == 0) {
-		(*it)->state = "ÒÑÏÂ¼Ü";
+		(*it)->state = "å·²ä¸‹æ¶";
 
 		//SSSQQQLLL
 		string sqlstr3 = SQLnone_goods((*it)->commodityID);
@@ -391,25 +391,25 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 
 	}
 
-	//ÀûÓÃiteratorÕÒµ½ÉÌÆ·¶ÔÓ¦µÄÂô¼Ò
+	//åˆ©ç”¨iteratoræ‰¾åˆ°å•†å“å¯¹åº”çš„å–å®¶
 	vector<User*>::iterator sut = usvec.begin();
 	for (sut; sut != usvec.end(); sut++) {
 		if ((*it)->sellerID == (*sut)->userID) break;
 	}
 
-	//½øĞĞÂòÂô¼ÒÓà¶î±ä¶¯
+	//è¿›è¡Œä¹°å–å®¶ä½™é¢å˜åŠ¨
 	(*sut)->balance += prcsum;
 	(*bt)->balance -= prcsum;
 
 
 
 	cout << "**************************************" << endl;
-	cout << "**½»Ò×ÌáĞÑ*************************" << endl;
-	cout << "½»Ò×Ê±¼ä£º" << theTime << endl;
-	cout << "½»Ò×µ¥¼Û£º" << (*it)->price << endl;
-	cout << "½»Ò×ÊıÁ¿£º" << gnumb << endl;
-	cout << "½»Ò××´Ì¬£º½»Ò×³É¹¦"<< endl;
-	cout << "ÄúµÄÓà¶î£º" << (*bt)->balance << endl;
+	cout << "**äº¤æ˜“æé†’*************************" << endl;
+	cout << "äº¤æ˜“æ—¶é—´ï¼š" << theTime << endl;
+	cout << "äº¤æ˜“å•ä»·ï¼š" << (*it)->price << endl;
+	cout << "äº¤æ˜“æ•°é‡ï¼š" << gnumb << endl;
+	cout << "äº¤æ˜“çŠ¶æ€ï¼šäº¤æ˜“æˆåŠŸ" << endl;
+	cout << "æ‚¨çš„ä½™é¢ï¼š" << (*bt)->balance << endl;
 	cout << "**************************************" << endl;
 	cout << endl;
 
@@ -420,7 +420,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	system("cls");
 };
 
-//ËÑË÷ÉÌÆ·£¨Ö»ÄÜ¿´µ½ÔÚÊÛ£©
+//æœç´¢å•†å“ï¼ˆåªèƒ½çœ‹åˆ°åœ¨å”®ï¼‰
 void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 
 	//SSSQQQLLL
@@ -428,24 +428,24 @@ void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 	//analySQL(sqlstr1);
 
 	string gname;
-	cout << "ÇëÊäÈëÄúÒª²éÕÒµÄÉÌÆ·Ãû£º";
+	cout << "è¯·è¾“å…¥æ‚¨è¦æŸ¥æ‰¾çš„å•†å“åï¼š";
 	cin.sync();
 	getline(cin, gname);
 
 	cout << endl;
 	cout << "************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÉÏ¼ÜÊ±¼ä" << setw(20) << "Âô¼ÒID" << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "ä¸Šæ¶æ—¶é—´" << setw(20) << "å–å®¶ID" << endl;
 
-	//Ñ°ÕÒÉÌÆ·ÔÙvecÖĞµÄÎ»ÖÃ
+	//å¯»æ‰¾å•†å“å†vecä¸­çš„ä½ç½®
 	bool flag = false;
 	int i = 0;
 	vector<Goods*>::iterator it = gdvec.begin();
 	for (it; it != gdvec.end(); it++) {
-		//Ñ°ÕÒ×Ö·û
+		//å¯»æ‰¾å­—ç¬¦
 		int fdstr = (*it)->commodityName.find(gname, 0);
-		//ÈôÕÒµ½£¬Ôò¼ÇÂ¼µ±Ç°vecÏÂ±êÎ»ÖÃ£¬½øĞĞÊä³ö
-		if (fdstr < (*it)->commodityName.length() && (*it)->state == "ÏúÊÛÖĞ") {
+		//è‹¥æ‰¾åˆ°ï¼Œåˆ™è®°å½•å½“å‰vecä¸‹æ ‡ä½ç½®ï¼Œè¿›è¡Œè¾“å‡º
+		if (fdstr < (*it)->commodityName.length() && (*it)->state == "é”€å”®ä¸­") {
 			cout << left << setw(20) << (*it)->commodityID << setw(20)
 				<< (*it)->commodityName << setw(20)
 				<< (*it)->price << setw(20)
@@ -455,9 +455,9 @@ void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 		}
 		i++;
 	}
-	//Ã»ÓĞÉÌÆ·´æÔÚ
+	//æ²¡æœ‰å•†å“å­˜åœ¨
 	if (!flag) {
-		cout << "                   Ã»ÓĞ¸ÃÉÌÆ·£¡£¡                " << endl;
+		cout << "                   æ²¡æœ‰è¯¥å•†å“ï¼ï¼                " << endl;
 		cout << "************************************************************************************************************" << endl;
 		cout << endl;
 		system("pause");
@@ -472,7 +472,7 @@ void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 
 };
 
-//²é¿´ÀúÊ·¶©µ¥
+//æŸ¥çœ‹å†å²è®¢å•
 void Buyer::viewBORDER(vector<Order*>& orvec) {
 
 	//SSSQQQLLL
@@ -482,8 +482,8 @@ void Buyer::viewBORDER(vector<Order*>& orvec) {
 
 	cout << endl;
 	cout << "************************************************************************************************************" << endl;
-	cout << left << setw(20) << "¶©µ¥ID" << setw(20) << "ÉÌÆ·ID" << setw(20) << "½»Ò×µ¥¼Û" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "½»Ò×Ê±¼ä" << setw(20) << "Âô¼ÒID" << setw(20) << endl;
+	cout << left << setw(20) << "è®¢å•ID" << setw(20) << "å•†å“ID" << setw(20) << "äº¤æ˜“å•ä»·" << setw(20)
+		<< "æ•°é‡" << setw(20) << "äº¤æ˜“æ—¶é—´" << setw(20) << "å–å®¶ID" << setw(20) << endl;
 
 	for (vector<Order*>::iterator it = orvec.begin(); it != orvec.end(); it++) {
 		if ((*it)->buyerID == this->userID) {
@@ -504,42 +504,44 @@ void Buyer::viewBORDER(vector<Order*>& orvec) {
 
 };
 
-//²é¿´ÉÌÆ·ÏêÏ¸ĞÅÏ¢
+//æŸ¥çœ‹å•†å“è¯¦ç»†ä¿¡æ¯
 void Buyer::detailGOODS(vector<Goods*>& gdvec) {
 
-	//SSSQQQLLL
-	string sqlstr = SQLdetail_goods();
-	//analySQL(sqlstr1);
+
 
 	cout << endl;
 
 	string gID;
 
-	cout << "ÇëÊäÈëÏëÒª²é¿´µÄÉÌÆ·ID£º";
+	cout << "è¯·è¾“å…¥æƒ³è¦æŸ¥çœ‹çš„å•†å“IDï¼š";
 	cin.sync();
 	getline(cin, gID);
 
-	//ÀûÓÃiteratorÕÒµ½ÉÌÆ·ËùÔÚÎ»ÖÃ
+	//SSSQQQLLL
+	string sqlstr = SQLdetail_goods(gID);
+	//analySQL(sqlstr1);
+
+	//åˆ©ç”¨iteratoræ‰¾åˆ°å•†å“æ‰€åœ¨ä½ç½®
 	vector<Goods*>::iterator it = gdvec.begin();
 	for (it; it != gdvec.end(); it++) {
-		if ((*it)->commodityID == gID && (*it)->state == "ÏúÊÛÖĞ") break;
+		if ((*it)->commodityID == gID && (*it)->state == "é”€å”®ä¸­") break;
 	}
 	if (it == gdvec.end()) {
-		cout << "ÎŞ´ËÉÌÆ·£¡£¡" << endl;
+		cout << "æ— æ­¤å•†å“ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	//ÕÒµ½ÉÌÆ·
+	//æ‰¾åˆ°å•†å“
 	cout << endl;
 	cout << "************************************************" << endl;
-	cout << "ÉÌÆ·ID£º" << (*it)->commodityID << endl;
-	cout << "ÉÌÆ·Ãû³Æ£º" << (*it)->commodityName << endl;
-	cout << "ÉÌÆ·¼Û¸ñ£º" << (*it)->price << endl;
-	cout << "ÉÏ¼ÜÊ±¼ä£º" << (*it)->addedDate << endl;
-	cout << "ÉÌÆ·ÃèÊö£º" << (*it)->description << endl;
-	cout << "ÉÌÆ·Âô¼Ò: " << (*it)->sellerID << endl;
+	cout << "å•†å“IDï¼š" << (*it)->commodityID << endl;
+	cout << "å•†å“åç§°ï¼š" << (*it)->commodityName << endl;
+	cout << "å•†å“ä»·æ ¼ï¼š" << (*it)->price << endl;
+	cout << "ä¸Šæ¶æ—¶é—´ï¼š" << (*it)->addedDate << endl;
+	cout << "å•†å“æè¿°ï¼š" << (*it)->description << endl;
+	cout << "å•†å“å–å®¶: " << (*it)->sellerID << endl;
 	cout << "************************************************" << endl;
 
 	system("pause");
@@ -547,7 +549,7 @@ void Buyer::detailGOODS(vector<Goods*>& gdvec) {
 
 };
 
-//·µ»ØÓÃ»§Ö÷½çÃæ
+//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 void Buyer::exitBUYER() {
 	system("pause");
 	system("cls");
@@ -556,17 +558,17 @@ void Buyer::exitBUYER() {
 
 
 
-//---------------------Âô¼Ò²Ëµ¥
+//---------------------å–å®¶èœå•
 
-//Âô¼Ò²Ëµ¥Õ¹Ê¾
+//å–å®¶èœå•å±•ç¤º
 void Seller::showSELLERMenu() {
-	cout << "¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª         ÏÖÔÚ´¦ÓÚÓÃ»§Âô¼ÒÄ£Ê½        ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª" << endl;
+	cout << "â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”         ç°åœ¨å¤„äºç”¨æˆ·å–å®¶æ¨¡å¼        â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”" << endl;
 	cout << "========================================================================================" << endl;
-	cout << "1.·¢²¼ÉÌÆ·  2.²é¿´·¢²¼ÉÌÆ·  3.ĞŞ¸ÄÉÌÆ·ĞÅÏ¢  4.ÏÂ¼ÜÉÌÆ· 5.²é¿´ÀúÊ·¶©µ¥  6.·µ»ØÓÃ»§Ö÷½çÃæ" << endl;
+	cout << "1.å‘å¸ƒå•†å“  2.æŸ¥çœ‹å‘å¸ƒå•†å“  3.ä¿®æ”¹å•†å“ä¿¡æ¯  4.ä¸‹æ¶å•†å“ 5.æŸ¥çœ‹å†å²è®¢å•  6.è¿”å›ç”¨æˆ·ä¸»ç•Œé¢" << endl;
 	cout << "========================================================================================" << endl;
 };
 
-//·¢²¼ÉÌÆ·
+//å‘å¸ƒå•†å“
 void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 
 
@@ -577,90 +579,90 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	string gnumb;
 	string gdescrib;
 
-	cout << "ÇëÊäÈëÉÌÆ·Ãû³Æ£º";
+	cout << "è¯·è¾“å…¥å•†å“åç§°ï¼š";
 	cin.sync();
 	getline(cin, gname);
 
-	cout << "ÇëÊäÈëÉÌÆ·¼ÛÖµ£º£¨ĞèÒªÒ»Î»Ğ¡Êı£© ";
+	cout << "è¯·è¾“å…¥å•†å“ä»·å€¼ï¼šï¼ˆéœ€è¦ä¸€ä½å°æ•°ï¼‰ ";
 	cin.sync();
 	getline(cin, gprice);
-	//ÅĞ¶ÏÊÇ·ñÎªÒ»Î»Ğ¡Êı
-	//ÅĞ¶ÏÊäÈëÊÇ·ñÎªÊı×Ö
+	//åˆ¤æ–­æ˜¯å¦ä¸ºä¸€ä½å°æ•°
+	//åˆ¤æ–­è¾“å…¥æ˜¯å¦ä¸ºæ•°å­—
 	if (!isNumber(gprice)) {
-		cout << "ÊäÈëÓĞÎó£¡£¡·¢²¼Ê§°Ü£¡£¡" << endl;
+		cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼å‘å¸ƒå¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//ÅĞ¶ÏÊÇ·ñÎª±£ÁôÒ»Î»Ğ¡Êı,ÏÈÕÒµ½Ğ¡Êıµã£¬ÔÙ½øĞĞ³¤¶ÈÏà¼õ
+	//åˆ¤æ–­æ˜¯å¦ä¸ºä¿ç•™ä¸€ä½å°æ•°,å…ˆæ‰¾åˆ°å°æ•°ç‚¹ï¼Œå†è¿›è¡Œé•¿åº¦ç›¸å‡
 	int i = 0;
 	for (i; i < gprice.length(); i++) {
 		if (gprice[i] == '.') break;
 	}
 	if (gprice.length() - i - 1 > 1) {
-		//³¬³öĞ¡ÊıÎ»³¤¶È
-		cout << "ÊäÈë³¬³öĞ¡ÊıÎ»³¤¶È£¡£¡·¢²¼Ê§°Ü£¡£¡" << endl;
+		//è¶…å‡ºå°æ•°ä½é•¿åº¦
+		cout << "è¾“å…¥è¶…å‡ºå°æ•°ä½é•¿åº¦ï¼ï¼å‘å¸ƒå¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
 
-	cout << "ÇëÊäÈëÉÌÆ·ÊıÁ¿£º";
+	cout << "è¯·è¾“å…¥å•†å“æ•°é‡ï¼š";
 	cin.sync();
 	getline(cin, gnumb);
-	//ÅĞ¶ÏÊäÈëÊÇ·ñÎªÊı×Ö
+	//åˆ¤æ–­è¾“å…¥æ˜¯å¦ä¸ºæ•°å­—
 	if (!isNumber(gnumb)) {
-		cout << "ÊäÈëÓĞÎó£¡£¡·¢²¼Ê§°Ü£¡£¡" << endl;
+		cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼å‘å¸ƒå¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//ÅĞ¶ÏÊÇ·ñÎªÕûÊı
+	//åˆ¤æ–­æ˜¯å¦ä¸ºæ•´æ•°
 	int k = 0;
 	for (k; k < gnumb.length(); k++) {
 		if (gnumb[k] == '.') break;
 	}
 	if (gnumb.length() != k) {
-		cout << "ÊäÈëÊıÁ¿²»ÊÇÕûÊı£¡£¡·¢²¼Ê§°Ü£¡£¡" << endl;
+		cout << "è¾“å…¥æ•°é‡ä¸æ˜¯æ•´æ•°ï¼ï¼å‘å¸ƒå¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
 
-	cout << "ÇëÊäÈëÉÌÆ·ÃèÊö£º";
+	cout << "è¯·è¾“å…¥å•†å“æè¿°ï¼š";
 	cin.sync();
 	getline(cin, gdescrib);
 
 
 	cout << endl;
 
-	cout << "ÇëÔÙ´ÎÈ·¶¨ÉÌÆ·ĞÅÏ¢:" << endl;
+	cout << "è¯·å†æ¬¡ç¡®å®šå•†å“ä¿¡æ¯:" << endl;
 	cout << "*********************************************" << endl;
-	cout << "ÉÌÆ·Ãû³Æ£º" << gname << endl;
-	cout << "ÉÌÆ·¼Û¸ñ£º" << gprice << endl;
-	cout << "ÉÌÆ·ÊıÁ¿£º" << gnumb << endl;
-	cout << "ÉÌÆ·ÃèÊö£º" << gdescrib << endl;
+	cout << "å•†å“åç§°ï¼š" << gname << endl;
+	cout << "å•†å“ä»·æ ¼ï¼š" << gprice << endl;
+	cout << "å•†å“æ•°é‡ï¼š" << gnumb << endl;
+	cout << "å•†å“æè¿°ï¼š" << gdescrib << endl;
 	cout << "*********************************************" << endl;
 	cout << endl;
 
-	cout << "È·¶¨·¢²¼£¿(y/n)";
+	cout << "ç¡®å®šå‘å¸ƒï¼Ÿ(y/n)";
 	string judge;
 	cin.sync();
 	getline(cin, judge);
 
-	//---·¢²¼²¢½øĞĞÎÄ¼şĞ´Èë
+	//---å‘å¸ƒå¹¶è¿›è¡Œæ–‡ä»¶å†™å…¥
 	if (judge != "y") {
-		cout << "ÒÑÈ¡Ïû·¢²¼¡£" << endl;
+		cout << "å·²å–æ¶ˆå‘å¸ƒã€‚" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 	else {
-		string st = "ÏúÊÛÖĞ";
+		string st = "é”€å”®ä¸­";
 
-		/////////////////////»ñÈ¡Ê±¼ä
+		/////////////////////è·å–æ—¶é—´
 		struct tm* tm_ptr;
 		time_t the_time;
 		(void)time(&the_time);
@@ -680,18 +682,18 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 		Goods* good = new Goods(GOODSIDback(numbgoods + 1), gname, gprice, gnumb, gdescrib, this->userID, theTime, st);
 		gdvec.push_back(good);
 		numbgoods++;
-		//-------±£´æ¸Ãvec£¬½øĞĞÎÄ¼şĞ´Èë
+		//-------ä¿å­˜è¯¥vecï¼Œè¿›è¡Œæ–‡ä»¶å†™å…¥
 
 		saveGOOD(gdvec);
 
-		cout << "·¢²¼³É¹¦£¡£¡" << endl;
+		cout << "å‘å¸ƒæˆåŠŸï¼ï¼" << endl;
 	}
 	system("pause");
 	system("cls");
 };
 
-//²é¿´·¢²¼ÉÌÆ·
-void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
+//æŸ¥çœ‹å‘å¸ƒå•†å“
+void Seller::viewSGOODS(string ID, vector<Goods*>& gdvec) {
 
 	//SSSQQQLLL
 	string sqlstr = SQLshow_goods(SELLER, this->userID);
@@ -699,8 +701,8 @@ void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
 
 	cout << endl;
 	cout << "************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "ÉÏ¼ÜÊ±¼ä" << setw(20) << "ÉÌÆ·×´Ì¬" << setw(20) << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "æ•°é‡" << setw(20) << "ä¸Šæ¶æ—¶é—´" << setw(20) << "å•†å“çŠ¶æ€" << setw(20) << endl;
 
 
 	for (vector<Goods*>::iterator it = gdvec.begin(); it != gdvec.end(); it++) {
@@ -712,7 +714,7 @@ void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
 				<< (*it)->addedDate << setw(20)
 				<< (*it)->state << setw(20) << endl;
 		}
-	
+
 	}
 	cout << "************************************************************************************************************************" << endl;
 	cout << endl;
@@ -721,7 +723,7 @@ void Seller::viewSGOODS(string ID,vector<Goods*>& gdvec) {
 	system("cls");
 };
 
-//ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+//ä¿®æ”¹å•†å“ä¿¡æ¯
 void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 
 	cout << endl;
@@ -729,60 +731,60 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 	string gID;
 	string gchoose;
 
-	cout << "ÇëÊäÈëĞèÒªĞŞ¸ÄµÄÉÌÆ·ID£º";
+	cout << "è¯·è¾“å…¥éœ€è¦ä¿®æ”¹çš„å•†å“IDï¼š";
 	cin.sync();
 	getline(cin, gID);
 
-	//ÀûÓÃiteratorÕÒµ½ÉÌÆ·ËùÔÚÎ»ÖÃ
+	//åˆ©ç”¨iteratoræ‰¾åˆ°å•†å“æ‰€åœ¨ä½ç½®
 	vector<Goods*>::iterator it = gdvec.begin();
 	for (it; it != gdvec.end(); it++) {
 		if ((*it)->commodityID == gID && (*it)->sellerID == this->userID) break;
 	}
 	if (it == gdvec.end()) {
-		cout << "ÎŞ´ËÉÌÆ·£¡£¡" << endl;
+		cout << "æ— æ­¤å•†å“ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "ÇëÊäÈëĞèÒªĞŞ¸ÄµÄÉÌÆ·ÊôĞÔ£º£¨1.¼Û¸ñ 2.ÃèÊö£© ";
+	cout << "è¯·è¾“å…¥éœ€è¦ä¿®æ”¹çš„å•†å“å±æ€§ï¼šï¼ˆ1.ä»·æ ¼ 2.æè¿°ï¼‰ ";
 	cin.sync();
 	while (getline(cin, gchoose)) {
-		if (gchoose.length() > 1 ) {
-			cout << "ÊäÈëÓĞÎó£¡£¡ÇëÖØĞÂÊäÈë£¡£¡" << endl;
-			cout << "ÇëÊäÈëĞèÒªĞŞ¸ÄµÄÉÌÆ·ÊôĞÔ£º£¨1.¼Û¸ñ 2.ÃèÊö£© ";
+		if (gchoose.length() > 1) {
+			cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼è¯·é‡æ–°è¾“å…¥ï¼ï¼" << endl;
+			cout << "è¯·è¾“å…¥éœ€è¦ä¿®æ”¹çš„å•†å“å±æ€§ï¼šï¼ˆ1.ä»·æ ¼ 2.æè¿°ï¼‰ ";
 			cin.sync();
 			continue;
 		}
 		if (gchoose != "1" && gchoose != "2") {
-			cout << "ÊäÈëÓĞÎó£¡£¡ÇëÖØĞÂÊäÈë£¡£¡" << endl;
-			cout << "ÇëÊäÈëĞèÒªĞŞ¸ÄµÄÉÌÆ·ÊôĞÔ£º£¨1.¼Û¸ñ 2.ÃèÊö£© ";
+			cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼è¯·é‡æ–°è¾“å…¥ï¼ï¼" << endl;
+			cout << "è¯·è¾“å…¥éœ€è¦ä¿®æ”¹çš„å•†å“å±æ€§ï¼šï¼ˆ1.ä»·æ ¼ 2.æè¿°ï¼‰ ";
 			cin.sync();
 			continue;
 		}
-		//ĞŞ¸ÄÃèÊö
+		//ä¿®æ”¹æè¿°
 		if (gchoose == "2") {
-			cout << "ÇëÊäÈëĞŞ¸ÄÉÌÆ·µÄÃèÊö£º ";
+			cout << "è¯·è¾“å…¥ä¿®æ”¹å•†å“çš„æè¿°ï¼š ";
 			string desci;
 			cin.sync();
 			getline(cin, desci);
-			
-			cout << "ÇëÈ·¶¨ÉÌÆ·ĞÅÏ¢ÎŞÎó£¡£¡" << endl;
+
+			cout << "è¯·ç¡®å®šå•†å“ä¿¡æ¯æ— è¯¯ï¼ï¼" << endl;
 			cout << "**********************************************" << endl;
-			cout << "ÉÌÆ·Ãû³Æ£º" << gID << endl;
-			cout << "ÉÌÆ·¼Û¸ñ£º" << (*it)->commodityName << endl;
-			cout << "ÉÌÆ·ÊıÁ¿£º" << (*it)->price << endl;
-			cout << "ÉÌÆ·ÃèÊö£º" << desci << endl;
+			cout << "å•†å“åç§°ï¼š" << gID << endl;
+			cout << "å•†å“ä»·æ ¼ï¼š" << (*it)->commodityName << endl;
+			cout << "å•†å“æ•°é‡ï¼š" << (*it)->price << endl;
+			cout << "å•†å“æè¿°ï¼š" << desci << endl;
 			cout << "**********************************************" << endl;
 
-			cout << "È·¶¨ĞŞ¸Ä£¿(y/n) ";
+			cout << "ç¡®å®šä¿®æ”¹ï¼Ÿ(y/n) ";
 			string judge;
 			cin.sync();
 			getline(cin, judge);
 
-			//---ĞŞ¸Ä²¢½øĞĞÎÄ¼şĞ´Èë
+			//---ä¿®æ”¹å¹¶è¿›è¡Œæ–‡ä»¶å†™å…¥
 			if (judge != "y") {
-				cout << "ÒÑÈ¡ÏûĞŞ¸Ä¡£" << endl;
+				cout << "å·²å–æ¶ˆä¿®æ”¹ã€‚" << endl;
 				system("pause");
 				system("cls");
 				return;
@@ -793,61 +795,61 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 				string sqlstr = SQLmodify_goodsDescr(desci, (*it)->commodityID);
 				//analySQL(sqlstr1);
 
-				//½øĞĞĞŞ¸Ä
+				//è¿›è¡Œä¿®æ”¹
 				(*it)->description = desci;
 				saveGOOD(gdvec);
-				cout << "ĞŞ¸Ä³É¹¦£¡£¡" << endl;
+				cout << "ä¿®æ”¹æˆåŠŸï¼ï¼" << endl;
 				system("pause");
 				system("cls");
 				return;
 			}
 
 		}
-		//ĞŞ¸Ä¼Û¸ñ
+		//ä¿®æ”¹ä»·æ ¼
 		if (gchoose == "1") {
-			cout << "ÇëÊäÈëĞŞ¸ÄÉÌÆ·µÄ¼Û¸ñ£º£¨ĞèÒªÒ»Î»Ğ¡Êı£© ";
+			cout << "è¯·è¾“å…¥ä¿®æ”¹å•†å“çš„ä»·æ ¼ï¼šï¼ˆéœ€è¦ä¸€ä½å°æ•°ï¼‰ ";
 			string prc;
 			cin.sync();
 			getline(cin, prc);
 
-			//ÅĞ¶ÏÊäÈëÊÇ·ñÎªÊı×Ö
+			//åˆ¤æ–­è¾“å…¥æ˜¯å¦ä¸ºæ•°å­—
 			if (!isNumber(prc)) {
-				cout << "ÊäÈëÓĞÎó£¡£¡ĞŞ¸ÄÊ§°Ü£¡£¡" << endl;
+				cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼ä¿®æ”¹å¤±è´¥ï¼ï¼" << endl;
 				system("pause");
 				system("cls");
 				return;
 			}
 
-			//ÅĞ¶ÏÊÇ·ñÎª±£ÁôÒ»Î»Ğ¡Êı,ÏÈÕÒµ½Ğ¡Êıµã£¬ÔÙ½øĞĞ³¤¶ÈÏà¼õ
+			//åˆ¤æ–­æ˜¯å¦ä¸ºä¿ç•™ä¸€ä½å°æ•°,å…ˆæ‰¾åˆ°å°æ•°ç‚¹ï¼Œå†è¿›è¡Œé•¿åº¦ç›¸å‡
 			int i = 0;
 			for (i; i < prc.length(); i++) {
 				if (prc[i] == '.') break;
 			}
 			if (prc.length() - i - 1 > 1) {
-				//³¬³öĞ¡ÊıÎ»³¤¶È
-				cout << "ÊäÈë³¬³öĞ¡ÊıÎ»³¤¶È£¡£¡ĞŞ¸ÄÊ§°Ü£¡£¡" << endl;
+				//è¶…å‡ºå°æ•°ä½é•¿åº¦
+				cout << "è¾“å…¥è¶…å‡ºå°æ•°ä½é•¿åº¦ï¼ï¼ä¿®æ”¹å¤±è´¥ï¼ï¼" << endl;
 				system("pause");
 				system("cls");
 				return;
 			}
 
 
-			cout << "ÇëÈ·¶¨ÉÌÆ·ĞÅÏ¢ÎŞÎó£¡£¡" << endl;
+			cout << "è¯·ç¡®å®šå•†å“ä¿¡æ¯æ— è¯¯ï¼ï¼" << endl;
 			cout << "*****************************************" << endl;
-			cout << "ÉÌÆ·Ãû³Æ£º" << gID << endl;
-			cout << "ÉÌÆ·¼Û¸ñ£º" << (*it)->commodityName << endl;
-			cout << "ÉÌÆ·ÊıÁ¿£º" << prc << endl;
-			cout << "ÉÌÆ·ÃèÊö£º" << (*it)->description << endl;
+			cout << "å•†å“åç§°ï¼š" << gID << endl;
+			cout << "å•†å“ä»·æ ¼ï¼š" << (*it)->commodityName << endl;
+			cout << "å•†å“æ•°é‡ï¼š" << prc << endl;
+			cout << "å•†å“æè¿°ï¼š" << (*it)->description << endl;
 			cout << "*****************************************" << endl;
 
-			cout << "È·¶¨ĞŞ¸Ä£¿(y/n) ";
+			cout << "ç¡®å®šä¿®æ”¹ï¼Ÿ(y/n) ";
 			string judge;
 			cin.sync();
 			getline(cin, judge);
 
-			//---ĞŞ¸Ä²¢½øĞĞÎÄ¼şĞ´Èë
+			//---ä¿®æ”¹å¹¶è¿›è¡Œæ–‡ä»¶å†™å…¥
 			if (judge != "y") {
-				cout << "ÒÑÈ¡ÏûĞŞ¸Ä¡£" << endl;
+				cout << "å·²å–æ¶ˆä¿®æ”¹ã€‚" << endl;
 				system("pause");
 				system("cls");
 				return;
@@ -858,10 +860,10 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 				string sqlstr = SQLmodify_goodsPrice(prc, (*it)->commodityID);
 				//analySQL(sqlstr1);
 
-				//½øĞĞĞŞ¸Ä
+				//è¿›è¡Œä¿®æ”¹
 				(*it)->price = prc;
 				saveGOOD(gdvec);
-				cout << "ĞŞ¸Ä³É¹¦£¡£¡" << endl;
+				cout << "ä¿®æ”¹æˆåŠŸï¼ï¼" << endl;
 				system("pause");
 				system("cls");
 				return;
@@ -870,34 +872,34 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 	}
 }
 
-//ÏÂ¼ÜÉÌÆ·
+//ä¸‹æ¶å•†å“
 void Seller::removeGOODS(vector<Goods*>& gdvec) {
 
 	cout << endl;
 
 	string gID;
 
-	cout << "ÇëÊäÈëĞèÒªĞŞ¸ÄµÄÉÌÆ·ID£º";
+	cout << "è¯·è¾“å…¥éœ€è¦ä¿®æ”¹çš„å•†å“IDï¼š";
 	cin.sync();
 	getline(cin, gID);
 
-	//ÀûÓÃiteratorÕÒµ½ÉÌÆ·ËùÔÚÎ»ÖÃ
+	//åˆ©ç”¨iteratoræ‰¾åˆ°å•†å“æ‰€åœ¨ä½ç½®
 	vector<Goods*>::iterator it = gdvec.begin();
 	for (it; it != gdvec.end(); it++) {
 		if ((*it)->commodityID == gID && (*it)->sellerID == this->userID) break;
 	}
 	if (it == gdvec.end()) {
-		cout << "ÎŞ´ËÉÌÆ·£¡£¡" << endl;
+		cout << "æ— æ­¤å•†å“ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "È·¶¨ÏÂ¼Ü¸ÃÉÌÆ·£¿" << endl;
+	cout << "ç¡®å®šä¸‹æ¶è¯¥å•†å“ï¼Ÿ" << endl;
 	cout << endl;
 	cout << "************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÉÏ¼ÜÊ±¼ä" << setw(20) << "ÉÌÆ·×´Ì¬" << setw(20) << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "ä¸Šæ¶æ—¶é—´" << setw(20) << "å•†å“çŠ¶æ€" << setw(20) << endl;
 	cout << left << setw(20) << (*it)->commodityID << setw(20)
 		<< (*it)->commodityName << setw(20)
 		<< (*it)->price << setw(20)
@@ -906,14 +908,14 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 	cout << "************************************************************************************************************************" << endl;
 	cout << endl;
 
-	cout << "ÇëÑ¡Ôñ£º(y/n) ";
+	cout << "è¯·é€‰æ‹©ï¼š(y/n) ";
 	string judge;
 	cin.sync();
 	getline(cin, judge);
 
-	//---ĞŞ¸Ä²¢½øĞĞÎÄ¼şĞ´Èë
+	//---ä¿®æ”¹å¹¶è¿›è¡Œæ–‡ä»¶å†™å…¥
 	if (judge != "y") {
-		cout << "ÒÑÈ¡ÏûĞŞ¸Ä¡£" << endl;
+		cout << "å·²å–æ¶ˆä¿®æ”¹ã€‚" << endl;
 		system("pause");
 		system("cls");
 		return;
@@ -924,17 +926,17 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 		string sqlstr = SQLremove_goods(SELLER, (*it)->commodityID);
 		//analySQL(sqlstr1);
 
-		//½øĞĞĞŞ¸Ä
-		(*it)->state = "ÒÑÏÂ¼Ü";
+		//è¿›è¡Œä¿®æ”¹
+		(*it)->state = "å·²ä¸‹æ¶";
 		saveGOOD(gdvec);
-		cout << "ÏÂ¼Ü³É¹¦£¡£¡" << endl;
+		cout << "ä¸‹æ¶æˆåŠŸï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 };
 
-//²é¿´ÀúÊ·¶©µ¥
+//æŸ¥çœ‹å†å²è®¢å•
 void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
 
 	//SSSQQQLLL
@@ -943,8 +945,8 @@ void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
 
 	cout << endl;
 	cout << "************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "¶©µ¥ID" << setw(20) << "ÉÌÆ·ID" << setw(20) << "½»Ò×µ¥¼Û" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "½»Ò×Ê±¼ä" << setw(20) << "Âò¼ÒID" << setw(20) << endl;
+	cout << left << setw(20) << "è®¢å•ID" << setw(20) << "å•†å“ID" << setw(20) << "äº¤æ˜“å•ä»·" << setw(20)
+		<< "æ•°é‡" << setw(20) << "äº¤æ˜“æ—¶é—´" << setw(20) << "ä¹°å®¶ID" << setw(20) << endl;
 
 	for (vector<Order*>::iterator it = orvec.begin(); it != orvec.end(); it++) {
 		if ((*it)->sellerID == ID) {
@@ -964,18 +966,18 @@ void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
 	system("cls");
 };
 
-//·µ»ØÓÃ»§Ö÷½çÃæ
+//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 void Seller::exitSELLER() {
 	system("pause");
 	system("cls");
 };
 
 
-//---------------------ĞÅÏ¢¹ÜÀí²Ëµ¥
+//---------------------ä¿¡æ¯ç®¡ç†èœå•
 void User::showINFOMenu() {
-	cout << "¡ª¡ª¡ª¡ª    ÏÖÔÚ´¦ÓÚÓÃ»§¸öÈËĞÅÏ¢¹ÜÀíÄ£Ê½    ¡ª¡ª¡ª¡ª" << endl;
+	cout << "â€”â€”â€”â€”    ç°åœ¨å¤„äºç”¨æˆ·ä¸ªäººä¿¡æ¯ç®¡ç†æ¨¡å¼    â€”â€”â€”â€”" << endl;
 	cout << "==================================================" << endl;
-	cout << "1.²é¿´ĞÅÏ¢  2.ĞŞ¸ÄĞÅÏ¢  3.³äÖµ  4.·µ»ØÓÃ»§Ö÷½çÃæ" << endl;
+	cout << "1.æŸ¥çœ‹ä¿¡æ¯  2.ä¿®æ”¹ä¿¡æ¯  3.å……å€¼  4.è¿”å›ç”¨æˆ·ä¸»ç•Œé¢" << endl;
 	cout << "==================================================" << endl;
 
 };
@@ -983,16 +985,16 @@ void User::showINFOMenu() {
 void User::GetUserinfo(vector<Order*>& orvec) {
 
 	cout << endl;
-	//»ñÈ¡Óà¶îËãÊ½²¢½øĞĞ¼ÆËã
+	//è·å–ä½™é¢ç®—å¼å¹¶è¿›è¡Œè®¡ç®—
 	string Balc = createBlcStr(orvec, this->userID);
 	double blc = useCal(Balc);
 	cout << endl;
 
 	cout << "==============================" << endl;
-	cout << "ÓÃ»§Ãû£º"<<this->username << endl;
-	cout << "ÁªÏµ·½Ê½£º"<<this->phoneNumber << endl;
-	cout << "µØÖ·£º"<<this->address << endl;
-	cout << "Ç®°üÓà¶î£º"<<blc << endl;
+	cout << "ç”¨æˆ·åï¼š" << this->username << endl;
+	cout << "è”ç³»æ–¹å¼ï¼š" << this->phoneNumber << endl;
+	cout << "åœ°å€ï¼š" << this->address << endl;
+	cout << "é’±åŒ…ä½™é¢ï¼š" << blc << endl;
 	cout << "==============================" << endl;
 	system("pause");
 	system("cls");
@@ -1000,25 +1002,25 @@ void User::GetUserinfo(vector<Order*>& orvec) {
 };
 
 void User::ModifyUserinfo(vector<User*> vec) {
-	
+
 	string choice;
 	bool judge = true;
 
-	//½øÈëÑ­»·
+	//è¿›å…¥å¾ªç¯
 	while (judge) {
-		//²Ëµ¥Õ¹Ê¾
+		//èœå•å±•ç¤º
 		cout << "===================================================" << endl;
-		cout << "===============ÇëÊäÈëÒªĞŞ¸ÄµÄĞÅÏ¢==================" << endl;
-		cout << "====== 1.ÓÃ»§Ãû  2.ÁªÏµ·½Ê½  3.µØÖ·  4.È¡ÏûĞŞ¸Ä  ==" << endl;
+		cout << "===============è¯·è¾“å…¥è¦ä¿®æ”¹çš„ä¿¡æ¯==================" << endl;
+		cout << "====== 1.ç”¨æˆ·å  2.è”ç³»æ–¹å¼  3.åœ°å€  4.å–æ¶ˆä¿®æ”¹  ==" << endl;
 		cout << "===================================================" << endl;
 
-		//ÊäÈëÑ¡Ôñ
-		cout << "ÊäÈëÑ¡Ïî£º";
+		//è¾“å…¥é€‰æ‹©
+		cout << "è¾“å…¥é€‰é¡¹ï¼š";
 		cin.sync();
 		getline(cin, choice);
 
 		if (size(choice) > 1) {
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
 			system("cls");
 			continue;
@@ -1026,51 +1028,51 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 		switch (choice[0])
 		{
-		case '1':	//ĞŞ¸ÄÓÃ»§Ãû,×¢ÒâÓÃ»§Ãû²»ÄÜÏàÍ¬
+		case '1':	//ä¿®æ”¹ç”¨æˆ·å,æ³¨æ„ç”¨æˆ·åä¸èƒ½ç›¸åŒ
 		{
-			cout << "ÇëÊäÈëĞŞ¸ÄºóµÄÓÃ»§Ãû£º";
+			cout << "è¯·è¾“å…¥ä¿®æ”¹åçš„ç”¨æˆ·åï¼š";
 			string Uname;
 			cin.sync();
 			getline(cin, Uname);
 
-			//½øĞĞÓÃ»§ÃûµÄ±éÀú
-			for (vector<User*>::iterator it =vec.begin(); it != vec.end(); it++) {
+			//è¿›è¡Œç”¨æˆ·åçš„éå†
+			for (vector<User*>::iterator it = vec.begin(); it != vec.end(); it++) {
 				if (Uname == (*it)->username) {
-					//Ê§°Ü£¬ÒÑ´æÔÚÓÃ»§Ãû
-					cout << "×¢²áÊ§°Ü£¡£¡ÒÑ´æÔÚÓÃ»§Ãû£¡£¡" << endl;
+					//å¤±è´¥ï¼Œå·²å­˜åœ¨ç”¨æˆ·å
+					cout << "æ³¨å†Œå¤±è´¥ï¼ï¼å·²å­˜åœ¨ç”¨æˆ·åï¼ï¼" << endl;
 					system("pause");
 					system("cls");
 					return;
 				}
 			}
-			
-			
-			//³É¹¦ÔòĞŞ¸Ä
+
+
+			//æˆåŠŸåˆ™ä¿®æ”¹
 			this->username = Uname;
-			cout << "ĞŞ¸Ä³É¹¦£¡£¡" << endl;
+			cout << "ä¿®æ”¹æˆåŠŸï¼ï¼" << endl;
 			judge = false;
 			system("pause");
 			system("cls");
 		}
-			break;
-		case '2':	//ĞŞ¸ÄÁªÏµ·½Ê½
+		break;
+		case '2':	//ä¿®æ”¹è”ç³»æ–¹å¼
 		{
-			cout << "ÇëÊäÈëĞŞ¸ÄºóµÄÁªÏµ·½Ê½£º";
+			cout << "è¯·è¾“å…¥ä¿®æ”¹åçš„è”ç³»æ–¹å¼ï¼š";
 			string number;
 			cin.sync();
 			getline(cin, number);
 
 			this->phoneNumber = number;
-			cout << "ĞŞ¸Ä³É¹¦£¡£¡" << endl;
+			cout << "ä¿®æ”¹æˆåŠŸï¼ï¼" << endl;
 			judge = false;
 
 			system("pause");
 			system("cls");
 		}
-			break;
-		case '3':	//ĞŞ¸ÄµØÖ·
+		break;
+		case '3':	//ä¿®æ”¹åœ°å€
 		{
-			cout << "ÇëÊäÈëĞŞ¸ÄºóµÄµØÖ·£º";
+			cout << "è¯·è¾“å…¥ä¿®æ”¹åçš„åœ°å€ï¼š";
 			string addr;
 			cin.sync();
 			getline(cin, addr);
@@ -1078,14 +1080,14 @@ void User::ModifyUserinfo(vector<User*> vec) {
 			this->address = addr;
 
 
-			cout << "ĞŞ¸Ä³É¹¦£¡£¡" << endl;
+			cout << "ä¿®æ”¹æˆåŠŸï¼ï¼" << endl;
 			judge = false;
 
 			system("pause");
 			system("cls");
 
 		}
-			break;
+		break;
 		case '4':
 		{
 			judge = false;
@@ -1093,11 +1095,11 @@ void User::ModifyUserinfo(vector<User*> vec) {
 			system("pause");
 			system("cls");
 		}
-			break;
+		break;
 		default:
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
-			system("cls"); //ÇåÆÁ
+			system("cls"); //æ¸…å±
 			break;
 		}
 	}
@@ -1109,46 +1111,46 @@ void User::ModifyUserinfo(vector<User*> vec) {
 void User::Topup_Userbalance() {
 
 	string money;
-	cout << "ÇëÊäÈëÒª³äÖµµÄ½ğ¶î£º£¨ÒªÇóÒ»Î»Ğ¡Êı£© ";
+	cout << "è¯·è¾“å…¥è¦å……å€¼çš„é‡‘é¢ï¼šï¼ˆè¦æ±‚ä¸€ä½å°æ•°ï¼‰ ";
 	cin.sync();
 	getline(cin, money);
 
-	//if (!(cin >> money).get())			//cin>>µÄ½áÊø·û£¬»Ø³µ£¬»òÕß¿Õ¸ñ¶¼¿ÉÒÔ£¬µ«ÊÇµ±cin¶ÁÈ¡½áÊøºó£¬cinµÄ½áÊø·û»¹»áÔÙ»º³åÇøÖĞ´æÔÚ£¬²¢ÈÃÏÂ´ÎĞèÒª¶ÁÈ¡Ê±½øĞĞ¶ÁÈ¡
-	//	cout << "ÊäÈëÓĞÎó£¡£¡" << endl;	//Ìí¼ÓÁË.get(),ÓÃcin.get()À´Ïû³ı»º³åÇøÖĞ²ĞÁôµÄ¡®\n¡¯
-	//cin.ignore(numeric_limits<std::streamsize>::max());				//Çå¿Õ»º³åÇø(Çå³ıÊäÈë»º³åÇøµÄËùÓĞÄÚÈİ) //·ÅÆ¨
+	//if (!(cin >> money).get())			//cin>>çš„ç»“æŸç¬¦ï¼Œå›è½¦ï¼Œæˆ–è€…ç©ºæ ¼éƒ½å¯ä»¥ï¼Œä½†æ˜¯å½“cinè¯»å–ç»“æŸåï¼Œcinçš„ç»“æŸç¬¦è¿˜ä¼šå†ç¼“å†²åŒºä¸­å­˜åœ¨ï¼Œå¹¶è®©ä¸‹æ¬¡éœ€è¦è¯»å–æ—¶è¿›è¡Œè¯»å–
+	//	cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼" << endl;	//æ·»åŠ äº†.get(),ç”¨cin.get()æ¥æ¶ˆé™¤ç¼“å†²åŒºä¸­æ®‹ç•™çš„â€˜\nâ€™
+	//cin.ignore(numeric_limits<std::streamsize>::max());				//æ¸…ç©ºç¼“å†²åŒº(æ¸…é™¤è¾“å…¥ç¼“å†²åŒºçš„æ‰€æœ‰å†…å®¹) //æ”¾å±
 
-	//ÅĞ¶ÏÊäÈëÊÇ·ñÎªÊı×Ö
+	//åˆ¤æ–­è¾“å…¥æ˜¯å¦ä¸ºæ•°å­—
 	if (!isNumber(money)) {
-		cout << "ÊäÈëÓĞÎó£¡£¡³äÖµÊ§°Ü£¡£¡" << endl;
+		cout << "è¾“å…¥æœ‰è¯¯ï¼ï¼å……å€¼å¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	
-	////ÅĞ¶ÏÊÇ·ñÎª±£ÁôÒ»Î»Ğ¡Êı,ÏÈÕÒµ½Ğ¡Êıµã£¬ÔÙ½øĞĞ³¤¶ÈÏà¼õ
+
+	////åˆ¤æ–­æ˜¯å¦ä¸ºä¿ç•™ä¸€ä½å°æ•°,å…ˆæ‰¾åˆ°å°æ•°ç‚¹ï¼Œå†è¿›è¡Œé•¿åº¦ç›¸å‡
 	int i = 0;
 	for (i; i < money.length(); i++) {
 		if (money[i] == '.') break;
 	}
 	if (money.length() - i - 1 > 1) {
-		//³¬³öĞ¡ÊıÎ»³¤¶È
-		cout << "ÊäÈë³¬³öĞ¡ÊıÎ»³¤¶È£¡£¡³äÖµÊ§°Ü£¡£¡" << endl;
+		//è¶…å‡ºå°æ•°ä½é•¿åº¦
+		cout << "è¾“å…¥è¶…å‡ºå°æ•°ä½é•¿åº¦ï¼ï¼å……å€¼å¤±è´¥ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//ÖÕÓÚ¸ãºÃ
+	//ç»ˆäºæå¥½
 	this->balance += stod(money);
 
-	cout << "³äÖµ³É¹¦£¡£¡" << endl;
+	cout << "å……å€¼æˆåŠŸï¼ï¼" << endl;
 
 
-	//·ÖÁ½ÖÖÇé¿ö£ºÃ»ÓĞÎÄ¼şºÍÓĞÎÄ¼şÊ±
-	//ÒÔĞ´ÈëºÍ×·¼Ó·½Ê½´ò¿ªÎÄ¼ş
+	//åˆ†ä¸¤ç§æƒ…å†µï¼šæ²¡æœ‰æ–‡ä»¶å’Œæœ‰æ–‡ä»¶æ—¶
+	//ä»¥å†™å…¥å’Œè¿½åŠ æ–¹å¼æ‰“å¼€æ–‡ä»¶
 	ofstream ofs("balance.txt", ios::out | ios::app);
 	ifstream ifs("balance.txt", ios::in);
 
-	//ÄÃµ½µ±Ç°³äÖµµÄÏµÍ³Ê±¼ä
+	//æ‹¿åˆ°å½“å‰å……å€¼çš„ç³»ç»Ÿæ—¶é—´
 	struct tm* tm_ptr;
 	time_t the_time;
 	(void)time(&the_time);
@@ -1159,12 +1161,12 @@ void User::Topup_Userbalance() {
 	string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day);
 
 
-	//ÎŞÎÄ¼ş£¬½øĞĞ´´½¨
+	//æ— æ–‡ä»¶ï¼Œè¿›è¡Œåˆ›å»º
 	if (!ofs.is_open()) {
 		cout << "the balance txt open failed." << endl;
-		//ofs << setw(10) << setiosflags(ios::left) << "³äÖµÓÃ»§ID" 
-		//	<< setw(10) << setiosflags(ios::left) <<"³äÖµ½ğ¶î"
-		//	<< setw(30) << setiosflags(ios::left) <<"³äÖµÊ±¼ä" << endl;
+		//ofs << setw(10) << setiosflags(ios::left) << "å……å€¼ç”¨æˆ·ID" 
+		//	<< setw(10) << setiosflags(ios::left) <<"å……å€¼é‡‘é¢"
+		//	<< setw(30) << setiosflags(ios::left) <<"å……å€¼æ—¶é—´" << endl;
 
 		//ofs << setw(10) << setiosflags(ios::left) << this->userID 
 		//	<< setw(10) << setiosflags(ios::left) << money 
@@ -1184,19 +1186,19 @@ void User::Topup_Userbalance() {
 	}
 
 
-	//ÅĞ¶ÏÎÄ¼şÎª¿Õ(eof)
+	//åˆ¤æ–­æ–‡ä»¶ä¸ºç©º(eof)
 	char ch;
 	if (!ifs.get(ch)) {
-		ofs << left << setw(20) << "³äÖµÓÃ»§ID"
-			<< setw(20) << "³äÖµ½ğ¶î"
-			<< setw(30) << "³äÖµÊ±¼ä" << endl;
+		ofs << left << setw(20) << "å……å€¼ç”¨æˆ·ID"
+			<< setw(20) << "å……å€¼é‡‘é¢"
+			<< setw(30) << "å……å€¼æ—¶é—´" << endl;
 	}
-	//ÏÈÇ°ÒÑ¾­ÓĞÎÄ¼ş´æÔÚ
+	//å…ˆå‰å·²ç»æœ‰æ–‡ä»¶å­˜åœ¨
 	ofs << left << setw(20) << this->userID
 		<< setw(20) << money
 		<< setw(30) << theTime << endl;
 
-	//¹Ø±ÕÎÄ¼ş
+	//å…³é—­æ–‡ä»¶
 	ofs.close();
 	ifs.close();
 
@@ -1205,7 +1207,7 @@ void User::Topup_Userbalance() {
 };
 
 void User::exitINFO() {
-	cout << "»¶Ó­ÏÂ´ÎÊ¹ÓÃ£¡£¡" << endl;
+	cout << "æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨ï¼ï¼" << endl;
 	system("pause");
 	system("cls");
 	return;
@@ -1213,7 +1215,7 @@ void User::exitINFO() {
 
 
 
-//-----------------------Ğ­ÖúĞÔº¯Êı
+//-----------------------ååŠ©æ€§å‡½æ•°
 string GOODSIDback(int i) {
 
 	string kksk;
@@ -1251,9 +1253,9 @@ void saveGOOD(vector<Goods*> gdvec) {
 		return;
 	}
 
-	ofs << "ÉÌÆ·ID,Ãû³Æ,¼Û¸ñ,ÊıÁ¿,ÃèÊö,Âô¼ÒID,ÉÏ¼ÜÊ±¼ä,ÉÌÆ·×´Ì¬" << endl;
+	ofs << "å•†å“ID,åç§°,ä»·æ ¼,æ•°é‡,æè¿°,å–å®¶ID,ä¸Šæ¶æ—¶é—´,å•†å“çŠ¶æ€" << endl;
 
-	//ÓÃ»§vecĞ´Èë
+	//ç”¨æˆ·vecå†™å…¥
 	for (vector<Goods*>::iterator it = gdvec.begin(); it != gdvec.end(); it++) {
 		ofs << (*it)->commodityID << ","
 			<< (*it)->commodityName << ","
@@ -1277,9 +1279,9 @@ void saveORDER(vector<Order*> orvec) {
 		return;
 	}
 
-	ofs << "¶©µ¥ID,ÉÌÆ·ID,½»Ò×µ¥¼Û,ÊıÁ¿,½»Ò×Ê±¼ä,Âô¼ÒID,Âò¼ÒID" << endl;
+	ofs << "è®¢å•ID,å•†å“ID,äº¤æ˜“å•ä»·,æ•°é‡,äº¤æ˜“æ—¶é—´,å–å®¶ID,ä¹°å®¶ID" << endl;
 
-	//ÓÃ»§vecĞ´Èë
+	//ç”¨æˆ·vecå†™å…¥
 	for (vector<Order*>::iterator it = orvec.begin(); it != orvec.end(); it++) {
 		ofs << (*it)->orderID << ","
 			<< (*it)->commodityID << ","
@@ -1300,15 +1302,15 @@ bool isNumber(const string& str) {
 
 string createBlcStr(vector<Order*> orvec, string inID) {
 
-	//´ò¿ª³äÖµÎÄ¼ş£¬×¥È¡ÓÃ»§³äÖµÊı¾İ
+	//æ‰“å¼€å……å€¼æ–‡ä»¶ï¼ŒæŠ“å–ç”¨æˆ·å……å€¼æ•°æ®
 	ifstream ifs("balance.txt", ios::in);
-	//Î´ÓĞÎÄ¼ş
+	//æœªæœ‰æ–‡ä»¶
 	if (!ifs.is_open()) {
 		return "0.0";
 	}
-	vector<string> AddBlc; //´¢´æ³äÖµÊı
+	vector<string> AddBlc; //å‚¨å­˜å……å€¼æ•°
 	string str;
-	//È¥µôÃ»ÓÃµÄµÚÒ»ĞĞ
+	//å»æ‰æ²¡ç”¨çš„ç¬¬ä¸€è¡Œ
 	getline(ifs, str);
 	string UID, Balc, BTime;
 	while (ifs >> UID && ifs >> Balc && ifs >> BTime) {
@@ -1319,24 +1321,24 @@ string createBlcStr(vector<Order*> orvec, string inID) {
 	string rel1;
 	for (vector<string>::iterator it = AddBlc.begin(); it != AddBlc.end(); it++) {
 		rel1 += (*it);
-		if (it + 1 != AddBlc.end()) rel1 += " + "; //¿ÉÄÜĞèÒª±£ÁôÄ©Î²¼ÓºÅ
+		if (it + 1 != AddBlc.end()) rel1 += " + "; //å¯èƒ½éœ€è¦ä¿ç•™æœ«å°¾åŠ å·
 	}
 
 
-	//±éÀú¶©µ¥ÎÄ¼ş£¬Éú³É¶©µ¥Ê½×Ó
+	//éå†è®¢å•æ–‡ä»¶ï¼Œç”Ÿæˆè®¢å•å¼å­
 	string bbb;
 	string sss;
-	vector<string> BuyPrc; //´¢´æÂò¼ÒÊı
-	vector<string> SelPrc; //´¢´æÂô¼ÒÊı
+	vector<string> BuyPrc; //å‚¨å­˜ä¹°å®¶æ•°
+	vector<string> SelPrc; //å‚¨å­˜å–å®¶æ•°
 
 	vector<Order*>::iterator ot = orvec.begin();
 	for (ot; ot != orvec.end(); ot++) {
-		//Âò¼Ò¼õÓà¶î
+		//ä¹°å®¶å‡ä½™é¢
 		if ((*ot)->buyerID == inID) {
 			bbb = (*ot)->unitPrice + " * " + (*ot)->number;
 			BuyPrc.push_back(bbb);
 		}
-		//Âô¼Ò¼ÓÓà¶î
+		//å–å®¶åŠ ä½™é¢
 		if ((*ot)->sellerID == inID) {
 			sss = (*ot)->unitPrice + " * " + (*ot)->number;
 			SelPrc.push_back(sss);
@@ -1346,13 +1348,13 @@ string createBlcStr(vector<Order*> orvec, string inID) {
 	string rel2;
 	for (vector<string>::iterator bt = BuyPrc.begin(); bt != BuyPrc.end(); bt++) {
 		rel2 += (*bt);
-		if (bt + 1 != BuyPrc.end()) rel2 += " - "; //¿ÉÄÜĞèÒª±£ÁôÄ©Î²¼ÓºÅ
+		if (bt + 1 != BuyPrc.end()) rel2 += " - "; //å¯èƒ½éœ€è¦ä¿ç•™æœ«å°¾åŠ å·
 	}
 
 	string rel3;
 	for (vector<string>::iterator st = SelPrc.begin(); st != SelPrc.end(); st++) {
 		rel3 += (*st);
-		if (st + 1 != SelPrc.end()) rel3 += " + "; //¿ÉÄÜĞèÒª±£ÁôÄ©Î²¼ÓºÅ
+		if (st + 1 != SelPrc.end()) rel3 += " + "; //å¯èƒ½éœ€è¦ä¿ç•™æœ«å°¾åŠ å·
 	}
 
 

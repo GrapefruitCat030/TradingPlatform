@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include<iostream>
 #include<fstream>
 #include<vector>
@@ -16,68 +16,67 @@ using namespace std;
 
 class Admin {
 public:
-	//ÓÃ»§ÊýÁ¿
+	//ç”¨æˆ·æ•°é‡
 	int numbUser;
-	//ÉÌÆ·ÊýÁ¿
+	//å•†å“æ•°é‡
 	int numbGoods;
-	//¶©µ¥ÊýÁ¿
+	//è®¢å•æ•°é‡
 	int numbOrder;
 
-	//ÓÃ»§ÁÐ±íÏòÁ¿
+	//ç”¨æˆ·åˆ—è¡¨å‘é‡
 	vector <User*> userVec;
 
-	//ÉÌÆ·ÁÐ±íÏòÁ¿
+	//å•†å“åˆ—è¡¨å‘é‡
 	vector <Goods*> goodsVec;
 
-	//¶©µ¥ÁÐ±íÏòÁ¿
+	//è®¢å•åˆ—è¡¨å‘é‡
 	vector <Order*> orderVec;
 
-	
+
 
 	Admin();
 	~Admin();
 
-	//****************ÒÔÏÂÎª¹ÜÀíÔ±µÄ¹¦ÄÜº¯Êý³ÉÔ±*******************//
+	//****************ä»¥ä¸‹ä¸ºç®¡ç†å‘˜çš„åŠŸèƒ½å‡½æ•°æˆå‘˜*******************//
 
-	//¹ÜÀíÔ±²Ëµ¥ÏÔÊ¾
+	//ç®¡ç†å‘˜èœå•æ˜¾ç¤º
 	void show_Menu();
-	//²é¿´ËùÓÐÉÌÆ·
+	//æŸ¥çœ‹æ‰€æœ‰å•†å“
 	void Goods_show();
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	void searchGoods();
-	//ÏÂ¼ÜÉÌÆ·
+	//ä¸‹æž¶å•†å“
 	void removeGoods();
-	//²é¿´ËùÓÐ¶©µ¥
+	//æŸ¥çœ‹æ‰€æœ‰è®¢å•
 	void Order_show();
-	//²é¿´ËùÓÐÓÃ»§
+	//æŸ¥çœ‹æ‰€æœ‰ç”¨æˆ·
 	void User_show();
-	//·â½ûÓÃ»§
+	//å°ç¦ç”¨æˆ·
 	void banUser();
-	//ÍË³ö£¨×¢Ïú£©
+	//é€€å‡ºï¼ˆæ³¨é”€ï¼‰
 	void exitAD();
-	//¹ÜÀíÔ±Ä£Ê½£¬ÓÃÀ´½ÓÈë¹ÜÀíÔ±µÇÂ¼ºóµÄÄ£Ê½
+	//ç®¡ç†å‘˜æ¨¡å¼ï¼Œç”¨æ¥æŽ¥å…¥ç®¡ç†å‘˜ç™»å½•åŽçš„æ¨¡å¼
 	void Module_Admin();
 
 
 	/**************************/
 
-	//ÓÃ»§ÕûÌåÕûÌåÕûÌå³õÊ¼»¯
+	//ç”¨æˆ·æ•´ä½“æ•´ä½“æ•´ä½“åˆå§‹åŒ–
 	void USERINIT();
 
-	//ÉÌÆ·ÎÄ¼þÕûÌåÕûÌå³õÊ¼»¯
+	//å•†å“æ–‡ä»¶æ•´ä½“æ•´ä½“åˆå§‹åŒ–
 	void GOODSINIT();
 
-	//¶©µ¥ÎÄ¼þÕûÌå³õÊ¼»¯
+	//è®¢å•æ–‡ä»¶æ•´ä½“åˆå§‹åŒ–
 	void ORDERINIT();
 
-	//ÓÃ»§ÎÄ¼þ±£´æ
+	//ç”¨æˆ·æ–‡ä»¶ä¿å­˜
 	void saveUSERFILE();
 
-	//ÉÌÆ·ÎÄ¼þ±£´æ
+	//å•†å“æ–‡ä»¶ä¿å­˜
 	void saveGOODFILE();
-	
-	//****************ÒÔÏÂÎª¹ÜÀíÔ±µÄÊý¾Ý³ÉÔ±*******************//
+
+	//****************ä»¥ä¸‹ä¸ºç®¡ç†å‘˜çš„æ•°æ®æˆå‘˜*******************//
 
 
 };
-

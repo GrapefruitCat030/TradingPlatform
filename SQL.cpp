@@ -1,9 +1,9 @@
-#include"SQL.h"
+ï»¿#include"SQL.h"
 
-//Òª×¢Òâ£¬Éú³ÉÓÃÀ´´¢´æµÄÓï¾ä·ÖÁ½¶Î£¬ºó¶ÎÓÃÀ´·µ»Ø½âÎö
+//è¦æ³¨æ„ï¼Œç”Ÿæˆç”¨æ¥å‚¨å­˜çš„è¯­å¥åˆ†ä¸¤æ®µï¼Œåæ®µç”¨æ¥è¿”å›è§£æ
 
-//²é¿´ËùÓĞ(¿É¹ºÂòµÄ/·¢²¼µÄ)ÉÌÆ·(AD,B,S)
-string SQLshow_goods(int i,string ID) {
+//æŸ¥çœ‹æ‰€æœ‰(å¯è´­ä¹°çš„/å‘å¸ƒçš„)å•†å“(AD,B,S)
+string SQLshow_goods(int i, string ID) {
 	string front = backTime();
 	string behind;
 	switch (i)
@@ -11,15 +11,15 @@ string SQLshow_goods(int i,string ID) {
 	case ADMIN: {
 		behind = "SELECT * FROM commodity";
 	}
-		break;
+			  break;
 	case BUYER: {
-		behind = "SELECT * FROM commodity WHERE ÉÌÆ·×´Ì¬ CONTAINS ÏúÊÛÖĞ";
+		behind = "SELECT * FROM commodity WHERE å•†å“çŠ¶æ€ CONTAINS é”€å”®ä¸­";
 	}
-		break;
+			  break;
 	case SELLER: {
-		behind = "SELECT * FROM commodity WHERE Âô¼ÒID CONTAINS "+ ID;
+		behind = "SELECT * FROM commodity WHERE å–å®¶ID CONTAINS " + ID;
 	}
-		break;
+			   break;
 	default:
 		break;
 	}
@@ -29,7 +29,7 @@ string SQLshow_goods(int i,string ID) {
 	return behind;
 }
 
-//ËÑË÷(¿É¹ºÂòµÄ)ÉÌÆ·(AD,B)
+//æœç´¢(å¯è´­ä¹°çš„)å•†å“(AD,B)
 string SQLsearch_goods(int i, string Name) {
 	string front = backTime();
 	string behind;
@@ -37,13 +37,13 @@ string SQLsearch_goods(int i, string Name) {
 	switch (i)
 	{
 	case ADMIN: {
-		behind = "SELECT * FROM commodity WHERE Ãû³Æ CONTAINS " + Name;
+		behind = "SELECT * FROM commodity WHERE åç§° CONTAINS " + Name;
 	}
-		break;
+			  break;
 	case BUYER: {
-		behind = "SELECT * FROM commodity WHERE Ãû³Æ CONTAINS " + Name;
+		behind = "SELECT * FROM commodity WHERE åç§° CONTAINS " + Name;
 	}
-		break;
+			  break;
 	default:
 		break;
 	}
@@ -55,7 +55,7 @@ string SQLsearch_goods(int i, string Name) {
 
 }
 
-//ÏÂ¼ÜÉÌÆ·(AD,S)
+//ä¸‹æ¶å•†å“(AD,S)
 string SQLremove_goods(int i, string ID) {
 	string front = backTime();
 	string behind;
@@ -63,11 +63,11 @@ string SQLremove_goods(int i, string ID) {
 	switch (i)
 	{
 	case ADMIN: {
-		behind = "UPDATE commodity SET ÉÌÆ·×´Ì¬ = ÒÑÏÂ¼Ü WHERE ÉÌÆ·ID = " + ID;
+		behind = "UPDATE commodity SET å•†å“çŠ¶æ€ = å·²ä¸‹æ¶ WHERE å•†å“ID = " + ID;
 	}
 			  break;
 	case SELLER: {
-		behind = "UPDATE commodity SET ÉÌÆ·×´Ì¬ = ÒÑÏÂ¼Ü WHERE ÉÌÆ·ID = " + ID;
+		behind = "UPDATE commodity SET å•†å“çŠ¶æ€ = å·²ä¸‹æ¶ WHERE å•†å“ID = " + ID;
 	}
 			   break;
 	default:
@@ -82,7 +82,7 @@ string SQLremove_goods(int i, string ID) {
 
 }
 
-//²é¿´ËùÓĞ¶©µ¥(AD,B,S)
+//æŸ¥çœ‹æ‰€æœ‰è®¢å•(AD,B,S)
 string SQLshow_order(int i, string ID) {
 	string front = backTime();
 	string behind;
@@ -93,11 +93,11 @@ string SQLshow_order(int i, string ID) {
 	}
 			  break;
 	case BUYER: {
-		behind = "SELECT * FROM order WHERE Âò¼ÒID CONTAINS " + ID;
+		behind = "SELECT * FROM order WHERE ä¹°å®¶ID CONTAINS " + ID;
 	}
 			  break;
 	case SELLER: {
-		behind = "SELECT * FROM order WHERE Âô¼ÒID CONTAINS " + ID;
+		behind = "SELECT * FROM order WHERE å–å®¶ID CONTAINS " + ID;
 	}
 			   break;
 	default:
@@ -109,7 +109,7 @@ string SQLshow_order(int i, string ID) {
 	return behind;
 }
 
-//²é¿´ËùÓĞÓÃ»§
+//æŸ¥çœ‹æ‰€æœ‰ç”¨æˆ·
 string SQLshow_user() {
 	string front = backTime();
 	string behind = "SELECT * FROM user";
@@ -121,10 +121,10 @@ string SQLshow_user() {
 
 }
 
-//·â½ûÓÃ»§
+//å°ç¦ç”¨æˆ·
 string SQLban_userGOOD(string ID) {
 	string front = backTime();
-	string behind = "UPDATE commodity SET ÉÌÆ·×´Ì¬ = ÒÑÏÂ¼Ü WHERE Âô¼ÒID = " + ID;
+	string behind = "UPDATE commodity SET å•†å“çŠ¶æ€ = å·²ä¸‹æ¶ WHERE å–å®¶ID = " + ID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -133,7 +133,7 @@ string SQLban_userGOOD(string ID) {
 }
 string SQLban_userUSER(string ID) {
 	string front = backTime();
-	string behind = "UPDATE user SET ÓÃ»§×´Ì¬ = ·â½û WHERE ÓÃ»§ID = " + ID;
+	string behind = "UPDATE user SET ç”¨æˆ·çŠ¶æ€ = å°ç¦ WHERE ç”¨æˆ·ID = " + ID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -142,14 +142,14 @@ string SQLban_userUSER(string ID) {
 }
 
 
-//--------------buyer¶îÍâ
+//--------------buyeré¢å¤–
 
-//¹ºÂòÉÌÆ·
+//è´­ä¹°å•†å“
 string SQLbuy_goodsOrder(string TID, string MID, string price, string numb, string TIME, string SID, string BID) {
 	string front = backTime();
 	string behind;
 
-	behind = "INSERT INTO order VALUES (" +TID + "," + MID + "," + price + "," + numb + "," + TIME + "," + SID + "," + BID + ")";
+	behind = "INSERT INTO order VALUES (" + TID + "," + MID + "," + price + "," + numb + "," + TIME + "," + SID + "," + BID + ")";
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -160,7 +160,7 @@ string SQLbuy_goodsGoods(string MID, string numb) {
 	string front = backTime();
 	string behind;
 
-	behind = "UPDATE commodity SET ÊıÁ¿ = " + numb + " WHERE ÉÌÆ·ID = " + MID;
+	behind = "UPDATE commodity SET æ•°é‡ = " + numb + " WHERE å•†å“ID = " + MID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -169,22 +169,24 @@ string SQLbuy_goodsGoods(string MID, string numb) {
 }
 
 
-//ÉÌÆ·×Ô¶¯ÏÂ¼Ü
+//å•†å“è‡ªåŠ¨ä¸‹æ¶
 string SQLnone_goods(string ID) {
 	string front = backTime();
 	string behind;
-	behind = "UPDATE commodity SET ÉÌÆ·×´Ì¬ = ÒÑÏÂ¼Ü WHERE ÉÌÆ·ID = " + ID;
+	behind = "UPDATE commodity SET å•†å“çŠ¶æ€ = å·²ä¸‹æ¶ WHERE å•†å“ID = " + ID;
 	string result = front + behind;
 	SQLsaveFile(result);
 
 	return behind;
 }
 
-//²é¿´ÉÌÆ·ÏêÏ¸ĞÅÏ¢
-string SQLdetail_goods() {
+//æŸ¥çœ‹å•†å“è¯¦ç»†ä¿¡æ¯
+string SQLdetail_goods(string ID) {
 	string front = backTime();
 	string behind;
 
+	behind = "SELECT * FROM commodity WHERE å•†å“ID CONTAINS " + ID;
+
 	string result = front + behind;
 	SQLsaveFile(result);
 
@@ -192,9 +194,9 @@ string SQLdetail_goods() {
 
 }
 
-//-------------seller¶îÍâ
+//-------------selleré¢å¤–
 
-//·¢²¼ÉÌÆ·
+//å‘å¸ƒå•†å“
 string SQLpublish_goods(string Gname, string Gprice, string Gnumb, string Gdescr) {
 	string front = backTime();
 	string behind;
@@ -208,12 +210,12 @@ string SQLpublish_goods(string Gname, string Gprice, string Gnumb, string Gdescr
 
 }
 
-//ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+//ä¿®æ”¹å•†å“ä¿¡æ¯
 string SQLmodify_goodsPrice(string Gprice, string ID) {
 	string front = backTime();
 	string behind;
 
-	behind = "UPDATE commodity SET ¼Û¸ñ = " + Gprice + " WHERE ÉÌÆ·ID = " + ID;
+	behind = "UPDATE commodity SET ä»·æ ¼ = " + Gprice + " WHERE å•†å“ID = " + ID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -225,7 +227,7 @@ string SQLmodify_goodsDescr(string Gdescr, string ID) {
 	string front = backTime();
 	string behind;
 
-	behind = "UPDATE commodity SET ÃèÊö = " + Gdescr + " WHERE ÉÌÆ·ID = " + ID;
+	behind = "UPDATE commodity SET æè¿° = " + Gdescr + " WHERE å•†å“ID = " + ID;
 
 	string result = front + behind;
 	SQLsaveFile(result);
@@ -233,10 +235,10 @@ string SQLmodify_goodsDescr(string Gdescr, string ID) {
 	return behind;
 }
 
-//·µ»ØÏµÍ³Ê±¼ä
+//è¿”å›ç³»ç»Ÿæ—¶é—´
 string backTime() {
 
-	/////////////////////»ñÈ¡Ê±¼ä
+	/////////////////////è·å–æ—¶é—´
 	struct tm* tm_ptr;
 	time_t the_time;
 	(void)time(&the_time);
@@ -247,8 +249,13 @@ string backTime() {
 	int hour = tm_ptr->tm_hour;
 	int minute = tm_ptr->tm_min;
 	int second = tm_ptr->tm_sec;
+
+	string mie;
+	if (minute < 10) mie = '0' + to_string(minute);
+	else mie = to_string(minute);
+
 	string theTime = to_string(year) + "-" + to_string(month) + "-" + to_string(day)\
-		+ " " + to_string(hour) + ":" + to_string(minute) + ":" + to_string(second) + ": ";
+		+ " " + to_string(hour) + ":" + mie + ":" + to_string(second) + ": ";
 	/////////////////////////////////
 
 
@@ -256,12 +263,12 @@ string backTime() {
 }
 
 void SQLsaveFile(string command) {
-	//ÒÔĞ´ÈëºÍ×·¼Ó·½Ê½´ò¿ªÎÄ¼ş
+	//ä»¥å†™å…¥å’Œè¿½åŠ æ–¹å¼æ‰“å¼€æ–‡ä»¶
 	ofstream ofs("commands.txt", ios::out | ios::app);
 
-	//ÎŞÎÄ¼ş£¬½øĞĞ´´½¨
+	//æ— æ–‡ä»¶ï¼Œè¿›è¡Œåˆ›å»º
 	if (!ofs.is_open()) {
-		cout << "ÏÖÔÚ´´½¨SQLcommandÎÄ¼ş";
+		cout << "ç°åœ¨åˆ›å»ºSQLcommandæ–‡ä»¶";
 	}
 	ifstream ifs("commands.txt", ios::in);
 	char ch;
@@ -272,11 +279,10 @@ void SQLsaveFile(string command) {
 		ofs << endl << command << endl;
 	}
 
-	//¹Ø±ÕÎÄ¼ş
+	//å…³é—­æ–‡ä»¶
 	ofs.close();
 	ifs.close();
 }
 
 
-//½âÎö¹¦ÄÜ
-void analySQL(string SQLSTR) {}
+

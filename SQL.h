@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 using namespace std;
 #include<string>
 #include<vector>
@@ -14,53 +14,52 @@ using namespace std;
 
 enum USER { NONE, ADMIN, BUYER, SELLER };//0,1,2,3
 
-//»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä yyyy-mm-dddd hh:mm:ss
+//è·å–å½“å‰ç³»ç»Ÿæ—¶é—´ yyyy-mm-dddd hh:mm:ss
 string backTime();
 
-//---------------------------½çÃæ
+//---------------------------ç•Œé¢
 
-//²é¿´ËùÓĞ(¿É¹ºÂòµÄ/·¢²¼µÄ)ÉÌÆ·(AD,B,S)
+//æŸ¥çœ‹æ‰€æœ‰(å¯è´­ä¹°çš„/å‘å¸ƒçš„)å•†å“(AD,B,S)
 string SQLshow_goods(int i, string ID);
 
-//ËÑË÷(¿É¹ºÂòµÄ)ÉÌÆ·(AD,B)
+//æœç´¢(å¯è´­ä¹°çš„)å•†å“(AD,B)
 string SQLsearch_goods(int i, string Name);
 
-//ÏÂ¼ÜÉÌÆ·(AD,S)
+//ä¸‹æ¶å•†å“(AD,S)
 string SQLremove_goods(int i, string ID);
 
-//²é¿´ËùÓĞ¶©µ¥(AD,B,S)
+//æŸ¥çœ‹æ‰€æœ‰è®¢å•(AD,B,S)
 string SQLshow_order(int i, string ID);
 
-//²é¿´ËùÓĞÓÃ»§
+//æŸ¥çœ‹æ‰€æœ‰ç”¨æˆ·
 string SQLshow_user();
 
-//·â½ûÓÃ»§
+//å°ç¦ç”¨æˆ·
 string SQLban_userGOOD(string ID);
 string SQLban_userUSER(string ID);
 
-//--------------buyer¶îÍâ
+//--------------buyeré¢å¤–
 
-//¹ºÂòÉÌÆ·
+//è´­ä¹°å•†å“
 string SQLbuy_goodsOrder(string TID, string MID, string price, string numb, string TIME, string SID, string BID);
 string SQLbuy_goodsGoods(string MID, string numb);
 
 
-//²é¿´ÉÌÆ·ÏêÏ¸ĞÅÏ¢
-string SQLdetail_goods();
+//æŸ¥çœ‹å•†å“è¯¦ç»†ä¿¡æ¯
+string SQLdetail_goods(string ID);
 
-//-------------seller¶îÍâ
+//-------------selleré¢å¤–
 
-//·¢²¼ÉÌÆ·
+//å‘å¸ƒå•†å“
 string SQLpublish_goods(string Gname, string Gprice, string Gnumb, string Gdescr);
-//ÉÌÆ·×Ô¶¯ÏÂ¼Ü
+//å•†å“è‡ªåŠ¨ä¸‹æ¶
 string SQLnone_goods(string ID);
 
-//ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+//ä¿®æ”¹å•†å“ä¿¡æ¯
 string SQLmodify_goodsPrice(string Gprice, string ID);
 string SQLmodify_goodsDescr(string Gdescr, string ID);
 
 
-//½âÎö¹¦ÄÜ
-void analySQL(string SQLSTR);
-//Ö¸ÁîÎÄ¼ş±£´æ
+
+//æŒ‡ä»¤æ–‡ä»¶ä¿å­˜
 void SQLsaveFile(string command);

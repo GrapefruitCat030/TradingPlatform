@@ -1,14 +1,14 @@
-#include"Admin.h"
+ï»¿#include"Admin.h"
 
 Admin::Admin() {
 	numbUser = 0;
 	numbGoods = 0;
 	numbOrder = 0;
-	//ÓÃ»§³õÊ¼»¯
+	//ç”¨æˆ·åˆå§‹åŒ–
 	this->USERINIT();
-	//ÉÌÆ·³õÊ¼»¯
+	//å•†å“åˆå§‹åŒ–
 	this->GOODSINIT();
-	//¶©µ¥³õÊ¼»¯
+	//è®¢å•åˆå§‹åŒ–
 	this->ORDERINIT();
 
 	//numbUser = 0;
@@ -21,16 +21,16 @@ Admin::Admin() {
 Admin::~Admin() {};
 
 void Admin::Module_Admin() {
-	//ÏÈ½øĞĞÇåÆÁ£¬È»ºó¹ÜÀíÔ±²Ëµ¥Õ¹Ê¾
+	//å…ˆè¿›è¡Œæ¸…å±ï¼Œç„¶åç®¡ç†å‘˜èœå•å±•ç¤º
 	system("cls");
-	//ÓÃÀ´´¢´æÓÃ»§Ñ¡Ïî
+	//ç”¨æ¥å‚¨å­˜ç”¨æˆ·é€‰é¡¹
 	string choicecc;
 	bool judge = true;
 
 	while (judge) {
 
 		this->show_Menu();
-		cout << "ÊäÈëÑ¡Ïî£º";
+		cout << "è¾“å…¥é€‰é¡¹ï¼š";
 		cin.sync();
 		getline(cin, choicecc);
 		//if (cin >> choicecc) {
@@ -39,7 +39,7 @@ void Admin::Module_Admin() {
 		//	cin.clear();
 		//}
 		if (size(choicecc) > 1) {
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
 			system("cls");
 			continue;
@@ -47,53 +47,57 @@ void Admin::Module_Admin() {
 		//char kksk = choicecc[0];
 		switch (choicecc[0])
 		{
-		case '1':	{//²é¿´ËùÓĞÉÌÆ·
+		case '1': {//æŸ¥çœ‹æ‰€æœ‰å•†å“
 			string sqlstr = SQLshow_goods(ADMIN, "NONE");
 			//analySQL(sqlstr);
 			this->Goods_show();
 			system("pause");
 			system("cls");
 		}
-			break;
-		case '2':	//ËÑË÷ÉÌÆ·
+				break;
+		case '2':	//æœç´¢å•†å“
 			this->searchGoods();
 			break;
-		case '3':	//ÏÂ¼ÜÉÌÆ·
+		case '3':	//ä¸‹æ¶å•†å“
 			this->removeGoods();
 			break;
-		case '4':	//²é¿´ËùÓĞ¶©µ¥
+		case '4':	//æŸ¥çœ‹æ‰€æœ‰è®¢å•
 			this->Order_show();
 			break;
-		case '5':	//²é¿´ËùÓĞÓÃ»§
+		case '5':	//æŸ¥çœ‹æ‰€æœ‰ç”¨æˆ·
 			this->User_show();
 			break;
-		case '6':	//·â½ûÓÃ»§
+		case '6':	//å°ç¦ç”¨æˆ·
 			this->banUser();
 			break;
-		case '7':	//×¢Ïú
+		case '7':	//æ³¨é”€
 			this->exitAD();
 			judge = false;
 			break;
 		default:
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
-			system("cls"); //ÇåÆÁ
+			system("cls"); //æ¸…å±
 			break;
 		}
+
+
+
+
 	}
 }
 
 void Admin::show_Menu() {
 	cout << "========================================================================================" << endl;
-	cout << "------------------------------ÄúÏÖÔÚ´¦ÓÚ¹ÜÀíÔ±Ä£Ê½--------------------------------------"<< endl;
+	cout << "------------------------------æ‚¨ç°åœ¨å¤„äºç®¡ç†å‘˜æ¨¡å¼--------------------------------------" << endl;
 	cout << "========================================================================================" << endl;
-	cout << "  1.²é¿´ËùÓĞÉÌÆ· 2.ËÑË÷ÉÌÆ· 3.ÏÂ¼ÜÉÌÆ· 4.²é¿´ËùÓĞ¶©µ¥ 5.²é¿´ËùÓĞÓÃ»§ 6.·â½ûÓÃ»§ 7.×¢Ïú" << endl;
+	cout << "  1.æŸ¥çœ‹æ‰€æœ‰å•†å“ 2.æœç´¢å•†å“ 3.ä¸‹æ¶å•†å“ 4.æŸ¥çœ‹æ‰€æœ‰è®¢å• 5.æŸ¥çœ‹æ‰€æœ‰ç”¨æˆ· 6.å°ç¦ç”¨æˆ· 7.æ³¨é”€" << endl;
 	cout << "========================================================================================" << endl;
 
 }
 
 void Admin::exitAD() {
-	cout << "»¶Ó­ÏÂ´ÎÊ¹ÓÃ£¡£¡" << endl;
+	cout << "æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨ï¼ï¼" << endl;
 	system("pause");
 	system("cls");
 	return;
@@ -102,9 +106,9 @@ void Admin::exitAD() {
 void Admin::Goods_show() {
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "ÃèÊö" << setw(20) << "Âô¼ÒID" << setw(20)
-		<< "ÉÏ¼ÜÊ±¼ä" << setw(20) << "ÉÌÆ·×´Ì¬" << setw(20) << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "æ•°é‡" << setw(20) << "æè¿°" << setw(20) << "å–å®¶ID" << setw(20)
+		<< "ä¸Šæ¶æ—¶é—´" << setw(20) << "å•†å“çŠ¶æ€" << setw(20) << endl;
 
 	for (vector<Goods*>::iterator it = this->goodsVec.begin(); it != this->goodsVec.end(); it++) {
 		cout << left << setw(20) << (*it)->commodityID << setw(20)
@@ -122,7 +126,7 @@ void Admin::Goods_show() {
 
 void Admin::searchGoods() {
 	string gname;
-	cout << "ÇëÊäÈëÄúÒª²éÕÒµÄÉÌÆ·Ãû£º";
+	cout << "è¯·è¾“å…¥æ‚¨è¦æŸ¥æ‰¾çš„å•†å“åï¼š";
 	cin.sync();
 	getline(cin, gname);
 
@@ -132,18 +136,18 @@ void Admin::searchGoods() {
 
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "ÃèÊö" << setw(20) << "Âô¼ÒID" << setw(20)
-		<< "ÉÏ¼ÜÊ±¼ä" << setw(20) << "ÉÌÆ·×´Ì¬" << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "æ•°é‡" << setw(20) << "æè¿°" << setw(20) << "å–å®¶ID" << setw(20)
+		<< "ä¸Šæ¶æ—¶é—´" << setw(20) << "å•†å“çŠ¶æ€" << endl;
 
-	//Ñ°ÕÒÉÌÆ·ÔÙvecÖĞµÄÎ»ÖÃ
+	//å¯»æ‰¾å•†å“å†vecä¸­çš„ä½ç½®
 	bool flag = false;
 	int i = 0;
 	vector<Goods*>::iterator it = this->goodsVec.begin();
 	for (it; it != this->goodsVec.end(); it++) {
-		//Ñ°ÕÒ×Ö·û
+		//å¯»æ‰¾å­—ç¬¦
 		int fdstr = (*it)->commodityName.find(gname, 0);
-		//ÈôÕÒµ½£¬Ôò¼ÇÂ¼µ±Ç°vecÏÂ±êÎ»ÖÃ£¬½øĞĞÊä³ö
+		//è‹¥æ‰¾åˆ°ï¼Œåˆ™è®°å½•å½“å‰vecä¸‹æ ‡ä½ç½®ï¼Œè¿›è¡Œè¾“å‡º
 		if (fdstr < (*it)->commodityName.length()) {
 			cout << left << setw(20) << (*it)->commodityID << setw(20)
 				<< (*it)->commodityName << setw(20)
@@ -157,10 +161,10 @@ void Admin::searchGoods() {
 		}
 		i++;
 	}
-	//Ã»ÓĞÉÌÆ·´æÔÚ
+	//æ²¡æœ‰å•†å“å­˜åœ¨
 	if (!flag) {
 		cout << endl;
-		cout << "                                   Ã»ÓĞ¸ÃÉÌÆ·£¡£¡                                         " << endl;
+		cout << "                                   æ²¡æœ‰è¯¥å•†å“ï¼ï¼                                         " << endl;
 		cout << endl;
 		cout << "**********************************************************************************************************************************************************" << endl;
 		cout << endl;
@@ -172,42 +176,42 @@ void Admin::searchGoods() {
 
 	cout << "**********************************************************************************************************************************************************" << endl;
 	cout << endl;
-	
+
 	system("pause");
 	system("cls");
 };
 
 void Admin::removeGoods() {
-	//ÏÈ²é¿´Ò»ÏÂÉÌÆ·ÁĞ±í
+	//å…ˆæŸ¥çœ‹ä¸€ä¸‹å•†å“åˆ—è¡¨
 	this->Goods_show();
-	
+
 	string gstr;
-	cout << "ÊäÈëÏëÒªÏÂ¼ÜµÄÉÌÆ·£º";
+	cout << "è¾“å…¥æƒ³è¦ä¸‹æ¶çš„å•†å“ï¼š";
 	getline(cin, gstr);
 
 	//SSSQQQLLL
 	string sqlstr = SQLremove_goods(ADMIN, gstr);
 	//analySQL(sqlstr);
 
-	//±éÀú
+	//éå†
 	vector<Goods*>::iterator it = this->goodsVec.begin();
 	for (it; it != this->goodsVec.end(); it++) {
 		if ((*it)->commodityID == gstr) break;
 	}
-	//ÎŞÉÌÆ·
+	//æ— å•†å“
 	if (it == this->goodsVec.end()) {
-		cout << "Ã»ÓĞ¸ÃÉÌÆ·£¡£¡" << endl;
+		cout << "æ²¡æœ‰è¯¥å•†å“ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "È·¶¨ÏÂ¼Ü¸ÃÉÌÆ·Âğ?" << endl;
+	cout << "ç¡®å®šä¸‹æ¶è¯¥å•†å“å—?" << endl;
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "ÉÌÆ·ID" << setw(20) << "Ãû³Æ" << setw(20) << "¼Û¸ñ" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "ÃèÊö" << setw(20) << "Âô¼ÒID" << setw(20)
-		<< "ÉÏ¼ÜÊ±¼ä" << setw(20) << "ÉÌÆ·×´Ì¬" << setw(20) << endl;
+	cout << left << setw(20) << "å•†å“ID" << setw(20) << "åç§°" << setw(20) << "ä»·æ ¼" << setw(20)
+		<< "æ•°é‡" << setw(20) << "æè¿°" << setw(20) << "å–å®¶ID" << setw(20)
+		<< "ä¸Šæ¶æ—¶é—´" << setw(20) << "å•†å“çŠ¶æ€" << setw(20) << endl;
 	cout << left << setw(20) << (*it)->commodityID << setw(20)
 		<< (*it)->commodityName << setw(20)
 		<< (*it)->price << setw(20)
@@ -218,18 +222,18 @@ void Admin::removeGoods() {
 		<< (*it)->state << setw(20) << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
 	cout << endl;
-	cout << "ÇëÑ¡Ôñ£º(y/n)  ";
+	cout << "è¯·é€‰æ‹©ï¼š(y/n)  ";
 
 	string flag;
 	cin.sync();
 	getline(cin, flag);
-	//½øĞĞĞŞ¸Ä
+	//è¿›è¡Œä¿®æ”¹
 	if (flag == "y") {
-		(*it)->state = "ÒÑÏÂ¼Ü";
-		cout << "ÏÂ¼Ü³É¹¦£¡£¡" << endl;
+		(*it)->state = "å·²ä¸‹æ¶";
+		cout << "ä¸‹æ¶æˆåŠŸï¼ï¼" << endl;
 	}
 	else
-		cout << "È¡ÏûÏÂ¼Ü!!" << endl;
+		cout << "å–æ¶ˆä¸‹æ¶!!" << endl;
 
 
 
@@ -248,9 +252,9 @@ void Admin::Order_show() {
 
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
-	cout << left << setw(20) << "¶©µ¥ID" << setw(20) << "ÉÌÆ·ID" << setw(20) << "½»Ò×µ¥¼Û" << setw(20)
-		<< "ÊıÁ¿" << setw(20) << "½»Ò×Ê±¼ä" << setw(20) << "Âô¼ÒID" << setw(20)
-		<< "Âò¼ÒID" << endl;
+	cout << left << setw(20) << "è®¢å•ID" << setw(20) << "å•†å“ID" << setw(20) << "äº¤æ˜“å•ä»·" << setw(20)
+		<< "æ•°é‡" << setw(20) << "äº¤æ˜“æ—¶é—´" << setw(20) << "å–å®¶ID" << setw(20)
+		<< "ä¹°å®¶ID" << endl;
 
 	for (vector<Order*>::iterator it = this->orderVec.begin(); it != this->orderVec.end(); it++) {
 		cout << left << setw(20) << (*it)->orderID << setw(20)
@@ -277,11 +281,11 @@ void Admin::User_show() {
 
 	cout << endl;
 	cout << "*******************************************************************************************************************************************" << endl;
-	cout << left<< setw(20)<<"ÓÃ»§ID" << setw(20) << "ĞÕÃû" << setw(20) << "ÃÜÂë" << setw(20)
-		<<"ÊÖ»úºÅ" << setw(20) <<"µØÖ·" << setw(20) << "ÓÃ»§Óà¶î" << setw(20) << "ÓÃ»§×´Ì¬" << endl;
+	cout << left << setw(20) << "ç”¨æˆ·ID" << setw(20) << "å§“å" << setw(20) << "å¯†ç " << setw(20)
+		<< "æ‰‹æœºå·" << setw(20) << "åœ°å€" << setw(20) << "ç”¨æˆ·ä½™é¢" << setw(20) << "ç”¨æˆ·çŠ¶æ€" << endl;
 	if (!this->numbUser) {
 		cout << endl;
-		cout << "       ÎŞÓÃ»§£¡£¡      " << endl;
+		cout << "       æ— ç”¨æˆ·ï¼ï¼      " << endl;
 		cout << endl;
 		cout << "*******************************************************************************************************************************************" << endl;
 		cout << endl;
@@ -297,10 +301,10 @@ void Admin::User_show() {
 			<< (*it)->address << setw(20)
 			<< (*it)->balance << setw(20);
 		if ((*it)->userState == 1) {
-			cout << "Õı³£" << setw(20);
+			cout << "æ­£å¸¸" << setw(20);
 		}
 		else {
-			cout << "·â½û" << setw(20);
+			cout << "å°ç¦" << setw(20);
 		}
 
 		cout << endl;
@@ -316,17 +320,17 @@ void Admin::User_show() {
 
 void Admin::banUser() {
 	string UID;
-	cout << "ÇëÊäÈëÒª·â½ûµÄÓÃ»§ID£º";
+	cout << "è¯·è¾“å…¥è¦å°ç¦çš„ç”¨æˆ·IDï¼š";
 	cin.sync();
 	getline(cin, UID);
-	cout << "È·¶¨·â½û£¿(Y/ÆäËû) ";
+	cout << "ç¡®å®šå°ç¦ï¼Ÿ(Y/å…¶ä»–) ";
 	string judge;
 	cin.sync();
 	getline(cin, judge);
 
 
 	if (judge != "Y") {
-		cout << "·ÅÆú·â½û£¡£¡" << endl;
+		cout << "æ”¾å¼ƒå°ç¦ï¼ï¼" << endl;
 		system("pause");
 		system("cls");
 		return;
@@ -348,14 +352,14 @@ void Admin::banUser() {
 			if (UID == theID) {
 				(*it)->userState = 0;
 
-				//Ë³±ãÏÂ¼ÜÉÌÆ·
+				//é¡ºä¾¿ä¸‹æ¶å•†å“
 				for (vector<Goods*>::iterator gt = this->goodsVec.begin(); gt != this->goodsVec.end(); gt++) {
 					if ((*gt)->sellerID == theID) {
-						(*gt)->state = "ÒÑÏÂ¼Ü";
+						(*gt)->state = "å·²ä¸‹æ¶";
 					}
 				}
 
-				cout << "·â½û³É¹¦£¡£¡" << endl;
+				cout << "å°ç¦æˆåŠŸï¼ï¼" << endl;
 
 				this->saveUSERFILE();
 				this->saveGOODFILE();
@@ -364,7 +368,7 @@ void Admin::banUser() {
 				return;
 			}
 		}
-		cout << "Î´ÕÒµ½´ËÓÃ»§£¡£¡" << endl;
+		cout << "æœªæ‰¾åˆ°æ­¤ç”¨æˆ·ï¼ï¼" << endl;
 	}
 
 
@@ -379,36 +383,36 @@ void Admin::banUser() {
 void Admin::USERINIT() {
 	ifstream ifs(FILEUSER, ios::in);
 
-	//´ò¿ªÊ§°Ü
+	//æ‰“å¼€å¤±è´¥
 	if (!ifs.is_open()) {
 		//cout << "user txt open failed!" << endl;
-		//cout << "ÏÖÔÚ´´½¨ÎÄ¼ş" << endl;
+		//cout << "ç°åœ¨åˆ›å»ºæ–‡ä»¶" << endl;
 		ofstream ofs(FILEUSER, ios::out);
 		ofs.close();
 		return;
 	}
 
-	//Ã¿ĞĞ¶ÁÈë
+	//æ¯è¡Œè¯»å…¥
 	string str;
-	//È¥µôÃ»ÓÃµÄµÚÒ»ĞĞ
+	//å»æ‰æ²¡ç”¨çš„ç¬¬ä¸€è¡Œ
 	getline(ifs, str);
-	//¼ÌĞø¶ÁÈë
+	//ç»§ç»­è¯»å…¥
 	while (getline(ifs, str)) {
 		numbUser++;
 		stringstream kksk(str);
 
 		vector<string> record;
 
-		//½«Ò»ĞĞÖĞÒÔ¶ººÅÎª·Ö¸ô·ûµÄ×Ö·û´®¼ÇÂ¼½ørecordÏòÁ¿ÖĞ
+		//å°†ä¸€è¡Œä¸­ä»¥é€—å·ä¸ºåˆ†éš”ç¬¦çš„å­—ç¬¦ä¸²è®°å½•è¿›recordå‘é‡ä¸­
 		while (kksk) {
 			string tmp;
 			getline(kksk, tmp, ',');
 			record.push_back(tmp);
 		}
 
-		//³õÊ¼»¯ĞÂµÄÉÌÆ·¶ÔÏó
+		//åˆå§‹åŒ–æ–°çš„å•†å“å¯¹è±¡
 		User* gd = new User(record);
-		//×°½øÏòÁ¿ÀïÃæ
+		//è£…è¿›å‘é‡é‡Œé¢
 		this->userVec.push_back(gd);
 	}
 
@@ -421,19 +425,19 @@ void Admin::USERINIT() {
 void Admin::GOODSINIT() {
 	ifstream ifs(FILEGOOD, ios::in);
 
-	//´ò¿ªÊ§°Ü
+	//æ‰“å¼€å¤±è´¥
 	if (!ifs.is_open()) {
 		//cout << "goods txt open failed!" << endl;
-		//cout << "ÏÖÔÚ´´½¨ÎÄ¼ş" << endl;
+		//cout << "ç°åœ¨åˆ›å»ºæ–‡ä»¶" << endl;
 		ofstream ofs(FILEGOOD, ios::out);
 		return;
 	}
 
-	//Ã¿ĞĞ¶ÁÈë
+	//æ¯è¡Œè¯»å…¥
 	string str;
-	//È¥µôÃ»ÓÃµÄµÚÒ»ĞĞ
+	//å»æ‰æ²¡ç”¨çš„ç¬¬ä¸€è¡Œ
 	getline(ifs, str);
-	//¼ÌĞø¶ÁÈë
+	//ç»§ç»­è¯»å…¥
 	while (getline(ifs, str)) {
 		numbGoods++;
 
@@ -441,16 +445,16 @@ void Admin::GOODSINIT() {
 
 		vector<string> record;
 
-		//½«Ò»ĞĞÖĞÒÔ¶ººÅÎª·Ö¸ô·ûµÄ×Ö·û´®¼ÇÂ¼½ørecordÏòÁ¿ÖĞ
+		//å°†ä¸€è¡Œä¸­ä»¥é€—å·ä¸ºåˆ†éš”ç¬¦çš„å­—ç¬¦ä¸²è®°å½•è¿›recordå‘é‡ä¸­
 		while (kksk) {
 			string tmp;
 			getline(kksk, tmp, ',');
 			record.push_back(tmp);
 		}
 
-		//³õÊ¼»¯ĞÂµÄÉÌÆ·¶ÔÏó
+		//åˆå§‹åŒ–æ–°çš„å•†å“å¯¹è±¡
 		Goods* gd = new Goods(record);
-		//×°½øÏòÁ¿ÀïÃæ
+		//è£…è¿›å‘é‡é‡Œé¢
 		this->goodsVec.push_back(gd);
 	}
 
@@ -460,18 +464,18 @@ void Admin::GOODSINIT() {
 };
 void Admin::ORDERINIT() {
 	ifstream ifs("order.txt", ios::in);
-	//´ò¿ªÊ§°Ü
+	//æ‰“å¼€å¤±è´¥
 	if (!ifs.is_open()) {
 		//cout << "order txt open failed!" << endl;
-		//cout << "ÏÖÔÚ´´½¨ÎÄ¼ş" << endl;
+		//cout << "ç°åœ¨åˆ›å»ºæ–‡ä»¶" << endl;
 		ofstream ofs("order.txt", ios::out);
 		return;
 	}
-	//Ã¿ĞĞ¶ÁÈë
+	//æ¯è¡Œè¯»å…¥
 	string str;
-	//È¥µôÃ»ÓÃµÄµÚÒ»ĞĞ
+	//å»æ‰æ²¡ç”¨çš„ç¬¬ä¸€è¡Œ
 	getline(ifs, str);
-	//¼ÌĞø¶ÁÈë
+	//ç»§ç»­è¯»å…¥
 	while (getline(ifs, str)) {
 		numbOrder++;
 
@@ -479,16 +483,16 @@ void Admin::ORDERINIT() {
 
 		vector<string> record;
 
-		//½«Ò»ĞĞÖĞÒÔ¶ººÅÎª·Ö¸ô·ûµÄ×Ö·û´®¼ÇÂ¼½ørecordÏòÁ¿ÖĞ
+		//å°†ä¸€è¡Œä¸­ä»¥é€—å·ä¸ºåˆ†éš”ç¬¦çš„å­—ç¬¦ä¸²è®°å½•è¿›recordå‘é‡ä¸­
 		while (kksk) {
 			string tmp;
 			getline(kksk, tmp, ',');
 			record.push_back(tmp);
 		}
 
-		//³õÊ¼»¯ĞÂµÄÉÌÆ·¶ÔÏó
+		//åˆå§‹åŒ–æ–°çš„å•†å“å¯¹è±¡
 		Order* gd = new Order(record);
-		//×°½øÏòÁ¿ÀïÃæ
+		//è£…è¿›å‘é‡é‡Œé¢
 		this->orderVec.push_back(gd);
 	}
 	ifs.close();
@@ -496,7 +500,7 @@ void Admin::ORDERINIT() {
 
 
 
-/***************ÀàÍâº¯Êı***********************/
+/***************ç±»å¤–å‡½æ•°***********************/
 
 void Admin::saveUSERFILE() {
 	ofstream ofs;
@@ -506,41 +510,41 @@ void Admin::saveUSERFILE() {
 		return;
 	}
 
-	ofs << "ÓÃ»§ID,ÓÃ»§Ãû,ÃÜÂë,ÁªÏµ·½Ê½,µØÖ·,Ç®°üÓà¶î,ÓÃ»§×´Ì¬" << endl;
+	ofs << "ç”¨æˆ·ID,ç”¨æˆ·å,å¯†ç ,è”ç³»æ–¹å¼,åœ°å€,é’±åŒ…ä½™é¢,ç”¨æˆ·çŠ¶æ€" << endl;
 
-	//ÓÃ»§vecĞ´Èë
+	//ç”¨æˆ·vecå†™å…¥
 	for (vector<User*>::iterator it = this->userVec.begin(); it != this->userVec.end(); it++) {
 		ofs << (*it)->userID << ","
 			<< (*it)->username << ","
 			<< (*it)->password << ","
 			<< (*it)->phoneNumber << ","
 			<< (*it)->address << ","
-			<< to_string((*it)->balance) << ",";	//double×ªstring
+			<< to_string((*it)->balance) << ",";	//doubleè½¬string
 		if ((*it)->userState == 1) {
-			ofs << "Õı³£" << endl;
+			ofs << "æ­£å¸¸" << endl;
 		}
 		else {
-			ofs << "·â½û" << endl;
+			ofs << "å°ç¦" << endl;
 		}
 
 	}
-		
-	
+
+
 	ofs.close();
 };
 
 void Admin::saveGOODFILE() {
 	ofstream ofs(FILEGOOD, ios::out);
 
-	//ÅĞ¶Ï´ò¿ªÊÇ·ñ³É¹¦
+	//åˆ¤æ–­æ‰“å¼€æ˜¯å¦æˆåŠŸ
 	if (!ofs.is_open()) {
 		cout << "file open failed (AD:saveGOODFILE)" << endl;
 		return;
 	}
 
-	ofs << "ÉÌÆ·ID,Ãû³Æ,¼Û¸ñ,ÊıÁ¿,ÃèÊö,Âô¼ÒID,ÉÏ¼ÜÊ±¼ä,ÉÌÆ·×´Ì¬" << endl;
+	ofs << "å•†å“ID,åç§°,ä»·æ ¼,æ•°é‡,æè¿°,å–å®¶ID,ä¸Šæ¶æ—¶é—´,å•†å“çŠ¶æ€" << endl;
 
-	//ÉÌÆ·vecĞ´Èë
+	//å•†å“vecå†™å…¥
 	for (vector<Goods*>::iterator it = this->goodsVec.begin(); it != this->goodsVec.end(); it++) {
 		ofs << (*it)->commodityID << ","
 			<< (*it)->commodityName << ","
@@ -554,3 +558,8 @@ void Admin::saveGOODFILE() {
 
 	ofs.close();
 }
+
+
+
+
+
