@@ -1008,11 +1008,13 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 	//进入循环
 	while (judge) {
+		cout << endl;
 		//菜单展示
-		cout << "===================================================" << endl;
-		cout << "===============请输入要修改的信息==================" << endl;
-		cout << "====== 1.用户名  2.联系方式  3.地址  4.取消修改  ==" << endl;
-		cout << "===================================================" << endl;
+		cout << "================================================================" << endl;
+		cout << "===================请输入要修改的信息===========================" << endl;
+		cout << "====== 1.用户名  2.联系方式  3.地址  4.修改密码 5.取消修改  ====" << endl;
+		cout << "================================================================" << endl;
+		cout << endl;
 
 		//输入选择
 		cout << "输入选项：";
@@ -1088,7 +1090,97 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 		}
 		break;
-		case '4':
+		case'4':	//修改用户密码
+		{
+			string ogpword, nwpword1, nwpword2;
+			cout << "请输入原密码:  ";
+			cin.sync();
+			getline(cin, ogpword);
+			if (ogpword == this->password) {
+				cout << "请输入新密码:  ";
+				//输入密码回显*
+				cin.sync();
+				char a;
+				int i = 0;
+				while (1)
+				{
+					a = _getch();        //获取输入的密码
+					if (a == 13)		//回车返回
+					{
+						break;
+					}
+					if (a == 8)			//退格
+					{
+						if (nwpword1.length() == 0)		//如果第一个键为退格键
+						{
+							cout << "密码为空,请输入密码：";
+							continue;
+						}
+						cout << "\b \b";
+						i++;							//清除所要删掉的字符
+						nwpword1[nwpword1.length() - i] = '\0';
+
+					}
+					else
+					{
+						nwpword1 += a;
+						cout << "*";
+					}
+
+				}
+				cin.sync();
+				cout << endl;
+
+				cout << "请再次输入新密码:  ";
+				//输入密码回显*
+				char b;
+				i = 0;
+				while (1)
+				{
+					b = _getch();        //获取输入的密码
+					if (b == 13)		//回车返回
+					{
+						break;
+					}
+					if (b == 8)			//退格
+					{
+						if (nwpword2.length() == 0)		//如果第一个键为退格键
+						{
+							cout << "密码为空,请输入密码：";
+							continue;
+						}
+						cout << "\b \b";
+						i++;							//清除所要删掉的字符
+						nwpword2[nwpword2.length() - i] = '\0';
+
+					}
+					else
+					{
+						nwpword2 += b;
+						cout << "*";
+					}
+
+				}
+				cout << endl;
+
+				if (nwpword1 == nwpword2) {
+					this->password = nwpword1;
+					cout << "修改成功！！" << endl;
+				}
+				else {
+					cout << "两次输入不符！！修改失败！！" << endl;
+				}
+
+			}
+			else {
+				cout << "与原密码不符！！修改失败！！" << endl;
+			}
+			judge = false;
+			system("pause");
+			system("cls");
+		}
+		break;
+		case '5':
 		{
 			judge = false;
 

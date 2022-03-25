@@ -1,4 +1,4 @@
-
+Ôªø
 #include"Platform.h"
 
 
@@ -9,15 +9,15 @@ Platform::~Platform() {};
 
 void Platform::show_Menu() {
 	cout << "===============================================================" << endl;
-	cout << "============      ª∂”≠ π”√∂¨∞¬ºÕƒÓ∆∑Ωª“◊∆ΩÃ®     =============" << endl;
+	cout << "============      Ê¨¢Ëøé‰ΩøÁî®ÂÜ¨Â••Á∫™ÂøµÂìÅ‰∫§ÊòìÂπ≥Âè∞     =============" << endl;
 	cout << "===============================================================" << endl;
-	cout << "  1.π‹¿Ì‘±µ«¬º	 2.”√ªß◊¢≤·	3.”√ªßµ«¬º	4.ÕÀ≥ˆœµÕ≥" << endl;
+	cout << "  1.ÁÆ°ÁêÜÂëòÁôªÂΩï	 2.Áî®Êà∑Ê≥®ÂÜå	3.Áî®Êà∑ÁôªÂΩï	4.ÈÄÄÂá∫Á≥ªÁªü" << endl;
 	cout << "===============================================================" << endl;
 	cout << endl;
 }
 
 void Platform::exitPlatform() {
-	cout << "ª∂”≠œ¬¥Œ π”√£°£°" << endl;
+	cout << "Ê¨¢Ëøé‰∏ãÊ¨°‰ΩøÁî®ÔºÅÔºÅ" << endl;
 	system("pause");
 	exit(0);
 }
@@ -25,27 +25,58 @@ void Platform::exitPlatform() {
 void Platform::AdminLogin(Admin& m_Admin) {
 
 	string A_Name, A_key;
-	cout << "«Î ‰»Îπ‹¿Ì‘±–’√˚£∫";
+	cout << "ËØ∑ËæìÂÖ•ÁÆ°ÁêÜÂëòÂßìÂêçÔºö";
 	cin.sync();
 	getline(cin, A_Name);
-	cout << "«Î ‰»Î√‹¬Î£∫";
+	cout << "ËØ∑ËæìÂÖ•ÂØÜÁ†ÅÔºö";
 	cin.sync();
-	getline(cin, A_key);
+	//getline(cin, A_key);
+	//ËæìÂÖ•ÂØÜÁ†ÅÂõûÊòæ*
+	char a;
+	int i = 0;
+	while (1)
+	{
+		a = _getch();        //Ëé∑ÂèñËæìÂÖ•ÁöÑÂØÜÁ†Å
+		if (a == 13)		//ÂõûËΩ¶ËøîÂõû
+		{
+			break;
+		}
+		if (a == 8)			//ÈÄÄÊ†º
+		{
+			if (A_key.length() == 0)		//Â¶ÇÊûúÁ¨¨‰∏Ä‰∏™ÈîÆ‰∏∫ÈÄÄÊ†ºÈîÆ
+			{
+				cout << "ÂØÜÁ†Å‰∏∫Á©∫,ËØ∑ËæìÂÖ•ÂØÜÁ†ÅÔºö";
+				continue;
+			}
+			cout << "\b \b";
+			i++;							//Ê∏ÖÈô§ÊâÄË¶ÅÂà†ÊéâÁöÑÂ≠óÁ¨¶
+			A_key[A_key.length() - i] = '\0';
 
-	
-	//µ«¬º ß∞‹‘Ú«Â∆¡∑µªÿ÷˜≤Àµ•
-	if (A_Name!=ADNAME || A_key != ADKEY) {
-		cout << "---------µ«¬º ß∞‹£¨∑µªÿ÷˜≤Àµ•-----------" << endl;
+		}
+		else
+		{
+			A_key += a;
+			cout << "*";
+		}
+
+	}
+	cin.sync();
+	cout << endl;
+
+
+	//ÁôªÂΩïÂ§±Ë¥•ÂàôÊ∏ÖÂ±èËøîÂõû‰∏ªËèúÂçï
+	if (A_Name != ADNAME || A_key != ADKEY) {
+		cout << "---------ÁôªÂΩïÂ§±Ë¥•ÔºåËøîÂõû‰∏ªËèúÂçï-----------" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//≥…π¶‘ÚΩ¯»Îπ‹¿Ì‘±ƒ£øÈ
+	//ÊàêÂäüÂàôËøõÂÖ•ÁÆ°ÁêÜÂëòÊ®°Âùó
 	else {
-		cout << "µ«¬º≥…π¶£°£°" << endl;
+		cout << "ÁôªÂΩïÊàêÂäüÔºÅÔºÅ" << endl;
 		system("pause");
 		m_Admin.Module_Admin();
-		
+
 	}
 };
 
@@ -56,21 +87,21 @@ void Platform::User_register(Admin& m_Admin) {
 	string address;
 
 	cout << endl;
-	cout << "«Î ‰»Î”√ªß√˚(◊Ó¥Û10Œª)£∫";
+	cout << "ËØ∑ËæìÂÖ•Áî®Êà∑Âêç(ÊúÄÂ§ß10‰Ωç)Ôºö";
 	cin.sync();
 	getline(cin, Uname);
 	if (size(Uname) > 10) {
-		cout << "”√ªß√˚≥¨π˝≥§∂»£°£°" << endl;
+		cout << "Áî®Êà∑ÂêçË∂ÖËøáÈïøÂ∫¶ÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//”√ªß√˚≤ªƒ‹÷ÿ∏¥
-	//±È¿˙À—À˜”√ªß
+	//Áî®Êà∑Âêç‰∏çËÉΩÈáçÂ§ç
+	//ÈÅçÂéÜÊêúÁ¥¢Áî®Êà∑
 	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
 		if (Uname == (*it)->username) {
-			// ß∞‹£¨“—¥Ê‘⁄”√ªß√˚
-			cout << "◊¢≤· ß∞‹£°£°“—¥Ê‘⁄”√ªß√˚£°£°" << endl;
+			//Â§±Ë¥•ÔºåÂ∑≤Â≠òÂú®Áî®Êà∑Âêç
+			cout << "Ê≥®ÂÜåÂ§±Ë¥•ÔºÅÔºÅÂ∑≤Â≠òÂú®Áî®Êà∑ÂêçÔºÅÔºÅ" << endl;
 			system("pause");
 			system("cls");
 			return;
@@ -79,105 +110,105 @@ void Platform::User_register(Admin& m_Admin) {
 
 
 
-	cout << "«Î ‰»Î…Ë÷√√‹¬Î(◊Ó¥Û20Œª)£∫";
+	cout << "ËØ∑ËæìÂÖ•ËÆæÁΩÆÂØÜÁ†Å(ÊúÄÂ§ß20‰Ωç)Ôºö";
 	cin.sync();
 	getline(cin, Password);
 	if (size(Password) > 20) {
-		cout << "√‹¬Î≥¨π˝≥§∂»£°£°" << endl;
+		cout << "ÂØÜÁ†ÅË∂ÖËøáÈïøÂ∫¶ÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "«Î ‰»Î ÷ª˙∫≈(◊Ó∂‡20∏ˆ ˝◊÷)£∫";
+	cout << "ËØ∑ËæìÂÖ•ÊâãÊú∫Âè∑(ÊúÄÂ§ö20‰∏™Êï∞Â≠ó)Ôºö";
 	cin.sync();
 	getline(cin, phnNumber);
 	if (!isNumber(phnNumber)) {
-		cout << "≤ª « ˝◊÷£°£°" << endl;
+		cout << "‰∏çÊòØÊï∞Â≠óÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	//≈–∂œ «∑ÒŒ™’˚ ˝,œ»’“µΩ–° ˝µ„£¨‘ŸΩ¯––≥§∂»œ‡ºı
+	//Âà§Êñ≠ÊòØÂê¶‰∏∫Êï¥Êï∞,ÂÖàÊâæÂà∞Â∞èÊï∞ÁÇπÔºåÂÜçËøõË°åÈïøÂ∫¶Áõ∏Âáè
 	int k = 0;
 	for (k; k < phnNumber.length(); k++) {
 		if (phnNumber[k] == '.') break;
 	}
 	if (phnNumber.length() != k) {
-		cout << " ‰»Î ˝¡ø≤ª «’˚ ˝£°£°∑¢≤º ß∞‹£°£°" << endl;
+		cout << "ËæìÂÖ•Êï∞Èáè‰∏çÊòØÊï¥Êï∞ÔºÅÔºÅÂèëÂ∏ÉÂ§±Ë¥•ÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 	if (size(phnNumber) > 20) {
-		cout << " ÷ª˙∫≈≥¨π˝≥§∂»£°£°" << endl;
+		cout << "ÊâãÊú∫Âè∑Ë∂ÖËøáÈïøÂ∫¶ÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "«Î ‰»Îµÿ÷∑(◊Ó∂‡40∏ˆ◊÷)£∫";
+	cout << "ËØ∑ËæìÂÖ•Âú∞ÂùÄ(ÊúÄÂ§ö40‰∏™Â≠ó)Ôºö";
 	cin.sync();
 	getline(cin, address);
 	if (size(address) > 40) {
-		cout << "µÿ÷∑≥¨π˝≥§∂»£°£°" << endl;
+		cout << "Âú∞ÂùÄË∂ÖËøáÈïøÂ∫¶ÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	cout << "»∑∂®◊¢≤·£ø(Y/∆‰À¸) ";
+	cout << "Á°ÆÂÆöÊ≥®ÂÜåÔºü(Y/ÂÖ∂ÂÆÉ) ";
 	string judge;
 	cin.sync();
 	getline(cin, judge);
 	if (judge != "Y") {
-		cout << "∑≈∆˙◊¢≤·£°£°" << endl;
+		cout << "ÊîæÂºÉÊ≥®ÂÜåÔºÅÔºÅ" << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	////ø™±Ÿ–¬ø’º‰£¨¿˚”√∂ØÃ¨ ˝◊È£¨‘™Àÿ¿‡–ÕŒ™User¿‡µƒ÷∏’Î (usernumb‘› ±ªπ√ª+1£©
+	////ÂºÄËæüÊñ∞Á©∫Èó¥ÔºåÂà©Áî®Âä®ÊÄÅÊï∞ÁªÑÔºåÂÖÉÁ¥†Á±ªÂûã‰∏∫UserÁ±ªÁöÑÊåáÈíà (usernumbÊöÇÊó∂ËøòÊ≤°+1Ôºâ
 	//User** newUArray = new User * [m_Admin.numbUser+1];
 
-	////Ω´‘≠¿¥ø’º‰œ¬µƒ ˝æ›øΩ±¥µΩ–¬ø’º‰œ¬
-	////œ»◊ˆ≈–∂œ£¨”– ˝æ›æÕÕ˘¿Ô√Ê∑≈
+	////Â∞ÜÂéüÊù•Á©∫Èó¥‰∏ãÁöÑÊï∞ÊçÆÊã∑Ë¥ùÂà∞Êñ∞Á©∫Èó¥‰∏ã
+	////ÂÖàÂÅöÂà§Êñ≠ÔºåÊúâÊï∞ÊçÆÂ∞±ÂæÄÈáåÈù¢Êîæ
 	//if (m_Admin.userArray != NULL) {
 	//	for (int i = 0; i < m_Admin.numbUser; ++i) {
 	//		newUArray[i] = m_Admin.userArray[i];
 	//	}
 	//}
 
-	////¥¥Ω®–¬µƒ”√ªß∂‘œÛ
+	////ÂàõÂª∫Êñ∞ÁöÑÁî®Êà∑ÂØπË±°
 	//User* n_User = new User(UIDback(m_Admin.numbUser + 1), Uname, Password, phnNumber, address, 0.0, 1);
 
-	////∑≈Ω¯»•
+	////ÊîæËøõÂéª
 	//newUArray[m_Admin.numbUser] = n_User;
 
-	//// Õ∑≈‘≠”–ø’º‰
+	////ÈáäÊîæÂéüÊúâÁ©∫Èó¥
 	//delete[] m_Admin.userArray;
-	////∏¸∏ƒ–¬ø’º‰µƒ÷∏œÚ
+	////Êõ¥ÊîπÊñ∞Á©∫Èó¥ÁöÑÊåáÂêë
 	//m_Admin.userArray = newUArray;
-	////∏¸–¬”√ªß»À ˝
+	////Êõ¥Êñ∞Áî®Êà∑‰∫∫Êï∞
 	//m_Admin.numbUser++;
 
-	//¥¥Ω®–¬µƒ”√ªß∂‘œÛ
+	//ÂàõÂª∫Êñ∞ÁöÑÁî®Êà∑ÂØπË±°
 	User* n_User = new User(UIDback(m_Admin.numbUser + 1), Uname, Password, phnNumber, address, 0.0, 1);
 
-	//»∑∂®◊¢≤·£¨÷±Ω”Õ˘userVec¿Ô√Êpush–¬”√ªß¿‡÷∏’Î
+	//Á°ÆÂÆöÊ≥®ÂÜåÔºåÁõ¥Êé•ÂæÄuserVecÈáåÈù¢pushÊñ∞Áî®Êà∑Á±ªÊåáÈíà
 	m_Admin.userVec.push_back(n_User);
 
-	//∏¸–¬”√ªß»À ˝
+	//Êõ¥Êñ∞Áî®Êà∑‰∫∫Êï∞
 	m_Admin.numbUser++;
 
 
 
-	//≥…π¶ÃÌº”∫Û£¨±£¥ÊµΩŒƒº˛÷–
+	//ÊàêÂäüÊ∑ªÂä†ÂêéÔºå‰øùÂ≠òÂà∞Êñá‰ª∂‰∏≠
 	this->saveFILE(m_Admin);
 
 
 
-	cout << "◊¢≤·≥…π¶£°£°" << endl;
+	cout << "Ê≥®ÂÜåÊàêÂäüÔºÅÔºÅ" << endl;
 	system("pause");
 	system("cls");
 };
@@ -185,58 +216,91 @@ void Platform::User_register(Admin& m_Admin) {
 void Platform::UserLogin(Admin& m_Admin) {
 
 	cout << endl;
-	//¥¥Ω®–¬”√ªß÷∏’Î£¨∫Û÷∏œÚ”√ªß ˝æ›
+	//ÂàõÂª∫Êñ∞Áî®Êà∑ÊåáÈíàÔºåÂêéÊåáÂêëÁî®Êà∑Êï∞ÊçÆ
 	User* n_user;
 
 	string U_Name, U_key;
-	cout << "«Î ‰»Î”√ªß√˚£∫";
+	cout << "ËØ∑ËæìÂÖ•Áî®Êà∑ÂêçÔºö";
 	cin.sync();
 	getline(cin, U_Name);
-	cout << "«Î ‰»Î√‹¬Î£∫";
+	cout << "ËØ∑ËæìÂÖ•ÂØÜÁ†ÅÔºö";
 	cin.sync();
-	getline(cin, U_key);
+	//getline(cin, U_key);
+
+	//ËæìÂÖ•ÂØÜÁ†ÅÂõûÊòæ*
+	char a;
+	int i = 0;
+	while (1)
+	{
+		a = _getch();        //Ëé∑ÂèñËæìÂÖ•ÁöÑÂØÜÁ†Å
+		if (a == 13)		//ÂõûËΩ¶ËøîÂõû
+		{
+			break;
+		}
+		if (a == 8)			//ÈÄÄÊ†º
+		{
+			if (U_key.length() == 0)		//Â¶ÇÊûúÁ¨¨‰∏Ä‰∏™ÈîÆ‰∏∫ÈÄÄÊ†ºÈîÆ
+			{
+				cout << "ÂØÜÁ†Å‰∏∫Á©∫,ËØ∑ËæìÂÖ•ÂØÜÁ†ÅÔºö";
+				continue;
+			}
+			cout << "\b \b";
+			i++;							//Ê∏ÖÈô§ÊâÄË¶ÅÂà†ÊéâÁöÑÂ≠óÁ¨¶
+			U_key[U_key.length() - i] = '\0';
+
+		}
+		else
+		{
+			U_key += a;
+			cout << "*";
+		}
+
+	}
+	cin.sync();
+	cout << endl;
+
 
 	int flag = 0;
 	string judgeUN, judgeUK;
 
-	//±È¿˙À—À˜”√ªß
+	//ÈÅçÂéÜÊêúÁ¥¢Áî®Êà∑
 	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
 		judgeUN = (*it)->username;
 		judgeUK = (*it)->password;
-		//’“µΩ”√ªß
+		//ÊâæÂà∞Áî®Êà∑
 		if (U_Name == judgeUN && U_key == judgeUK) {
 			n_user = (*it);
-			//»Áπ˚”√ªßŒ™∑‚Ω˚◊¥Ã¨£¨‘Úµ«¬º ß∞‹
+			//Â¶ÇÊûúÁî®Êà∑‰∏∫Â∞ÅÁ¶ÅÁä∂ÊÄÅÔºåÂàôÁôªÂΩïÂ§±Ë¥•
 			if (n_user->userState == 0) {
-				cout << "µ«¬º ß∞‹£°£°”√ªß“—±ª∑‚Ω˚£°£°" << endl;
+				cout << "ÁôªÂΩïÂ§±Ë¥•ÔºÅÔºÅÁî®Êà∑Â∑≤Ë¢´Â∞ÅÁ¶ÅÔºÅÔºÅ" << endl;
 				system("pause");
 				system("cls");
 				return;
 			}
 			flag = 1;
-			cout << "≥…π¶µ«¬º£°" << endl;
+			cout << "ÊàêÂäüÁôªÂΩïÔºÅ" << endl;
 			system("pause");
 			break;
 		}
 	}
 
-	//»Áπ˚≥…π¶¡À,switch!!
+	//Â¶ÇÊûúÊàêÂäü‰∫Ü,switch!!
 	if (flag) {
-		//œ»Ω¯––«Â∆¡£¨»ª∫Û”√ªß≤Àµ•’π æ
+		//ÂÖàËøõË°åÊ∏ÖÂ±èÔºåÁÑ∂ÂêéÁî®Êà∑ËèúÂçïÂ±ïÁ§∫
 		system("cls");
-		//”√¿¥¥¢¥Ê”√ªß—°œÓ
+		//Áî®Êù•ÂÇ®Â≠òÁî®Êà∑ÈÄâÈ°π
 		string choiceuu;
 		bool judge = true;
 
 		while (judge) {
 
 			n_user->showUSERMenu();
-			cout << " ‰»Î—°œÓ£∫";
+			cout << "ËæìÂÖ•ÈÄâÈ°πÔºö";
 			cin.sync();
 			getline(cin, choiceuu);
 
 			if (size(choiceuu) > 1) {
-				cout << " ‰»Î”–ŒÛ£°«Î÷ÿ–¬ ‰»Î!!" << endl;
+				cout << "ËæìÂÖ•ÊúâËØØÔºÅËØ∑ÈáçÊñ∞ËæìÂÖ•!!" << endl;
 				system("pause");
 				system("cls");
 				continue;
@@ -244,41 +308,41 @@ void Platform::UserLogin(Admin& m_Admin) {
 
 			switch (choiceuu[0])
 			{
-			case '1':	//Œ“ «¬Úº“
-				n_user->Module_BUYER(m_Admin.numbGoods,m_Admin.numbOrder, m_Admin.userVec, m_Admin.goodsVec, m_Admin.orderVec);
+			case '1':	//ÊàëÊòØ‰π∞ÂÆ∂
+				n_user->Module_BUYER(m_Admin.numbGoods, m_Admin.numbOrder, m_Admin.userVec, m_Admin.goodsVec, m_Admin.orderVec);
 				break;
-			case '2':	//Œ“ «¬Ùº“
-				//“˝”√¥´≤Œ
+			case '2':	//ÊàëÊòØÂçñÂÆ∂
+				//ÂºïÁî®‰º†ÂèÇ
 				n_user->Module_SELLER(m_Admin.numbGoods, m_Admin.goodsVec, m_Admin.orderVec);
 				break;
-			case '3':	//∏ˆ»À–≈œ¢π‹¿Ì
-				//¥´÷µ¥´≤Œ£¨≤ª≈¬‘≠vector–ﬁ∏ƒ
+			case '3':	//‰∏™‰∫∫‰ø°ÊÅØÁÆ°ÁêÜ
+				//‰º†ÂÄº‰º†ÂèÇÔºå‰∏çÊÄïÂéüvector‰øÆÊîπ
 				n_user->infoManageUSER(m_Admin.userVec, m_Admin.orderVec);
-				//±£¥Ê ˝æ›
+				//‰øùÂ≠òÊï∞ÊçÆ
 				this->saveFILE(m_Admin);
 				break;
-			case '4':	//ÕÀ≥ˆµ«¬º
+			case '4':	//ÈÄÄÂá∫ÁôªÂΩï
 				n_user->exitUSER();
 				judge = false;
 				break;
 			default:
-				cout << " ‰»Î”–ŒÛ£°«Î÷ÿ–¬ ‰»Î!!" << endl;
+				cout << "ËæìÂÖ•ÊúâËØØÔºÅËØ∑ÈáçÊñ∞ËæìÂÖ•!!" << endl;
 				system("pause");
-				system("cls"); //«Â∆¡
+				system("cls"); //Ê∏ÖÂ±è
 				break;
 			}
 		}
 
 	}
 	else {
-		cout << "µ«¬º ß∞‹£°«ÎºÏ≤È”√ªß√˚ªÚ√‹¬Î «∑Ò’˝»∑£°" << endl;
+		cout << "ÁôªÂΩïÂ§±Ë¥•ÔºÅËØ∑Ê£ÄÊü•Áî®Êà∑ÂêçÊàñÂØÜÁ†ÅÊòØÂê¶Ê≠£Á°ÆÔºÅ" << endl;
 		system("pause");
 		system("cls");
 	}
 };
 
 
-/*************–≠÷˙–‘∫Ø ˝****************************************/
+/*************ÂçèÂä©ÊÄßÂáΩÊï∞****************************************/
 string UIDback(int i) {
 
 	string kksk;
@@ -294,7 +358,7 @@ string UIDback(int i) {
 
 	//char* suki = new char[4];
 	//strcpy(suki, kksk.c_str());
-	
+
 	return kksk;
 }
 
@@ -306,21 +370,21 @@ void Platform::saveFILE(Admin& m_Admin) {
 		return;
 	}
 
-	ofs << "”√ªßID,”√ªß√˚,√‹¬Î,¡™œµ∑Ω Ω,µÿ÷∑,«Æ∞¸”‡∂Ó,”√ªß◊¥Ã¨" << endl;
+	ofs << "Áî®Êà∑ID,Áî®Êà∑Âêç,ÂØÜÁ†Å,ËÅîÁ≥ªÊñπÂºè,Âú∞ÂùÄ,Èí±ÂåÖ‰ΩôÈ¢ù,Áî®Êà∑Áä∂ÊÄÅ" << endl;
 
-	//”√ªßvec–¥»Î
+	//Áî®Êà∑vecÂÜôÂÖ•
 	for (vector<User*>::iterator it = m_Admin.userVec.begin(); it != m_Admin.userVec.end(); it++) {
 		ofs << (*it)->userID << ","
 			<< (*it)->username << ","
 			<< (*it)->password << ","
 			<< (*it)->phoneNumber << ","
 			<< (*it)->address << ","
-			<< (*it)->balance << ",";	//double◊™string
+			<< (*it)->balance << ",";	//doubleËΩ¨string
 		if ((*it)->userState == 1) {
-			ofs << "’˝≥£" << endl;
+			ofs << "Ê≠£Â∏∏" << endl;
 		}
 		else {
-			ofs << "∑‚Ω˚" << endl;
+			ofs << "Â∞ÅÁ¶Å" << endl;
 		}
 
 	}

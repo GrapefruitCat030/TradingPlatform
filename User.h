@@ -1,4 +1,4 @@
-using namespace std;
+ï»¿using namespace std;
 #include<string>
 #include<vector>
 #include<iostream>
@@ -12,6 +12,8 @@ using namespace std;
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include "conio.h"
 
 #include"Calculator.h"
 #include"SQL.h"
@@ -28,49 +30,49 @@ public:
 	User(string userID, string username, string password, string phoneNumber, string address, double balance, int userState);
 	User(vector<string> vcstr);
 	//User(const User& cpyuser);
-	//ÓÃ»§ID
+	//ç”¨æˆ·ID
 	string userID;
-	//ÓÃ»§Ãû
+	//ç”¨æˆ·å
 	string username;
-	//ÃÜÂëphoneNumber
+	//å¯†ç phoneNumber
 	string password;
-	//ÁªÏµ·½Ê½
+	//è”ç³»æ–¹å¼
 	string phoneNumber;
-	//µØÖ·
+	//åœ°å€
 	string address;
-	//Ç®°üÓà¶î
+	//é’±åŒ…ä½™é¢
 	double balance;
-	//ÓÃ»§×´Ì¬£º1ÎªÕı³££¬0Îª·â½û
+	//ç”¨æˆ·çŠ¶æ€ï¼š1ä¸ºæ­£å¸¸ï¼Œ0ä¸ºå°ç¦
 	int userState;
 
 
 
-	//-------------¹¦ÄÜº¯Êı-----------------
-	// ÓÃ»§²Ëµ¥ÏÔÊ¾
+	//-------------åŠŸèƒ½å‡½æ•°-----------------
+	// ç”¨æˆ·èœå•æ˜¾ç¤º
 	void showUSERMenu();
 
-	//Âò¼ÒÄ£Ê½
+	//ä¹°å®¶æ¨¡å¼
 	void Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec, vector<Goods*>& gdvec, vector<Order*>& orvec);
 
-	//Âô¼ÒÄ£Ê½
-	void Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec); // iÎªÉÌÆ·ÊıÁ¿, gdvec´«Öµ´«²Î
+	//å–å®¶æ¨¡å¼
+	void Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& orvec); // iä¸ºå•†å“æ•°é‡, gdvecä¼ å€¼ä¼ å‚
 
-	//¸öÈËĞÅÏ¢¹ÜÀí,´«ÈëvectorÒÔ·½±ãÓÃ»§ĞÅÏ¢ĞŞ¸ÄÊ±½øĞĞÓÃ»§ÃûµÄ±éÀú
+	//ä¸ªäººä¿¡æ¯ç®¡ç†,ä¼ å…¥vectorä»¥æ–¹ä¾¿ç”¨æˆ·ä¿¡æ¯ä¿®æ”¹æ—¶è¿›è¡Œç”¨æˆ·åçš„éå†
 	void infoManageUSER(vector<User*> vec, vector<Order*>& orvec);
 
-	//×¢ÏúµÇÂ¼
+	//æ³¨é”€ç™»å½•
 	void exitUSER();
 
 
-	//ĞÅÏ¢¹ÜÀí²Ëµ¥ÏÔÊ¾
+	//ä¿¡æ¯ç®¡ç†èœå•æ˜¾ç¤º
 	void showINFOMenu();
-	//²é¿´ĞÅÏ¢
+	//æŸ¥çœ‹ä¿¡æ¯
 	void GetUserinfo(vector<Order*>& orvec);
-	//ĞŞ¸ÄĞÅÏ¢
+	//ä¿®æ”¹ä¿¡æ¯
 	void ModifyUserinfo(vector<User*> vec);
-	//³äÖµ
+	//å……å€¼
 	void Topup_Userbalance();
-	//·µ»ØÓÃ»§Ö÷½çÃæ
+	//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 	void exitINFO();
 
 };
@@ -81,19 +83,19 @@ public:
 
 	using User::User;
 
-	//Âô¼Ò²Ëµ¥Õ¹Ê¾
+	//å–å®¶èœå•å±•ç¤º
 	void showSELLERMenu();
-	//·¢²¼ÉÌÆ·
-	void publishGOODS(int& numbgoods, vector<Goods*>& gdvec); // iÊÇ´ÓÂô¼ÒÄ£Ê½º¯Êı´«½øÀ´µÄÉÌÆ·ÊıÁ¿, gdvec´«Öµ´«²Î
-	//²é¿´·¢²¼ÉÌÆ·
+	//å‘å¸ƒå•†å“
+	void publishGOODS(int& numbgoods, vector<Goods*>& gdvec); // iæ˜¯ä»å–å®¶æ¨¡å¼å‡½æ•°ä¼ è¿›æ¥çš„å•†å“æ•°é‡, gdvecä¼ å€¼ä¼ å‚
+	//æŸ¥çœ‹å‘å¸ƒå•†å“
 	void viewSGOODS(string ID, vector<Goods*>& gdvec);
-	//ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+	//ä¿®æ”¹å•†å“ä¿¡æ¯
 	void modifyGOODS(vector<Goods*>& gdvec);
-	//ÏÂ¼ÜÉÌÆ·
+	//ä¸‹æ¶å•†å“
 	void removeGOODS(vector<Goods*>& gdvec);
-	//²é¿´ÀúÊ·¶©µ¥
+	//æŸ¥çœ‹å†å²è®¢å•
 	void viewSORDER(string ID, vector<Order*>& orvec);
-	//·µ»ØÓÃ»§Ö÷½çÃæ
+	//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 	void exitSELLER();
 
 };
@@ -102,38 +104,38 @@ class Buyer : public User {
 public:
 	using User::User;
 
-	//Âò¼Ò²Ëµ¥Õ¹Ê¾
+	//ä¹°å®¶èœå•å±•ç¤º
 	void showBUYERMenu();
-	//²é¿´ÉÌÆ·ÁĞ±í£¨Ö»ÄÜ¿´µ½ÔÚÊÛ£©
+	//æŸ¥çœ‹å•†å“åˆ—è¡¨ï¼ˆåªèƒ½çœ‹åˆ°åœ¨å”®ï¼‰
 	void viewBGOODS(vector<Goods*>& gdvec);
-	//¹ºÂòÉÌÆ·
-	void buyGOODS(int& numbgoods, int& numborder,vector <User*>& userVec, vector<Goods*>& gdvec, vector<Order*>& orvec);
-	//ËÑË÷ÉÌÆ·
+	//è´­ä¹°å•†å“
+	void buyGOODS(int& numbgoods, int& numborder, vector <User*>& userVec, vector<Goods*>& gdvec, vector<Order*>& orvec);
+	//æœç´¢å•†å“
 	void searchGOODS(vector<Goods*>& gdvec);
-	//²é¿´ÀúÊ·¶©µ¥
+	//æŸ¥çœ‹å†å²è®¢å•
 	void viewBORDER(vector<Order*>& orvec);
-	//²é¿´ÉÌÆ·ÏêÏ¸ĞÅÏ¢
+	//æŸ¥çœ‹å•†å“è¯¦ç»†ä¿¡æ¯
 	void detailGOODS(vector<Goods*>& gdvec);
-	//·µ»ØÓÃ»§Ö÷½çÃæ
+	//è¿”å›ç”¨æˆ·ä¸»ç•Œé¢
 	void exitBUYER();
 
 };
 
-//-----------------------Ğ­ÖúĞÔº¯Êı
+//-----------------------ååŠ©æ€§å‡½æ•°
 
-//·µ»ØÉÌÆ·IDµÄstring
+//è¿”å›å•†å“IDçš„string
 string GOODSIDback(int i);
 
-//·µ»Ø¶©µ¥ID
+//è¿”å›è®¢å•ID
 string ORDERIDback(int i);
 
-//±£´æÉÌÆ·ÁĞ±í
+//ä¿å­˜å•†å“åˆ—è¡¨
 void saveGOOD(vector<Goods*> gdvec);
-//±£´æ¶©µ¥ÁĞ±í
+//ä¿å­˜è®¢å•åˆ—è¡¨
 void saveORDER(vector<Order*> orvec);
 
-//ÅĞ¶ÏÊäÈëÊÇ·ñÎªÊı×Ö
+//åˆ¤æ–­è¾“å…¥æ˜¯å¦ä¸ºæ•°å­—
 bool isNumber(const string& str);
 
-//Óà¶îÊ½×ÓÉú³É
+//ä½™é¢å¼å­ç”Ÿæˆ
 string createBlcStr(vector<Order*> orvec, string inID);
