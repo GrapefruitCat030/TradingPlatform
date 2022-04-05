@@ -1,46 +1,46 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 #include<string>
 #include"Platform.h"
 
 
 int main() {
-	//ÊµÀı»¯Æ½Ì¨¶ÔÏó
+	//å®ä¾‹åŒ–å¹³å°å¯¹è±¡
 	Platform PL;
-	//ÊµÀı»¯¹ÜÀíÕß¶ÔÏó
+	//å®ä¾‹åŒ–ç®¡ç†è€…å¯¹è±¡
 	Admin AD;
-	//ÓÃÀ´´¢´æÓÃ»§Ñ¡Ïî
+	//ç”¨æ¥å‚¨å­˜ç”¨æˆ·é€‰é¡¹
 	string choice;
 	while (true) {
 
 		PL.show_Menu();
-		cout << "ÊäÈëÑ¡Ïî£º";
+		cout << "è¾“å…¥é€‰é¡¹ï¼š";
 		cin.sync();
 		getline(cin, choice);
 		if (size(choice) > 1) {
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
 			system("cls");
 			continue;
 		}
 		switch (choice[0])
 		{
-		case '1':	//¹ÜÀíÔ±µÇÂ¼
+		case '1':	//ç®¡ç†å‘˜ç™»å½•
 			PL.AdminLogin(AD);
 			break;
-		case '2':	//ÓÃ»§×¢²á
+		case '2':	//ç”¨æˆ·æ³¨å†Œ
 			PL.User_register(AD);
 			break;
-		case '3':	//ÓÃ»§µÇÂ¼
+		case '3':	//ç”¨æˆ·ç™»å½•
 			PL.UserLogin(AD);
 			break;
-		case '4':	//ÍË³öÆ½Ì¨
+		case '4':	//é€€å‡ºå¹³å°
 			PL.exitPlatform();
 			break;
 		default:
-			cout << "ÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë!!" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥!!" << endl;
 			system("pause");
-			system("cls"); //ÇåÆÁ
+			system("cls"); //æ¸…å±
 			break;
 		}
 	}

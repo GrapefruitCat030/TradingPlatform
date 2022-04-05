@@ -1,26 +1,25 @@
-#pragma once
+ï»¿#pragma once
 using namespace std;
 #include<string>
 #include<vector>
 
-
 class Goods {
 public:
-	//ÉÌÆ·ID
+	//å•†å“ID
 	string commodityID;
-	//Ãû³Æ
+	//åç§°
 	string commodityName;
-	//¼Û¸ñ(ĞèÒªÊ±ÔÙ½øĞĞ×ª»»),Ò»Î»Ğ¡Êı
+	//ä»·æ ¼(éœ€è¦æ—¶å†è¿›è¡Œè½¬æ¢),ä¸€ä½å°æ•°
 	string price;
-	//ÊıÁ¿(ĞèÒªÊ±ÔÙ½øĞĞ×ª»»),Ò»¶¨ÎªÕûÊı
+	//æ•°é‡(éœ€è¦æ—¶å†è¿›è¡Œè½¬æ¢),ä¸€å®šä¸ºæ•´æ•°
 	string number;
-	//ÃèÊö
+	//æè¿°
 	string description;
-	//Âô¼ÒID
+	//å–å®¶ID
 	string sellerID;
-	//ÉÏ¼ÜÊ±¼ä
+	//ä¸Šæ¶æ—¶é—´
 	string addedDate;
-	//ÉÌÆ·×´Ì¬£ºÏúÊÛÖĞ || ÒÑÏÂ¼Ü
+	//å•†å“çŠ¶æ€ï¼šé”€å”®ä¸­ || å·²ä¸‹æ¶
 	string state;
 
 	Goods();

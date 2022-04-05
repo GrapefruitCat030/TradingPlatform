@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include<iostream>
 using namespace std;
@@ -7,14 +7,14 @@ using namespace std;
 #include<vector>
 #include<sstream>
 
-//ÅĞ¶ÏstrÊÇ·ñÎªÊı×Ö
+//åˆ¤æ–­stræ˜¯å¦ä¸ºæ•°å­—
 bool CisNumber(const string& str);
-//ÅĞ¶ÏÊäÈë±í´ïÊ½
+//åˆ¤æ–­è¾“å…¥è¡¨è¾¾å¼
 bool judgecin(const string& kksk);
-//½øĞĞ±í´ïÊ½×ªºó×º
+//è¿›è¡Œè¡¨è¾¾å¼è½¬åç¼€
 void transform(vector<string>& stk, string str);
-//½øĞĞ¼ÆËã
+//è¿›è¡Œè®¡ç®—
 double calcalcal(vector<string> vcstr);
 
-//µ÷ÓÃ¼ÆËãÆ÷½Ó¿Ú
+//è°ƒç”¨è®¡ç®—å™¨æ¥å£
 double useCal(string str);

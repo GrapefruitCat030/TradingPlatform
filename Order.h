@@ -1,28 +1,27 @@
-#pragma once
+ï»¿#pragma once
 using namespace std;
 #include<string>
 #include<vector>
 
 class Order {
 public:
-	//¶©µ¥ID
+	//è®¢å•ID
 	string orderID;
-	//ÉÌÆ·ID
+	//å•†å“ID
 	string commodityID;
-	//½»Ò×µ¥¼Û
+	//äº¤æ˜“å•ä»·
 	string unitPrice;
-	//ÊıÁ¿
+	//æ•°é‡
 	string number;
-	//½»Ò×Ê±¼ä
+	//äº¤æ˜“æ—¶é—´
 	string date;
-	//Âô¼ÒID
+	//å–å®¶ID
 	string sellerID;
-	//Âò¼ÒID
+	//ä¹°å®¶ID
 	string buyerID;
 
-
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	Order(vector<string> strvc);
-	Order(string ordID, string gID, string price, string numb,string theTime, string seID, string buyID);
+	Order(string ordID, string gID, string price, string numb, string theTime, string seID, string buyID);
 
 };

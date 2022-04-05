@@ -1,7 +1,7 @@
-#include"Order.h"
+ï»¿#include"Order.h"
 
 Order::Order(vector<string> vcstr) {
-	//¶©µ¥ID,ÉÌÆ·ID,½»Ò×µ¥¼Û,ÊıÁ¿,½»Ò×Ê±¼ä,Âô¼ÒID,Âò¼ÒID
+	//è®¢å•ID,å•†å“ID,äº¤æ˜“å•ä»·,æ•°é‡,äº¤æ˜“æ—¶é—´,å–å®¶ID,ä¹°å®¶ID
 	//T001, M001, 10.0, 10, 2022 - 02 - 15, U001, U002
 	int i = 0;
 	for (i; i < 7; ++i) {
@@ -34,6 +34,7 @@ Order::Order(vector<string> vcstr) {
 
 	}
 }
+
 
 Order::Order(string ordID, string gID, string price, string numb, string theTime, string seID, string buyID) {
 	this->orderID = ordID;

@@ -1,4 +1,5 @@
-#include"Goods.h"
+ï»¿#include"Goods.h"
+
 
 Goods::Goods(string cID, string cName, string prc, string numb, string descr, string sID, string addD, string sta) {
 	commodityID = cID;
@@ -12,8 +13,8 @@ Goods::Goods(string cID, string cName, string prc, string numb, string descr, st
 }
 
 Goods::Goods(vector<string> vcstr) {
-	//ÉÌÆ·ID,Ãû³Æ,¼Û¸ñ,ÊıÁ¿,ÃèÊö,Âô¼ÒID,ÉÏ¼ÜÊ±¼ä,ÉÌÆ·×´Ì¬
-	//M001,±ù¶Ø¶Ø,100.0,10,2022¶¬°Â¼ªÏéÎï,U001,2022-02-15,ÏúÊÛÖĞ
+	//å•†å“ID,åç§°,ä»·æ ¼,æ•°é‡,æè¿°,å–å®¶ID,ä¸Šæ¶æ—¶é—´,å•†å“çŠ¶æ€
+	//M001,å†°æ•¦æ•¦,100.0,10,2022å†¬å¥¥å‰ç¥¥ç‰©,U001,2022-02-15,é”€å”®ä¸­
 	int i = 0;
 	for (i; i < 8; ++i) {
 		switch (i)

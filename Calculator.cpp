@@ -1,5 +1,4 @@
-#include"Calculator.h"
-
+ï»¿#include"Calculator.h"
 
 bool CisNumber(const string& str) {
 	istringstream sin(str);
@@ -8,17 +7,17 @@ bool CisNumber(const string& str) {
 }
 
 bool judgecin(const string& kksk) {
-	//È«ÇøÓòÅĞ¶Ï(ÌØÊâ×Ö·û)
+	//å…¨åŒºåŸŸåˆ¤æ–­(ç‰¹æ®Šå­—ç¬¦)
 	for (int i = 0; i < kksk.size(); i++) {
 		if (!(kksk[i] == '+' || kksk[i] == '-' || kksk[i] == '*' || kksk[i] == '/' || kksk[i] == '.' || \
 			kksk[i] == ' ' || kksk[i] == '(' || kksk[i] == ')' || isdigit(kksk[i]))) {
-			cout << "º¬ÓĞÌØÊâ×Ö·û£¡£¡" << endl;
+			cout << "å«æœ‰ç‰¹æ®Šå­—ç¬¦ï¼ï¼" << endl;
 			return false;
 		}
 
 	}
 
-	//À¨ºÅÅĞ¶Ï
+	//æ‹¬å·åˆ¤æ–­
 	int lefpa = 0, rigpa = 0;
 	int p = 0;
 	while (p < kksk.length()) {
@@ -28,44 +27,44 @@ bool judgecin(const string& kksk) {
 	}
 	p = 0;
 	if (lefpa != rigpa) {
-		cout << "À¨ºÅÊıÁ¿´íÎó£¡£¡" << endl;
+		cout << "æ‹¬å·æ•°é‡é”™è¯¯ï¼ï¼" << endl;
 		return false;
 	}
 
 
-	//Ğ¡ÊıµãÇ°ºóÊı×ÖÅĞ¶Ï
+	//å°æ•°ç‚¹å‰åæ•°å­—åˆ¤æ–­
 	if (kksk[0] == '.') {
-		cout << "Ğ¡ÊıµãÊ¹ÓÃ´íÎó£¡" << endl;
+		cout << "å°æ•°ç‚¹ä½¿ç”¨é”™è¯¯ï¼" << endl;
 		return false;
 	}
 	if (kksk[kksk.length() - 1] == '.') {
-		cout << "Ğ¡ÊıµãÊ¹ÓÃ´íÎó£¡" << endl;
+		cout << "å°æ•°ç‚¹ä½¿ç”¨é”™è¯¯ï¼" << endl;
 		return false;
 	}
-	//Á½Î»Ğ¡ÊıÊäÈë´íÎóÅĞ¶Ï
+	//ä¸¤ä½å°æ•°è¾“å…¥é”™è¯¯åˆ¤æ–­
 	for (int k = 0; k <= kksk.length() - 1; k++) {
 		if (kksk[k] == '.' && k + 2 <= kksk.length() - 1) {
 			if (isdigit(kksk[k + 1]) && isdigit(kksk[k + 2])) {
-				cout << "Ö»ÄÜÎªÒ»Î»Ğ¡Êı£¡" << endl;
+				cout << "åªèƒ½ä¸ºä¸€ä½å°æ•°ï¼" << endl;
 				return false;
 			}
 			if (isdigit(kksk[k + 1]) && kksk[k + 2] == '.') {
-				cout << "Ğ¡ÊıµãÎóÓÃ£¡" << endl;
+				cout << "å°æ•°ç‚¹è¯¯ç”¨ï¼" << endl;
 				return false;
 			}
 
 		}
 	}
 	for (int k = 0; k <= kksk.length() - 1; k++) {
-		//·ÀÖ¹ÏÂ±êÒç³ö
+		//é˜²æ­¢ä¸‹æ ‡æº¢å‡º
 		if (k + 1 <= kksk.length() - 2) {
 			if (kksk[k + 1] == '.') {
 				if (!isdigit(kksk[k])) {
-					cout << "Ğ¡ÊıµãÊ¹ÓÃ´íÎó£¡" << endl;
+					cout << "å°æ•°ç‚¹ä½¿ç”¨é”™è¯¯ï¼" << endl;
 					return false;
 				}
 				if (!isdigit(kksk[k + 2])) {
-					cout << "Ğ¡ÊıµãÊ¹ÓÃ´íÎó£¡" << endl;
+					cout << "å°æ•°ç‚¹ä½¿ç”¨é”™è¯¯ï¼" << endl;
 					return false;
 				}
 			}
@@ -73,7 +72,7 @@ bool judgecin(const string& kksk) {
 
 	}
 
-	////Ê¹ÓÃ×Ö·û´®Á÷ÅĞ¶Ï²Ù×÷·ûÓë²Ù×÷ÊıÊıÁ¿ÊÇ·ñÏàµÈ
+	////ä½¿ç”¨å­—ç¬¦ä¸²æµåˆ¤æ–­æ“ä½œç¬¦ä¸æ“ä½œæ•°æ•°é‡æ˜¯å¦ç›¸ç­‰
 	//stringstream jud_bySpace(kksk);
 	//vector<string> jbS;
 	//string s;
@@ -87,26 +86,26 @@ bool judgecin(const string& kksk) {
 	//}
 
 
-	//ÔËËã·ûÊ¹ÓÃÅĞ¶Ï
+	//è¿ç®—ç¬¦ä½¿ç”¨åˆ¤æ–­
 	if (kksk[0] == '+' || kksk[0] == '*' || kksk[0] == '/') {
-		cout << "²Ù×÷·ûÊ¹ÓÃ´íÎó£¡Ê×Ïî²»ÄÜÎª³ı¼õºÅÍâµÄ²Ù×÷·û£¡" << endl;
+		cout << "æ“ä½œç¬¦ä½¿ç”¨é”™è¯¯ï¼é¦–é¡¹ä¸èƒ½ä¸ºé™¤å‡å·å¤–çš„æ“ä½œç¬¦ï¼" << endl;
 		return false;
 	}
 	if (kksk[kksk.length() - 1] == '+' || kksk[kksk.length() - 1] == '*' || kksk[kksk.length() - 1] == '/' || kksk[kksk.length() - 1] == '-') {
-		cout << "²Ù×÷·ûÊ¹ÓÃ´íÎó£¡Î²Ïî²»ÄÜÎª²Ù×÷·û£¡" << endl;
+		cout << "æ“ä½œç¬¦ä½¿ç”¨é”™è¯¯ï¼å°¾é¡¹ä¸èƒ½ä¸ºæ“ä½œç¬¦ï¼" << endl;
 		return false;
 	}
 	for (int s = 0; s <= kksk.length() - 1; s++) {
-		//µ±Ç°sÎªÊı×Ö
+		//å½“å‰sä¸ºæ•°å­—
 		if (isdigit(kksk[s])) {
 			bool spaceFlag = false;
 			for (int i = s + 1; i <= kksk.length() - 1; i++) {
 				if (kksk[i] == '(') {
-					cout << "Êı×Ö²»ÄÜºÍÀ¨ºÅÌùºÏ£¡" << endl;
+					cout << "æ•°å­—ä¸èƒ½å’Œæ‹¬å·è´´åˆï¼" << endl;
 					return false;
 				}
 				else if (isdigit(kksk[i]) && spaceFlag) {
-					cout << "Êı×Ö²»ÄÜºÍÊı×Ö¸ô×Å¿Õ¸ñÌùºÏ£¡" << endl;
+					cout << "æ•°å­—ä¸èƒ½å’Œæ•°å­—éš”ç€ç©ºæ ¼è´´åˆï¼" << endl;
 					return false;
 				}
 				else {
@@ -120,16 +119,16 @@ bool judgecin(const string& kksk) {
 			}
 		}
 
-		//µ±Ç°sÎª(
+		//å½“å‰sä¸º(
 		else if (kksk[s] == '(') {
 			bool spaceFlag = false;
 			for (int i = s + 1; i <= kksk.length() - 1; i++) {
 				if (kksk[i] == '+' || kksk[i] == '*' || kksk[i] == '/') {
-					cout << "×óÀ¨ºÅ²»ÄÜÖ±½Ó¸ú²Ù×÷·û£¡" << endl;
+					cout << "å·¦æ‹¬å·ä¸èƒ½ç›´æ¥è·Ÿæ“ä½œç¬¦ï¼" << endl;
 					return false;
 				}
 				else if (kksk[i] == ')') {
-					cout << "×óÀ¨ºÅ²»ÄÜÖ±½Ó¸úÓÒÀ¨ºÅ£¡" << endl;
+					cout << "å·¦æ‹¬å·ä¸èƒ½ç›´æ¥è·Ÿå³æ‹¬å·ï¼" << endl;
 					return false;
 				}
 
@@ -144,12 +143,12 @@ bool judgecin(const string& kksk) {
 			}
 		}
 
-		//µ±Ç°sÎª)
+		//å½“å‰sä¸º)
 		else if (kksk[s] == ')') {
 			bool spaceFlag = false;
 			for (int i = s + 1; i <= kksk.length() - 1; i++) {
 				if (isdigit(kksk[i])) {
-					cout << "¿Õ¸ñÊ¹ÓÃ´íÎó£¡ÓÒÀ¨ºÅ²»ÄÜÖ±½Ó¸úÊı×Ö£¡" << endl;
+					cout << "ç©ºæ ¼ä½¿ç”¨é”™è¯¯ï¼å³æ‹¬å·ä¸èƒ½ç›´æ¥è·Ÿæ•°å­—ï¼" << endl;
 					return false;
 				}
 				else {
@@ -163,22 +162,22 @@ bool judgecin(const string& kksk) {
 			}
 		}
 
-		//µ±Ç°sÎª . || ' ' 
+		//å½“å‰sä¸º . || ' ' 
 		else if (kksk[s] == '.' || kksk[s] == ' ') {
 			continue;
 		}
 
-		//µ±Ç°sÎª²Ù×÷·û
+		//å½“å‰sä¸ºæ“ä½œç¬¦
 		else if (kksk[s] == '+' || kksk[s] == '-' || kksk[s] == '*' || kksk[s] == '/') {
 
 			bool spaceFlag = false;
 			for (int i = s + 1; i <= kksk.length() - 1; i++) {
 				if (kksk[i] == '+' || kksk[i] == '*' || kksk[i] == '/' || kksk[i] == '-') {
-					cout << "²Ù×÷·û²»ÄÜÖ±½Ó¸ú²Ù×÷·û£¡" << endl;
+					cout << "æ“ä½œç¬¦ä¸èƒ½ç›´æ¥è·Ÿæ“ä½œç¬¦ï¼" << endl;
 					return false;
 				}
 				else if (kksk[i] == ')') {
-					cout << "²Ù×÷·û²»ÄÜÖ±½Ó¸úÓÒÀ¨ºÅ£¡" << endl;
+					cout << "æ“ä½œç¬¦ä¸èƒ½ç›´æ¥è·Ÿå³æ‹¬å·ï¼" << endl;
 					return false;
 				}
 				else {
@@ -205,14 +204,14 @@ void transform(vector<string>& stk, string str) {
 
 	stack<char> MMstk;
 
-	//ÓÃÒÔ¶ÁÈ¡Õû¸öÊı×ÖµÄ¿ªÊ¼ÏÂ±ê
+	//ç”¨ä»¥è¯»å–æ•´ä¸ªæ•°å­—çš„å¼€å§‹ä¸‹æ ‡
 	int flag = 0;
 	string temp;
 
 	int i = 0;
 	while (i < str.length()) {
 
-		//Îª¿Õ¸ñ
+		//ä¸ºç©ºæ ¼
 		if (str[i] == ' ') {
 			if (i != flag) {
 				temp = str.substr(flag, i - flag);
@@ -226,15 +225,15 @@ void transform(vector<string>& stk, string str) {
 			continue;
 		}
 
-		//Îª×óÀ¨ºÅ£¬ÈëÕ»
+		//ä¸ºå·¦æ‹¬å·ï¼Œå…¥æ ˆ
 		else if (str[i] == '(') {
 			MMstk.push(str[i]);
 		}
 
 
-		//Èç¹ûchÊÇ²Ù×÷·û
+		//å¦‚æœchæ˜¯æ“ä½œç¬¦
 		else if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/') {
-			//¼õºÅÇ°Ò»Î»Îª×óÀ¨ºÅ
+			//å‡å·å‰ä¸€ä½ä¸ºå·¦æ‹¬å·
 			if (i - 1 >= 0 && (str[i - 1] == '(') && str[i] == '-') {
 				stk.push_back("0");
 			}
@@ -245,15 +244,15 @@ void transform(vector<string>& stk, string str) {
 				flag = i;
 			}
 			while (true) {
-				// (a) Õ»Îª¿Õ»òÕ»¶¥ÔªËØÎª×óÔ²À¨ºÅ
+				// (a) æ ˆä¸ºç©ºæˆ–æ ˆé¡¶å…ƒç´ ä¸ºå·¦åœ†æ‹¬å·
 				if (MMstk.empty() || MMstk.top() == '(') {
 					MMstk.push(str[i]);
 					break;
 				}
-				// °´ÓÅÏÈ¼¶ÅĞ¶ÏÈëÕ»
+				// æŒ‰ä¼˜å…ˆçº§åˆ¤æ–­å…¥æ ˆ
 				else if (MMstk.top() == '+' || MMstk.top() == '-' || MMstk.top() == '*' || MMstk.top() == '/') {
-					//(b) Èç¹ûchÓÅÏÈ¼¶±ÈÕ»¶¥ÔªËØ¸ß£¬ÄÇÃ´°ÑchÈëÕ»				
-					//(c) chÓÅÏÈ¼¶µÍÓÚ»òÕßµÈÓÚÕ»¶¥ÔªËØ,°ÑÕ»¶¥ÔªËØ³öÕ»²¢Êä³öÖ®£¬×ª£¨a£©
+					//(b) å¦‚æœchä¼˜å…ˆçº§æ¯”æ ˆé¡¶å…ƒç´ é«˜ï¼Œé‚£ä¹ˆæŠŠchå…¥æ ˆ				
+					//(c) chä¼˜å…ˆçº§ä½äºæˆ–è€…ç­‰äºæ ˆé¡¶å…ƒç´ ,æŠŠæ ˆé¡¶å…ƒç´ å‡ºæ ˆå¹¶è¾“å‡ºä¹‹ï¼Œè½¬ï¼ˆaï¼‰
 
 					if (MMstk.top() == '*' || MMstk.top() == '/') {
 						char theTop = MMstk.top();
@@ -284,7 +283,7 @@ void transform(vector<string>& stk, string str) {
 					break;
 			}
 		}
-		//ÎªÓÒÔ²À¨ºÅ
+		//ä¸ºå³åœ†æ‹¬å·
 		else if (str[i] == ')') {
 			if (i != flag) {
 				temp = str.substr(flag, i - flag);
@@ -294,7 +293,7 @@ void transform(vector<string>& stk, string str) {
 			while (!MMstk.empty())
 			{
 				if (MMstk.top() == '(') {
-					//'('³öÕ»
+					//'('å‡ºæ ˆ
 					MMstk.pop();
 					break;
 				}
@@ -315,7 +314,7 @@ void transform(vector<string>& stk, string str) {
 
 
 
-		//½«¸¡µãÊı´æºÃ(Óöµ½Êı×ÖºÍ.)
+		//å°†æµ®ç‚¹æ•°å­˜å¥½(é‡åˆ°æ•°å­—å’Œ.)
 		else {
 			i++;
 			continue;
@@ -338,16 +337,16 @@ void transform(vector<string>& stk, string str) {
 double calcalcal(vector<string> vcstr) {
 
 	vector<string> cpyvc = vcstr;
-	//´¢´æ²Ù×÷Êı
+	//å‚¨å­˜æ“ä½œæ•°
 	stack<double> ssk;
 
 	int i = 0;
 	while (i != cpyvc.size()) {
 		if (cpyvc[i] == "+" || cpyvc[i] == "-" || cpyvc[i] == "*" || cpyvc[i] == "/") {
-			//ÊÇ²Ù×÷·û, ´ÓÕ»ÀïÈ¡³öÁ½¸öÊı½øĞĞÔËËã£¬½á¹ûÔÙ½øĞĞÈëÕ»
+			//æ˜¯æ“ä½œç¬¦, ä»æ ˆé‡Œå–å‡ºä¸¤ä¸ªæ•°è¿›è¡Œè¿ç®—ï¼Œç»“æœå†è¿›è¡Œå…¥æ ˆ
 			double n1 = ssk.top();
 			ssk.pop();
-			//Ë«Ä¿²Ù×÷
+			//åŒç›®æ“ä½œ
 			if (!ssk.empty()) {
 				double n2 = ssk.top();
 				ssk.pop();
@@ -370,7 +369,7 @@ double calcalcal(vector<string> vcstr) {
 					ssk.push(rel);
 				}
 			}
-			//µ¥Ä¿²Ù×÷
+			//å•ç›®æ“ä½œ
 			else {
 				double n2 = 0.0;
 				if (cpyvc[i] == "-") {
@@ -381,7 +380,7 @@ double calcalcal(vector<string> vcstr) {
 					cout << "wrong, its not '-' ";
 			}
 		}
-		//ÊÇÊı×ÖµÄ»°¾ÍÈëÕ»(¸¡µãÊı)
+		//æ˜¯æ•°å­—çš„è¯å°±å…¥æ ˆ(æµ®ç‚¹æ•°)
 		else {
 			ssk.push(stod(cpyvc[i]));
 		}
