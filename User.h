@@ -23,7 +23,6 @@
 #define FILEGOODS "commodity.txt"
 #define FILEORDER "order.txt"
 
-
 class User {
 public:
 	User();

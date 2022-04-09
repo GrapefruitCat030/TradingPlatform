@@ -9,6 +9,8 @@ using namespace std;
 #include "conio.h"
 
 
+#include"Chatbox.h"
+
 #define ADNAME "admin"
 #define ADKEY "123456"
 

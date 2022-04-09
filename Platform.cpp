@@ -321,7 +321,10 @@ void Platform::UserLogin(Admin& m_Admin) {
 				//保存数据
 				this->saveFILE(m_Admin);
 				break;
-			case '4':	//退出登录
+			case '4': //聊天室
+				ChatBox(n_user->username);
+				break;
+			case '5':	//退出登录
 				n_user->exitUSER();
 				judge = false;
 				break;

@@ -39,6 +39,9 @@
     <ClCompile Include="SQL.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Chatbox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Platform.h">
@@ -62,6 +65,9 @@
     <ClInclude Include="SQL.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Chatbox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="commands.txt">
@@ -83,6 +89,9 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="balance.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="chatbox.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
