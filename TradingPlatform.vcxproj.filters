@@ -42,6 +42,9 @@
     <ClCompile Include="Chatbox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="bgmPlay.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Platform.h">
@@ -66,6 +69,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Chatbox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bgmPlay.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,6 +18,7 @@ void Platform::show_Menu() {
 
 void Platform::exitPlatform() {
 	cout << "欢迎下次使用！！" << endl;
+	ExitSound();
 	system("pause");
 	exit(0);
 }
@@ -45,7 +46,7 @@ void Platform::AdminLogin(Admin& m_Admin) {
 		{
 			if (A_key.length() == 0)		//如果第一个键为退格键
 			{
-				cout << "密码为空,请输入密码：";
+				//cout << "密码为空,请输入密码：";
 				continue;
 			}
 			cout << "\b \b";
@@ -67,6 +68,7 @@ void Platform::AdminLogin(Admin& m_Admin) {
 	//登录失败则清屏返回主菜单
 	if (A_Name != ADNAME || A_key != ADKEY) {
 		cout << "---------登录失败，返回主菜单-----------" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -74,6 +76,7 @@ void Platform::AdminLogin(Admin& m_Admin) {
 	//成功则进入管理员模块
 	else {
 		cout << "登录成功！！" << endl;
+		LoginSound();
 		system("pause");
 		m_Admin.Module_Admin();
 
@@ -92,6 +95,7 @@ void Platform::User_register(Admin& m_Admin) {
 	getline(cin, Uname);
 	if (size(Uname) > 10) {
 		cout << "用户名超过长度！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -102,6 +106,7 @@ void Platform::User_register(Admin& m_Admin) {
 		if (Uname == (*it)->username) {
 			//失败，已存在用户名
 			cout << "注册失败！！已存在用户名！！" << endl;
+			WarmSound();
 			system("pause");
 			system("cls");
 			return;
@@ -115,6 +120,7 @@ void Platform::User_register(Admin& m_Admin) {
 	getline(cin, Password);
 	if (size(Password) > 20) {
 		cout << "密码超过长度！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -125,6 +131,7 @@ void Platform::User_register(Admin& m_Admin) {
 	getline(cin, phnNumber);
 	if (!isNumber(phnNumber)) {
 		cout << "不是数字！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -136,12 +143,14 @@ void Platform::User_register(Admin& m_Admin) {
 	}
 	if (phnNumber.length() != k) {
 		cout << "输入数量不是整数！！发布失败！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
 	}
 	if (size(phnNumber) > 20) {
 		cout << "手机号超过长度！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -152,6 +161,7 @@ void Platform::User_register(Admin& m_Admin) {
 	getline(cin, address);
 	if (size(address) > 40) {
 		cout << "地址超过长度！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -161,8 +171,9 @@ void Platform::User_register(Admin& m_Admin) {
 	string judge;
 	cin.sync();
 	getline(cin, judge);
-	if (judge != "Y") {
+	if (judge != "Y" && judge != "y") {
 		cout << "放弃注册！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -209,6 +220,7 @@ void Platform::User_register(Admin& m_Admin) {
 
 
 	cout << "注册成功！！" << endl;
+	SuccessSound();
 	system("pause");
 	system("cls");
 };
@@ -241,7 +253,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 		{
 			if (U_key.length() == 0)		//如果第一个键为退格键
 			{
-				cout << "密码为空,请输入密码：";
+				//cout << "密码为空,请输入密码：";
 				continue;
 			}
 			cout << "\b \b";
@@ -273,12 +285,14 @@ void Platform::UserLogin(Admin& m_Admin) {
 			//如果用户为封禁状态，则登录失败
 			if (n_user->userState == 0) {
 				cout << "登录失败！！用户已被封禁！！" << endl;
+				WarmSound();
 				system("pause");
 				system("cls");
 				return;
 			}
 			flag = 1;
 			cout << "成功登录！" << endl;
+			LoginSound();
 			system("pause");
 			break;
 		}
@@ -300,6 +314,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 			getline(cin, choiceuu);
 
 			if (size(choiceuu) > 1) {
+				WarmSound();
 				cout << "输入有误！请重新输入!!" << endl;
 				system("pause");
 				system("cls");
@@ -329,6 +344,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 				judge = false;
 				break;
 			default:
+				WarmSound();
 				cout << "输入有误！请重新输入!!" << endl;
 				system("pause");
 				system("cls"); //清屏
@@ -338,6 +354,7 @@ void Platform::UserLogin(Admin& m_Admin) {
 
 	}
 	else {
+		WarmSound();
 		cout << "登录失败！请检查用户名或密码是否正确！" << endl;
 		system("pause");
 		system("cls");

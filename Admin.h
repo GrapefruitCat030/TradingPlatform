@@ -11,6 +11,7 @@ using namespace std;
 #include"Order.h"
 #include"SQL.h"
 
+
 #define FILEUSER "user.txt"
 #define FILEGOOD "commodity.txt"
 

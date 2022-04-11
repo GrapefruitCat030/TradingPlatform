@@ -98,12 +98,14 @@ void Admin::show_Menu() {
 
 void Admin::exitAD() {
 	cout << "欢迎下次使用！！" << endl;
+	ExitSound();
 	system("pause");
 	system("cls");
 	return;
 }
 
 void Admin::Goods_show() {
+	SearchSound();
 	cout << endl;
 	cout << "**********************************************************************************************************************************************************" << endl;
 	cout << left << setw(20) << "商品ID" << setw(20) << "名称" << setw(20) << "价格" << setw(20)
@@ -129,6 +131,7 @@ void Admin::searchGoods() {
 	cout << "请输入您要查找的商品名：";
 	cin.sync();
 	getline(cin, gname);
+	SearchSound();
 
 	//SSSQQQLLL
 	string sqlstr = SQLsearch_goods(ADMIN, gname);
@@ -188,6 +191,7 @@ void Admin::removeGoods() {
 	string gstr;
 	cout << "输入想要下架的商品：";
 	getline(cin, gstr);
+	SearchSound();
 
 	//SSSQQQLLL
 	string sqlstr = SQLremove_goods(ADMIN, gstr);
@@ -229,11 +233,14 @@ void Admin::removeGoods() {
 	getline(cin, flag);
 	//进行修改
 	if (flag == "y") {
+		SuccessSound();
 		(*it)->state = "已下架";
 		cout << "下架成功！！" << endl;
 	}
-	else
+	else {
+		WarmSound();
 		cout << "取消下架!!" << endl;
+	}
 
 
 
@@ -244,6 +251,7 @@ void Admin::removeGoods() {
 };
 
 void Admin::Order_show() {
+	SearchSound();
 
 	//SSSQQQLLL
 	string sqlstr = SQLshow_order(ADMIN, "NONE");
@@ -273,6 +281,7 @@ void Admin::Order_show() {
 };
 
 void Admin::User_show() {
+	SearchSound();
 
 	//SSSQQQLLL
 	string sqlstr = SQLshow_user();
@@ -331,6 +340,7 @@ void Admin::banUser() {
 
 	if (judge != "Y") {
 		cout << "放弃封禁！！" << endl;
+		WarmSound();
 		system("pause");
 		system("cls");
 		return;
@@ -360,6 +370,7 @@ void Admin::banUser() {
 				}
 
 				cout << "封禁成功！！" << endl;
+				SuccessSound();
 
 				this->saveUSERFILE();
 				this->saveGOODFILE();
@@ -369,6 +380,7 @@ void Admin::banUser() {
 			}
 		}
 		cout << "未找到此用户！！" << endl;
+		WarmSound();
 	}
 
 

@@ -18,6 +18,8 @@
 #include"Calculator.h"
 #include"SQL.h"
 
+#include"bgmPlay.h"
+
 #pragma once
 
 #define FILEGOODS "commodity.txt"

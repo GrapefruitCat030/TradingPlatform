@@ -97,6 +97,7 @@ void User::Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec,
 
 		if (size(choicebb) > 1) {
 			cout << "输入有误！请重新输入!!" << endl;
+			WarmSound();
 			system("pause");
 			system("cls");
 			continue;
@@ -125,9 +126,10 @@ void User::Module_BUYER(int& numbgoods, int& numborder, vector <User*>& userVec,
 			break;
 
 		default:
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
-			system("cls"); //清屏
+			system("cls");  //清屏
 			break;
 		}
 	}
@@ -151,6 +153,7 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 		getline(cin, choicess);
 
 		if (size(choicess) > 1) {
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls");
@@ -180,6 +183,7 @@ void User::Module_SELLER(int& numbgoods, vector<Goods*>& gdvec, vector<Order*>& 
 			break;
 
 		default:
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls"); //清屏
@@ -206,6 +210,7 @@ void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
 		getline(cin, choiceii);
 
 		if (size(choiceii) > 1) {
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls");
@@ -228,6 +233,7 @@ void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
 			judge = false;
 			break;
 		default:
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls"); //清屏
@@ -238,6 +244,7 @@ void User::infoManageUSER(vector<User*> vec, vector<Order*>& orvec) {
 };
 
 void User::exitUSER() {
+	ExitSound();
 	cout << "欢迎下次使用！！" << endl;
 	system("pause");
 	system("cls");
@@ -259,7 +266,7 @@ void Buyer::showBUYERMenu() {
 
 //查看商品列表（只能看到在售）
 void Buyer::viewBGOODS(vector<Goods*>& gdvec) {
-
+	SearchSound();
 	//SSSQQQLLL
 	string sqlstr = SQLshow_goods(BUYER, this->userID);
 	//analySQL(sqlstr1);
@@ -302,6 +309,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	string gID;
 	cin.sync();
 	getline(cin, gID);
+	SearchSound();
 
 	//利用iterator找到商品所在位置
 	vector<Goods*>::iterator it = gdvec.begin();
@@ -322,7 +330,8 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	getline(cin, gnumb);
 	//判断输入是否为数字
 	if (!isNumber(gnumb)) {
-		cout << "输入有误！！发布失败！！" << endl;
+		WarmSound();
+		cout << "输入有误！！购买失败！！" << endl;
 		system("pause");
 		system("cls");
 		return;
@@ -333,7 +342,8 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 		if (gnumb[k] == '.') break;
 	}
 	if (gnumb.length() != k) {
-		cout << "输入数量不是整数！！发布失败！！" << endl;
+		WarmSound();
+		cout << "输入数量不是整数！！购买失败！！" << endl;
 		system("pause");
 		system("cls");
 		return;
@@ -341,6 +351,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 
 	//判断商品数量够不够
 	if (stoi(gnumb) > stoi((*it)->number)) {	//库存不足的情况
+		WarmSound();
 		cout << "没有足够库存！！" << endl;
 		system("pause");
 		system("cls");
@@ -351,6 +362,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	double prcsum = stoi(gnumb) * stod((*it)->price);
 	//判断交易额与买家余额关系
 	if (prcsum > (*bt)->balance) {
+		WarmSound();
 		cout << "没有足够余额！！" << endl;
 		system("pause");
 		system("cls");
@@ -402,7 +414,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 	(*bt)->balance -= prcsum;
 
 
-
+	SuccessSound();
 	cout << "**************************************" << endl;
 	cout << "**交易提醒*************************" << endl;
 	cout << "交易时间：" << theTime << endl;
@@ -415,6 +427,7 @@ void Buyer::buyGOODS(int& numbgoods, int& numborder, vector <User*>& usvec, vect
 
 	saveGOOD(gdvec);
 	saveORDER(orvec);
+
 
 	system("pause");
 	system("cls");
@@ -431,6 +444,7 @@ void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 	cout << "请输入您要查找的商品名：";
 	cin.sync();
 	getline(cin, gname);
+	SearchSound();
 
 	cout << endl;
 	cout << "************************************************************************************************************" << endl;
@@ -474,7 +488,7 @@ void Buyer::searchGOODS(vector<Goods*>& gdvec) {
 
 //查看历史订单
 void Buyer::viewBORDER(vector<Order*>& orvec) {
-
+	SearchSound();
 	//SSSQQQLLL
 	string sqlstr = SQLshow_order(BUYER, this->userID);
 	//analySQL(sqlstr1);
@@ -516,6 +530,7 @@ void Buyer::detailGOODS(vector<Goods*>& gdvec) {
 	cout << "请输入想要查看的商品ID：";
 	cin.sync();
 	getline(cin, gID);
+	SearchSound();
 
 	//SSSQQQLLL
 	string sqlstr = SQLdetail_goods(gID);
@@ -551,6 +566,7 @@ void Buyer::detailGOODS(vector<Goods*>& gdvec) {
 
 //返回用户主界面
 void Buyer::exitBUYER() {
+	ExitSound();
 	system("pause");
 	system("cls");
 };
@@ -588,6 +604,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	//判断是否为一位小数
 	//判断输入是否为数字
 	if (!isNumber(gprice)) {
+		WarmSound();
 		cout << "输入有误！！发布失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -600,6 +617,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	}
 	if (gprice.length() - i - 1 > 1) {
 		//超出小数位长度
+		WarmSound();
 		cout << "输入超出小数位长度！！发布失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -612,6 +630,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 	getline(cin, gnumb);
 	//判断输入是否为数字
 	if (!isNumber(gnumb)) {
+		WarmSound();
 		cout << "输入有误！！发布失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -623,6 +642,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 		if (gnumb[k] == '.') break;
 	}
 	if (gnumb.length() != k) {
+		WarmSound();
 		cout << "输入数量不是整数！！发布失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -653,6 +673,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 
 	//---发布并进行文件写入
 	if (judge != "y") {
+		WarmSound();
 		cout << "已取消发布。" << endl;
 		system("pause");
 		system("cls");
@@ -685,6 +706,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 
 		saveGOOD(gdvec);
 
+		SuccessSound();
 		cout << "发布成功！！" << endl;
 	}
 	system("pause");
@@ -693,7 +715,7 @@ void Seller::publishGOODS(int& numbgoods, vector<Goods*>& gdvec) {
 
 //查看发布商品
 void Seller::viewSGOODS(string ID, vector<Goods*>& gdvec) {
-
+	SearchSound();
 	//SSSQQQLLL
 	string sqlstr = SQLshow_goods(SELLER, this->userID);
 	//analySQL(sqlstr1);
@@ -734,6 +756,7 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 	cin.sync();
 	getline(cin, gID);
 
+	SearchSound();
 	//利用iterator找到商品所在位置
 	vector<Goods*>::iterator it = gdvec.begin();
 	for (it; it != gdvec.end(); it++) {
@@ -750,12 +773,14 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 	cin.sync();
 	while (getline(cin, gchoose)) {
 		if (gchoose.length() > 1) {
+			WarmSound();
 			cout << "输入有误！！请重新输入！！" << endl;
 			cout << "请输入需要修改的商品属性：（1.价格 2.描述） ";
 			cin.sync();
 			continue;
 		}
 		if (gchoose != "1" && gchoose != "2") {
+			WarmSound();
 			cout << "输入有误！！请重新输入！！" << endl;
 			cout << "请输入需要修改的商品属性：（1.价格 2.描述） ";
 			cin.sync();
@@ -783,6 +808,7 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 
 			//---修改并进行文件写入
 			if (judge != "y") {
+				WarmSound();
 				cout << "已取消修改。" << endl;
 				system("pause");
 				system("cls");
@@ -797,6 +823,8 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 				//进行修改
 				(*it)->description = desci;
 				saveGOOD(gdvec);
+
+				SuccessSound();
 				cout << "修改成功！！" << endl;
 				system("pause");
 				system("cls");
@@ -813,6 +841,7 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 
 			//判断输入是否为数字
 			if (!isNumber(prc)) {
+				WarmSound();
 				cout << "输入有误！！修改失败！！" << endl;
 				system("pause");
 				system("cls");
@@ -826,6 +855,7 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 			}
 			if (prc.length() - i - 1 > 1) {
 				//超出小数位长度
+				WarmSound();
 				cout << "输入超出小数位长度！！修改失败！！" << endl;
 				system("pause");
 				system("cls");
@@ -848,6 +878,7 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 
 			//---修改并进行文件写入
 			if (judge != "y") {
+				WarmSound();
 				cout << "已取消修改。" << endl;
 				system("pause");
 				system("cls");
@@ -862,6 +893,8 @@ void Seller::modifyGOODS(vector<Goods*>& gdvec) {
 				//进行修改
 				(*it)->price = prc;
 				saveGOOD(gdvec);
+
+				SuccessSound();
 				cout << "修改成功！！" << endl;
 				system("pause");
 				system("cls");
@@ -881,6 +914,7 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 	cout << "请输入需要修改的商品ID：";
 	cin.sync();
 	getline(cin, gID);
+	SearchSound();
 
 	//利用iterator找到商品所在位置
 	vector<Goods*>::iterator it = gdvec.begin();
@@ -888,6 +922,7 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 		if ((*it)->commodityID == gID && (*it)->sellerID == this->userID) break;
 	}
 	if (it == gdvec.end()) {
+		WarmSound();
 		cout << "无此商品！！" << endl;
 		system("pause");
 		system("cls");
@@ -914,6 +949,7 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 
 	//---修改并进行文件写入
 	if (judge != "y") {
+		WarmSound();
 		cout << "已取消修改。" << endl;
 		system("pause");
 		system("cls");
@@ -928,6 +964,8 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 		//进行修改
 		(*it)->state = "已下架";
 		saveGOOD(gdvec);
+
+		SuccessSound();
 		cout << "下架成功！！" << endl;
 		system("pause");
 		system("cls");
@@ -937,7 +975,7 @@ void Seller::removeGOODS(vector<Goods*>& gdvec) {
 
 //查看历史订单
 void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
-
+	SearchSound();
 	//SSSQQQLLL
 	string sqlstr = SQLshow_order(SELLER, this->userID);
 	//analySQL(sqlstr1);
@@ -967,6 +1005,7 @@ void Seller::viewSORDER(string ID, vector<Order*>& orvec) {
 
 //返回用户主界面
 void Seller::exitSELLER() {
+	ExitSound();
 	system("pause");
 	system("cls");
 };
@@ -982,6 +1021,7 @@ void User::showINFOMenu() {
 };
 
 void User::GetUserinfo(vector<Order*>& orvec) {
+	SearchSound();
 
 	cout << endl;
 	//获取余额算式并进行计算
@@ -1021,6 +1061,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 		getline(cin, choice);
 
 		if (size(choice) > 1) {
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls");
@@ -1040,6 +1081,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 			for (vector<User*>::iterator it = vec.begin(); it != vec.end(); it++) {
 				if (Uname == (*it)->username) {
 					//失败，已存在用户名
+					WarmSound();
 					cout << "注册失败！！已存在用户名！！" << endl;
 					system("pause");
 					system("cls");
@@ -1050,6 +1092,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 			//成功则修改
 			this->username = Uname;
+			SuccessSound();
 			cout << "修改成功！！" << endl;
 			judge = false;
 			system("pause");
@@ -1064,6 +1107,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 			getline(cin, number);
 
 			this->phoneNumber = number;
+			SuccessSound();
 			cout << "修改成功！！" << endl;
 			judge = false;
 
@@ -1080,7 +1124,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 			this->address = addr;
 
-
+			SuccessSound();
 			cout << "修改成功！！" << endl;
 			judge = false;
 
@@ -1112,7 +1156,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 					{
 						if (nwpword1.length() == 0)		//如果第一个键为退格键
 						{
-							cout << "密码为空,请输入密码：";
+							//cout << "密码为空,请输入密码：";
 							continue;
 						}
 						cout << "\b \b";
@@ -1145,7 +1189,7 @@ void User::ModifyUserinfo(vector<User*> vec) {
 					{
 						if (nwpword2.length() == 0)		//如果第一个键为退格键
 						{
-							cout << "密码为空,请输入密码：";
+							//cout << "密码为空,请输入密码：";
 							continue;
 						}
 						cout << "\b \b";
@@ -1164,14 +1208,17 @@ void User::ModifyUserinfo(vector<User*> vec) {
 
 				if (nwpword1 == nwpword2) {
 					this->password = nwpword1;
+					SuccessSound();
 					cout << "修改成功！！" << endl;
 				}
 				else {
+					WarmSound();
 					cout << "两次输入不符！！修改失败！！" << endl;
 				}
 
 			}
 			else {
+				WarmSound();
 				cout << "与原密码不符！！修改失败！！" << endl;
 			}
 			judge = false;
@@ -1182,12 +1229,13 @@ void User::ModifyUserinfo(vector<User*> vec) {
 		case '5':
 		{
 			judge = false;
-
+			ExitSound();
 			system("pause");
 			system("cls");
 		}
 		break;
 		default:
+			WarmSound();
 			cout << "输入有误！请重新输入!!" << endl;
 			system("pause");
 			system("cls"); //清屏
@@ -1212,6 +1260,7 @@ void User::Topup_Userbalance() {
 
 	//判断输入是否为数字
 	if (!isNumber(money)) {
+		WarmSound();
 		cout << "输入有误！！充值失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -1225,6 +1274,7 @@ void User::Topup_Userbalance() {
 	}
 	if (money.length() - i - 1 > 1) {
 		//超出小数位长度
+		WarmSound();
 		cout << "输入超出小数位长度！！充值失败！！" << endl;
 		system("pause");
 		system("cls");
@@ -1233,6 +1283,7 @@ void User::Topup_Userbalance() {
 	//终于搞好
 	this->balance += stod(money);
 
+	SuccessSound();
 	cout << "充值成功！！" << endl;
 
 
@@ -1298,6 +1349,7 @@ void User::Topup_Userbalance() {
 };
 
 void User::exitINFO() {
+	ExitSound();
 	cout << "欢迎下次使用！！" << endl;
 	system("pause");
 	system("cls");
